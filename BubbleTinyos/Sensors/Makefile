@@ -1,0 +1,3 @@
+COMPONENT=ProgramAppC
+include $(MAKERULES)
+
