@@ -21,6 +21,7 @@ namespace BubbleDataCollection
         bool online, online_t;
         UInt16[] temperature = new UInt16[16];
         bool newindata;
+        bool uploadcreatenewfile;
 
         public TemperatueBoard()
 	    {
@@ -30,6 +31,7 @@ namespace BubbleDataCollection
             for (int i = 0; i < 16; i++)
                 temperature[i] = 0x4000;
             newindata = false;
+            uploadcreatenewfile = true;
 	    }
 
         public TemperatueBoard(UInt16 Id)
@@ -41,6 +43,7 @@ namespace BubbleDataCollection
             for (int i = 0; i < 16; i++)
                 temperature[i] = 0x4000;
             newindata = false;
+            uploadcreatenewfile = true;
         }
 
         public UInt16  ID 
@@ -70,6 +73,12 @@ namespace BubbleDataCollection
         {
             get { return newindata; }
             set { newindata = value; }
+        }
+
+        public bool UploadCreateNewFile
+        {
+            get { return uploadcreatenewfile; }
+            set { uploadcreatenewfile = value; }
         }
 
         public override bool Equals(object obj)
@@ -129,6 +138,7 @@ namespace BubbleDataCollection
         int[] pumpvalue = new int[8];
         UInt16[] pumpspeed = new UInt16[8];
         bool newoutdata;
+        bool uploadcreatenewfile;
 
         public PumpBoard()
         {
@@ -143,6 +153,7 @@ namespace BubbleDataCollection
             for (int i = 0; i < 8; i++)
                 pumpspeed [i] = 65535;
             newoutdata = false;
+            uploadcreatenewfile = true;
         }
 
         public PumpBoard(UInt16 Id)
@@ -159,6 +170,7 @@ namespace BubbleDataCollection
             for (int i = 0; i < 8; i++)
                 pumpspeed[i] = 65535;
             newoutdata = false;
+            uploadcreatenewfile = true;
         }
 
         public UInt16 ID
@@ -194,6 +206,12 @@ namespace BubbleDataCollection
         {
             get { return newoutdata; }
             set { newoutdata = value; }
+        }
+
+        public bool UploadCreateNewFile
+        {
+            get { return uploadcreatenewfile; }
+            set { uploadcreatenewfile = value; }
         }
 
         public override bool Equals(object obj)
@@ -268,6 +286,7 @@ namespace BubbleDataCollection
         int airboxvalue;
         byte airboxspeed;
         bool newoutdata;
+        bool uploadcreatenewfile;
 
         public Airbox()
         {
@@ -279,6 +298,7 @@ namespace BubbleDataCollection
             newindata = false;
             airboxvalue = 0;
             newoutdata = false;
+            uploadcreatenewfile = true;
         }
 
         public Airbox(UInt16 Id)
@@ -292,6 +312,7 @@ namespace BubbleDataCollection
             newindata = false;
             airboxvalue = 0;
             newoutdata = false;
+            uploadcreatenewfile = true;
         }
 
         public UInt16 ID
@@ -332,6 +353,12 @@ namespace BubbleDataCollection
         {
             get { return newoutdata; }
             set { newoutdata = value; }
+        }
+
+        public bool UploadCreateNewFile
+        {
+            get { return uploadcreatenewfile; }
+            set { uploadcreatenewfile = value; }
         }
 
         public override bool Equals(object obj)
@@ -390,6 +417,7 @@ namespace BubbleDataCollection
         byte[] CO2outdata = new byte[10];
         bool newindata;
         bool newoutdata;
+        bool uploadcreatenewfile;
 
         public CO2flap()
         {
@@ -410,6 +438,7 @@ namespace BubbleDataCollection
             CO2outdata[8] = 13;
             CO2outdata[9] = 10;
             newoutdata = false;
+            uploadcreatenewfile = true;
         }
 
         public CO2flap(UInt16 Id)
@@ -432,6 +461,7 @@ namespace BubbleDataCollection
             CO2outdata[8] = 13;
             CO2outdata[9] = 10;
             newoutdata = false;
+            uploadcreatenewfile = true;
         }
 
         public int Type
@@ -467,6 +497,12 @@ namespace BubbleDataCollection
         {
             get { return newoutdata; }
             set { newoutdata = value; }
+        }
+
+        public bool UploadCreateNewFile
+        {
+            get { return uploadcreatenewfile; }
+            set { uploadcreatenewfile = value; }
         }
 
         public override bool Equals(object obj)
@@ -530,6 +566,7 @@ namespace BubbleDataCollection
         UInt16[] telosbdata = new UInt16[2];
         double temperature,humidity;
         bool newindata;
+        bool uploadcreatenewfile;
        
 
         public TelosbSensor()
@@ -542,6 +579,7 @@ namespace BubbleDataCollection
             temperature = 0.0;
             humidity = 0.0;
             newindata = false;
+            uploadcreatenewfile = true;
         }
 
         public TelosbSensor(UInt16 Id)
@@ -555,6 +593,7 @@ namespace BubbleDataCollection
             temperature = 0.0;
             humidity = 0.0;
             newindata = false;
+            uploadcreatenewfile = true;
         }
 
         public UInt16 ID
@@ -594,6 +633,12 @@ namespace BubbleDataCollection
         public double Humidity
         {
             get { return humidity; }
+        }
+
+        public bool UploadCreateNewFile
+        {
+            get { return uploadcreatenewfile; }
+            set { uploadcreatenewfile = value; }
         }
 
         public override bool Equals(object obj)

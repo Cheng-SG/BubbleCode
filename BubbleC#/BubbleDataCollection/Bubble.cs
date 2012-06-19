@@ -10,6 +10,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading;
 using System.Collections;
+using System.Diagnostics;
 
 namespace BubbleDataCollection
 {
@@ -40,10 +41,17 @@ namespace BubbleDataCollection
         byte[] InBuf = new byte[64];
         
 
-        Thread thread1;
-        bool thread1En;
-        Thread thread2;
-        bool thread2En;
+        Thread threadReceive;
+        bool threadReceiveEn;
+
+        Thread threadSend;
+        bool threadSendEn;
+
+        Thread threadUpload;
+        bool shouldUpload = false;        
+        bool overwrite = false;
+        string datastoredirectory;
+        string uploadstoredirectory;
 
         public Form1()
         {
@@ -67,6 +75,31 @@ namespace BubbleDataCollection
             comboBoxP.Sorted = true;
             listBoxTBID.Sorted = true;
 
+            string curdirectory = Directory.GetCurrentDirectory();
+            string newdirectory;
+            newdirectory = curdirectory + "\\Data";
+            if (Directory.Exists(newdirectory) == false)
+            {
+                Directory.CreateDirectory(newdirectory);
+            }
+            datastoredirectory = curdirectory + "\\Data";
+            newdirectory = curdirectory + "\\Upload";
+            if (Directory.Exists(newdirectory) == false)
+            {
+                Directory.CreateDirectory(newdirectory);
+            }
+            newdirectory = curdirectory + "\\Upload\\Upload0";
+            if (Directory.Exists(newdirectory) == false)
+            {
+                Directory.CreateDirectory(newdirectory);
+            }
+            newdirectory = curdirectory + "\\Upload\\Upload1";
+            if (Directory.Exists(newdirectory) == false)
+            {
+                Directory.CreateDirectory(newdirectory);
+            }
+            uploadstoredirectory = curdirectory + "\\Upload\\Upload0";
+
             textBoxFP1PPM_THRES.Text = "900";
             textBoxFP1PPM_HYST.Text = "300";
             textBoxFP1TEMP_THRES.Text = "30";
@@ -84,13 +117,13 @@ namespace BubbleDataCollection
             textBoxFP4TEMP_THRES.Text = "30";
             textBoxFP4TEMP_HYST.Text = "2";
            
-            thread1En = true;
-            thread1 = new Thread(Thread1);
-            thread1.Start();
+            threadReceiveEn = true;
+            threadReceive = new Thread(ThreadReceive);
+            threadReceive.Start();
 
-            thread2En = true;
-            thread2 = new Thread(Thread2);
-            thread2.Start();            
+            threadSendEn = true;
+            threadSend = new Thread(ThreadSend);
+            threadSend.Start();            
 
             timer1.Interval = SyncInterval * 60 * 1000;
             timer1.Start();
@@ -102,13 +135,13 @@ namespace BubbleDataCollection
             timer3.Start();
         }
 
-        private void Thread1()
+        private void ThreadReceive()
         {
             byte temp;
             UInt16 len = 0;            
             UInt16 Type;
             MethodInvoker mi = new MethodInvoker(InvokeFun);
-            while (thread1En == true && ComPort.IsOpen == true)
+            while (threadReceiveEn == true && ComPort.IsOpen == true)
             {
                 try
                 {
@@ -188,9 +221,9 @@ namespace BubbleDataCollection
             }
         }
 
-        private void Thread2()
+        private void ThreadSend()
         {
-            while (thread2En == true && ComPort.IsOpen == true)
+            while (threadSendEn == true && ComPort.IsOpen == true)
             {
                 foreach (object o in PumpBoards)
                 {
@@ -221,6 +254,78 @@ namespace BubbleDataCollection
                 }
                 Thread.Sleep(10);
             }
+        }
+
+        private void ThreadUpload()
+        {
+            shouldUpload = false;  
+            overwrite = true;
+            string dictory = uploadstoredirectory;
+            string content = "";
+            if (uploadstoredirectory == (Directory.GetCurrentDirectory() + "\\Upload\\Upload0"))
+            {
+                dictory = "Upload\\Upload0";
+                uploadstoredirectory = Directory.GetCurrentDirectory() + "\\Upload\\Upload1";
+            }
+            else
+            {
+                dictory = "Upload\\Upload1";
+                uploadstoredirectory = Directory.GetCurrentDirectory() + "\\Upload\\Upload0";
+            }
+
+
+            foreach (object o in TempBoards)
+            {
+                content += "curl -F file=@" + dictory + "\\Temperature" + ((TemperatueBoard)o).ID.ToString() + ".txt  http://cps.isc.ntu.edu.sg/smartcontainer/uploadfile/upload.php \r\n";              
+            }
+
+            foreach (object o in PumpBoards)
+            {
+                content += "curl -F file=@" + dictory + "\\FlowRate" + ((PumpBoard)o).ID.ToString() + ".txt  http://cps.isc.ntu.edu.sg/smartcontainer/uploadfile/upload.php \r\n";
+            }
+
+            foreach (object o in Airboxes)
+            {
+                content += "curl -F file=@" + dictory + "\\Airbox" + ((Airbox)o).ID.ToString() + ".txt  http://cps.isc.ntu.edu.sg/smartcontainer/uploadfile/upload.php \r\n";   
+            }
+
+            foreach (object o in CO2flaps)
+            {
+                content += "curl -F file=@" + dictory + "\\CO2flap" + ((CO2flap)o).ID.ToString() + ".txt  http://cps.isc.ntu.edu.sg/smartcontainer/uploadfile/upload.php \r\n";    
+            }
+            foreach (object o in TelosbSensors)
+            {
+                content += "curl -F file=@" + dictory + "\\Telosb" + ((TelosbSensor)o).ID.ToString() + ".txt  http://cps.isc.ntu.edu.sg/smartcontainer/uploadfile/upload.php \r\n";                   
+            }
+            
+            
+            string filename = Directory.GetCurrentDirectory() + "\\upload.bat";
+            var fileMode = FileMode.Create;
+            FileStream fs = new FileStream(filename, fileMode, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+            sw.Write(content);
+            sw.Close();
+            fs.Close();
+
+            Process proc = new Process();
+            proc.StartInfo.FileName = "upload.bat";
+            proc.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+            try
+            {    
+                if (proc.Start() == true)
+                {
+                    proc.WaitForExit( (SyncInterval*60-10)*1000 );
+                    if (proc.HasExited == false)
+                    {
+                        proc.Kill();
+                    }
+                } 
+            }                
+            catch
+            {
+            }
+                
+             
         }
 
         private void PumpSend(object o)
@@ -743,31 +848,31 @@ namespace BubbleDataCollection
                 {
                     foreach (object o in TempBoards)
                     {                       
-                        origin = Directory.GetCurrentDirectory() + "\\Temperature" + ((TemperatueBoard)o).ID.ToString() + ".txt";
+                        origin = Directory.GetCurrentDirectory() + "\\Data\\Temperature" + ((TemperatueBoard)o).ID.ToString() + ".txt";
                         dest = SyncFolder + "\\Temperature" + ((TemperatueBoard)o).ID.ToString() + ".txt";
                         File.Copy(origin, dest, true);                        
                     }
                     foreach (object o in PumpBoards)
                     {
-                        origin = Directory.GetCurrentDirectory() + "\\FlowRate" + ((PumpBoard)o).ID.ToString() + ".txt";
+                        origin = Directory.GetCurrentDirectory() + "\\Data\\FlowRate" + ((PumpBoard)o).ID.ToString() + ".txt";
                         dest = SyncFolder + "\\FlowRate" + ((PumpBoard)o).ID.ToString() + ".txt";
                         File.Copy(origin, dest, true);                        
                     }
                     foreach (object o in Airboxes)
                     {
-                        origin = Directory.GetCurrentDirectory() + "\\Airbox" + ((Airbox)o).ID.ToString() + ".txt";
+                        origin = Directory.GetCurrentDirectory() + "\\Data\\Airbox" + ((Airbox)o).ID.ToString() + ".txt";
                         dest = SyncFolder + "\\Airbox" + ((Airbox)o).ID.ToString() + ".txt";
                         File.Copy(origin, dest, true);
                     }
                     foreach (object o in CO2flaps)
                     {
-                        origin = Directory.GetCurrentDirectory() + "\\CO2flap" + ((CO2flap)o).ID.ToString() + ".txt";
+                        origin = Directory.GetCurrentDirectory() + "\\Data\\CO2flap" + ((CO2flap)o).ID.ToString() + ".txt";
                         dest = SyncFolder + "\\CO2flap" + ((CO2flap)o).ID.ToString() + ".txt";
                         File.Copy(origin, dest, true);
                     }
                     foreach (object o in TelosbSensors)
                     {
-                        origin = Directory.GetCurrentDirectory() + "\\Telosb" + ((TelosbSensor)o).ID.ToString() + ".txt";
+                        origin = Directory.GetCurrentDirectory() + "\\Data\\Telosb" + ((TelosbSensor)o).ID.ToString() + ".txt";
                         dest = SyncFolder + "\\Telosb" + ((TelosbSensor)o).ID.ToString() + ".txt";
                         File.Copy(origin, dest, true);
                     }
@@ -776,31 +881,36 @@ namespace BubbleDataCollection
                 {
                 }
             }
-            
+
+            shouldUpload = true;
+            if(threadUpload != null && threadUpload.IsAlive == true )
+            {
+                threadUpload.Abort();
+            }
         }
 
         private void buttonPort_Click(object sender, EventArgs e)
         {
-            thread1En = false;
-            thread2En = false;
-            thread1.Join();
-            thread2.Join();
+            threadReceiveEn = false;
+            threadSendEn = false;
+            threadReceive.Join();
+            threadSend.Join();
             ComSet comset = new ComSet(ref this.ComPort);
             comset.ShowDialog();
-            thread1En = true;
-            thread1 = new Thread(Thread1);
-            thread1.Start();
-            thread2En = true;
-            thread2 = new Thread(Thread2);
-            thread2.Start();
+            threadReceiveEn = true;
+            threadReceive = new Thread(ThreadReceive);
+            threadReceive.Start();
+            threadSendEn = true;
+            threadSend = new Thread(ThreadSend);
+            threadSend.Start();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            thread1En = false;
-            thread2En = false;
-            thread1.Join();
-            thread2.Join();
+            threadReceiveEn = false;
+            threadSendEn = false;
+            threadReceive.Join();
+            threadSend.Join();
         }
 
         private void comboBoxT_SelectedIndexChanged(object sender, EventArgs e)
@@ -941,6 +1051,12 @@ namespace BubbleDataCollection
             {
                 FileSave(4, o);
             }
+
+            if (shouldUpload == true)
+            {                
+                threadUpload = new Thread(ThreadUpload);
+                threadUpload.Start();
+            }
         }
 
         private void timer3_Tick(object sender, EventArgs e)
@@ -1023,24 +1139,49 @@ namespace BubbleDataCollection
                     ((TelosbSensor)o).Online = false;
                 ((TelosbSensor)o).Online_T = false;
             }
+
         }
 
         private void FileSave(UInt16 type,object o)
         {
+            string filename;
+            FileStream fs;
+            StreamWriter sw;
+            var fileMode = FileMode.Append;
+            string content;
+            System.DateTime currentTime = new System.DateTime();
+            currentTime = System.DateTime.Now;
+
+            if (overwrite == true)
+            {
+                foreach (object oo in TempBoards)
+                {
+                    ((TemperatueBoard)oo).UploadCreateNewFile = true;                    
+                }
+                foreach (object oo in PumpBoards)
+                {
+                    ((PumpBoard)oo).UploadCreateNewFile = true;                    
+                }
+                foreach (object oo in Airboxes)
+                {
+                    ((Airbox)oo).UploadCreateNewFile = true;                                     
+                }
+                foreach (object oo in CO2flaps)
+                {
+                    ((CO2flap)oo).UploadCreateNewFile = true;
+                    
+                }
+                foreach (object oo in TelosbSensors)
+                {
+                    ((TelosbSensor)oo).UploadCreateNewFile = true;
+                }
+                overwrite = false;
+            }
+            
             if (type == 0)
             {
                 if (((TemperatueBoard)o).Online == true && ((TemperatueBoard)o).NewInData == true)
-                {
-                    string filename = Directory.GetCurrentDirectory();
-                    filename += "\\Temperature" + ((TemperatueBoard)o).ID.ToString() + ".txt";
-                    var fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
-                    FileStream fs = new FileStream(filename, fileMode, FileAccess.Write);
-                    StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-
-                    System.DateTime currentTime = new System.DateTime();
-                    currentTime = System.DateTime.Now;
-
-                    string content;
+                {                                        
                     content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
                     UInt16[] temperature = ((TemperatueBoard)o).GetTemperature();
                     for (int i = 0; i < 16; i++)
@@ -1052,11 +1193,25 @@ namespace BubbleDataCollection
                             content += string.Format("{0:0.00}", (temperature[i] / 16.0) );
                     }
                     content += "\n";
+
+                    filename = datastoredirectory + "\\Temperature" + ((TemperatueBoard)o).ID.ToString() + ".txt";
+                    fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);
                     sw.Write(content);
-
-
                     sw.Close();
                     fs.Close();
+
+                    filename = uploadstoredirectory + "\\Temperature" + ((TemperatueBoard)o).ID.ToString() + ".txt";
+                    fileMode = ((TemperatueBoard)o).UploadCreateNewFile ? FileMode.Create : FileMode.Append;
+                    if (fileMode == FileMode.Append && File.Exists(filename) == false) fileMode = FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);
+                    sw.Write(content);
+                    sw.Close();
+                    fs.Close();
+                    ((TemperatueBoard)o).UploadCreateNewFile = false;
+                    
                     ((TemperatueBoard)o).NewInData = false;
                 }
             }
@@ -1064,16 +1219,6 @@ namespace BubbleDataCollection
             {         
                 if (((PumpBoard)o).Online == true && ((PumpBoard)o).NewInData == true)
                 {
-                    string filename = Directory.GetCurrentDirectory();
-                    filename += "\\FlowRate" + ((PumpBoard)o).ID.ToString() + ".txt";
-                    var fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
-                    FileStream fs = new FileStream(filename, fileMode, FileAccess.Write);
-                    StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-
-                    System.DateTime currentTime = new System.DateTime();
-                    currentTime = DateTime.Now;
-
-                    string content;
                     content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
                     UInt16[] flowrate = ((PumpBoard)o).GetFlowrate();
                     for (int i = 0; i < 8; i++)
@@ -1082,88 +1227,120 @@ namespace BubbleDataCollection
                         content += string.Format( "{0:0.00}",(flowrate[i] / 9.4) );
                     }
                     content += "\n";
-                    sw.Write(content);
 
+                    filename = datastoredirectory + "\\FlowRate" + ((PumpBoard)o).ID.ToString() + ".txt";
+                    fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);
+                    sw.Write(content);
                     sw.Close();
                     fs.Close();
+
+                    filename = uploadstoredirectory + "\\FlowRate" + ((PumpBoard)o).ID.ToString() + ".txt";
+                    fileMode = ((PumpBoard)o).UploadCreateNewFile ? FileMode.Create : FileMode.Append;
+                    if (fileMode == FileMode.Append && File.Exists(filename) == false) fileMode = FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);                    
+                    sw.Write(content);
+                    sw.Close();
+                    fs.Close();
+                    ((PumpBoard)o).UploadCreateNewFile = false;
+
                     ((PumpBoard)o).NewInData = false;
                 }
             }
             else if (type == 2)
             {
                 if (((Airbox)o).Online == true && ((Airbox)o).NewInData == true)
-                {
-                    string filename = Directory.GetCurrentDirectory();
-                    filename += "\\Airbox" + ((Airbox)o).ID.ToString() + ".txt";
-                    var fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
-                    FileStream fs = new FileStream(filename, fileMode, FileAccess.Write);
-                    StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-
-                    System.DateTime currentTime = new System.DateTime();
-                    currentTime = DateTime.Now;
-
-                    string content;
+                {               
                     byte[] airboxdata = ((Airbox)o).GetAirboxdata();
                     content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
                     content += string.Format(";{0:0.0} °C", (airboxdata[3] * 0.5));
                     content += string.Format(";{0} Hz", (airboxdata[4] * 50) );
                     content += string.Format(";{0:0.0} W", (airboxdata[5] * 0.2).ToString() );
                     content += "\n";
-                    sw.Write(content);
 
+                    filename = datastoredirectory + "\\Airbox" + ((Airbox)o).ID.ToString() + ".txt";
+                    fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default); 
+                    sw.Write(content);
                     sw.Close();
                     fs.Close();
+
+
+                    filename = uploadstoredirectory + "\\Airbox" + ((Airbox)o).ID.ToString() + ".txt";
+                    fileMode = ((Airbox)o).UploadCreateNewFile ? FileMode.Create : FileMode.Append;
+                    if (fileMode == FileMode.Append && File.Exists(filename) == false) fileMode = FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);                   
+                    sw.Write(content);
+                    sw.Close();
+                    fs.Close();
+                    ((Airbox)o).UploadCreateNewFile = false;
+
                     ((Airbox)o).NewInData = false;
                 }       
             }
             else if (type == 3)
             {
                 if (((CO2flap)o).Online == true && ((CO2flap)o).NewInData == true)
-                {
-                    string filename = Directory.GetCurrentDirectory();
-                    filename += "\\CO2flap" + ((CO2flap)o).ID.ToString() + ".txt";
-                    var fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
-                    FileStream fs = new FileStream(filename, fileMode, FileAccess.Write);
-                    StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-
-                    System.DateTime currentTime = new System.DateTime();
-                    currentTime = DateTime.Now;
-
-                    string content;
+                {                                     
                     byte[] CO2flapdata = ((CO2flap)o).GetCO2flapdata();
                     content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
                     content += string.Format(";{0:0.0} °C", (CO2flapdata[8] * 0.2));
                     content += string.Format(";{0} ppm", (CO2flapdata[7] * 10));
                     content += "\n";
-                    sw.Write(content);
 
+                    filename = datastoredirectory + "\\CO2flap" + ((CO2flap)o).ID.ToString() + ".txt";
+                    fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default); 
+                    sw.Write(content);
                     sw.Close();
                     fs.Close();
+
+
+                    filename = uploadstoredirectory + "\\CO2flap" + ((CO2flap)o).ID.ToString() + ".txt";
+                    fileMode = ((CO2flap)o).UploadCreateNewFile ? FileMode.Create : FileMode.Append;
+                    if (fileMode == FileMode.Append && File.Exists(filename) == false) fileMode = FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);                                     
+                    sw.Write(content);
+                    sw.Close();
+                    fs.Close();
+                    ((CO2flap)o).UploadCreateNewFile = false;
+
                     ((CO2flap)o).NewInData = false;
                 }
             }
             else if (type == 4)
             {
                 if (((TelosbSensor)o).Online == true && ((TelosbSensor)o).NewInData == true)
-                {
-                    string filename = Directory.GetCurrentDirectory();
-                    filename += "\\Telosb" + ((TelosbSensor)o).ID.ToString() + ".txt";
-                    var fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
-                    FileStream fs = new FileStream(filename, fileMode, FileAccess.Write);
-                    StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-
-                    System.DateTime currentTime = new System.DateTime();
-                    currentTime = DateTime.Now;
-
-                    string content;
+                {                    
                     content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
                     content += string.Format(";{0:0.00}", ((TelosbSensor)o).Temperature);
                     content += string.Format(";{0:0.00}", ((TelosbSensor)o).Humidity);
                     content += "\n";
-                    sw.Write(content);
 
+                    filename = datastoredirectory + "\\Telosb" + ((TelosbSensor)o).ID.ToString() + ".txt";
+                    fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);
+                    sw.Write(content);
                     sw.Close();
                     fs.Close();
+
+                    filename = uploadstoredirectory + "\\Telosb" + ((TelosbSensor)o).ID.ToString() + ".txt";
+                    fileMode = ((TelosbSensor)o).UploadCreateNewFile ? FileMode.Create : FileMode.Append;
+                    if (fileMode == FileMode.Append && File.Exists(filename) == false) fileMode = FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);
+                    sw.Write(content);
+                    sw.Close();
+                    fs.Close();
+                    ((TelosbSensor)o).UploadCreateNewFile = false;
+
                     ((TelosbSensor)o).NewInData = false;
                 }
             }
@@ -1178,14 +1355,19 @@ namespace BubbleDataCollection
             }
             catch
             {
-                MessageBox.Show("Wrong input");
-                textBoxSync.Text = SyncInterval.ToString();
+                if (textBoxSync.Text != "")
+                {
+                    MessageBox.Show("Wrong input");
+                    textBoxSync.Text = SyncInterval.ToString();
+                }
+                return;
             }
 
             if(i<=0)
             {
-                MessageBox.Show("Wrong input");
+                MessageBox.Show("Wrong input");                
                 textBoxSync.Text = SyncInterval.ToString();
+                return;
             }
 
             SyncInterval = i;
@@ -1203,14 +1385,19 @@ namespace BubbleDataCollection
             }
             catch
             {
-                MessageBox.Show("Wrong input");
-                textBoxStrInterval.Text = StoreIterval.ToString();
+                if (textBoxStrInterval.Text != "")
+                {
+                    MessageBox.Show("Wrong input");
+                    textBoxStrInterval.Text = StoreIterval.ToString();
+                }
+                return;
             }
 
             if (i <= 0)
             {
-                MessageBox.Show("Wrong input");
+                MessageBox.Show("Wrong input");                
                 textBoxStrInterval.Text = StoreIterval.ToString();
+                return;
             }
 
             StoreIterval = i;
