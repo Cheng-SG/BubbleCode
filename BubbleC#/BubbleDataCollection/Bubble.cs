@@ -1030,28 +1030,36 @@ namespace BubbleDataCollection
         }        
 
         private void timer2_Tick(object sender, EventArgs e)
-        {
-            foreach (object o in TempBoards)
+        {          
+            if (overwrite == true)
             {
-                FileSave(0, o);
-            }
-            foreach (object o in PumpBoards)
-            {
-                FileSave(1, o);
-            }
-            foreach (object o in Airboxes)
-            {
-                FileSave(2, o);
-            }
-            foreach (object o in CO2flaps)
-            {
-                FileSave(3, o);
-            }
-            foreach (object o in TelosbSensors)
-            {
-                FileSave(4, o);
+                foreach (object o in TempBoards)
+                {
+                    ((TemperatueBoard)o).UploadCreateNewFile = true;
+                }
+                foreach (object o in PumpBoards)
+                {
+                    ((PumpBoard)o).UploadCreateNewFile = true;
+                }
+                foreach (object o in Airboxes)
+                {
+                    ((Airbox)o).UploadCreateNewFile = true;
+                }
+                foreach (object o in CO2flaps)
+                {
+                    ((CO2flap)o).UploadCreateNewFile = true;
+
+                }
+                foreach (object o in TelosbSensors)
+                {
+                    ((TelosbSensor)o).UploadCreateNewFile = true;
+                }
+                overwrite = false;
             }
 
+            CaculateSave();            
+            FileSave();
+            
             if (shouldUpload == true)
             {                
                 threadUpload = new Thread(ThreadUpload);
@@ -1139,10 +1147,10 @@ namespace BubbleDataCollection
                     ((TelosbSensor)o).Online = false;
                 ((TelosbSensor)o).Online_T = false;
             }
-
         }
 
-        private void FileSave(UInt16 type,object o)
+
+        private void FileSave()
         {
             string filename;
             FileStream fs;
@@ -1150,39 +1158,13 @@ namespace BubbleDataCollection
             var fileMode = FileMode.Append;
             string content;
             System.DateTime currentTime = new System.DateTime();
-            currentTime = System.DateTime.Now;
-
-            if (overwrite == true)
-            {
-                foreach (object oo in TempBoards)
-                {
-                    ((TemperatueBoard)oo).UploadCreateNewFile = true;                    
-                }
-                foreach (object oo in PumpBoards)
-                {
-                    ((PumpBoard)oo).UploadCreateNewFile = true;                    
-                }
-                foreach (object oo in Airboxes)
-                {
-                    ((Airbox)oo).UploadCreateNewFile = true;                                     
-                }
-                foreach (object oo in CO2flaps)
-                {
-                    ((CO2flap)oo).UploadCreateNewFile = true;
-                    
-                }
-                foreach (object oo in TelosbSensors)
-                {
-                    ((TelosbSensor)oo).UploadCreateNewFile = true;
-                }
-                overwrite = false;
-            }
+            currentTime = System.DateTime.Now;         
             
-            if (type == 0)
+            foreach (object o in TempBoards)
             {
                 if (((TemperatueBoard)o).Online == true && ((TemperatueBoard)o).NewInData == true)
-                {                                        
-                    content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
+                {
+                    content = string.Format("{0:yyyy-MM-dd;HH:mm:ss}", currentTime);
                     UInt16[] temperature = ((TemperatueBoard)o).GetTemperature();
                     for (int i = 0; i < 16; i++)
                     {
@@ -1215,11 +1197,12 @@ namespace BubbleDataCollection
                     ((TemperatueBoard)o).NewInData = false;
                 }
             }
-            else if (type == 1)
+
+            foreach (object o in PumpBoards)
             {         
                 if (((PumpBoard)o).Online == true && ((PumpBoard)o).NewInData == true)
                 {
-                    content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
+                    content = string.Format("{0:yyyy-MM-dd;HH:mm:ss}", currentTime);
                     UInt16[] flowrate = ((PumpBoard)o).GetFlowrate();
                     for (int i = 0; i < 8; i++)
                     {
@@ -1249,12 +1232,13 @@ namespace BubbleDataCollection
                     ((PumpBoard)o).NewInData = false;
                 }
             }
-            else if (type == 2)
+
+            foreach (object o in Airboxes)
             {
                 if (((Airbox)o).Online == true && ((Airbox)o).NewInData == true)
                 {               
                     byte[] airboxdata = ((Airbox)o).GetAirboxdata();
-                    content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
+                    content = string.Format("{0:yyyy-MM-dd;HH:mm:ss}", currentTime);
                     content += string.Format(";{0:0.0} °C", (airboxdata[3] * 0.5));
                     content += string.Format(";{0} Hz", (airboxdata[4] * 50) );
                     content += string.Format(";{0:0.0} W", (airboxdata[5] * 0.2).ToString() );
@@ -1282,12 +1266,13 @@ namespace BubbleDataCollection
                     ((Airbox)o).NewInData = false;
                 }       
             }
-            else if (type == 3)
+
+            foreach (object o in CO2flaps)
             {
                 if (((CO2flap)o).Online == true && ((CO2flap)o).NewInData == true)
                 {                                     
                     byte[] CO2flapdata = ((CO2flap)o).GetCO2flapdata();
-                    content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
+                    content = string.Format("{0:yyyy-MM-dd;HH:mm:ss}", currentTime);
                     content += string.Format(";{0:0.0} °C", (CO2flapdata[8] * 0.2));
                     content += string.Format(";{0} ppm", (CO2flapdata[7] * 10));
                     content += "\n";
@@ -1314,11 +1299,12 @@ namespace BubbleDataCollection
                     ((CO2flap)o).NewInData = false;
                 }
             }
-            else if (type == 4)
+
+            foreach (object o in TelosbSensors)
             {
                 if (((TelosbSensor)o).Online == true && ((TelosbSensor)o).NewInData == true)
-                {                    
-                    content = string.Format("{0:yyyy-M-d;H:m:s}", currentTime);
+                {
+                    content = string.Format("{0:yyyy-MM-dd;HH:mm:ss}", currentTime);
                     content += string.Format(";{0:0.00}", ((TelosbSensor)o).Temperature);
                     content += string.Format(";{0:0.00}", ((TelosbSensor)o).Humidity);
                     content += "\n";
@@ -1342,6 +1328,87 @@ namespace BubbleDataCollection
                     ((TelosbSensor)o).UploadCreateNewFile = false;
 
                     ((TelosbSensor)o).NewInData = false;
+                }
+            }
+        }
+
+        private void CaculateSave()
+        {
+            string filename;
+            FileStream fs;
+            StreamWriter sw;
+            var fileMode = FileMode.Append;
+            double power;
+            System.DateTime currentTime = new System.DateTime();
+            currentTime = System.DateTime.Now;
+            string content = string.Format("{0:yyyy-MM-dd;HH:mm:ss;}", currentTime);
+
+            if(TempBoards.Contains( (UInt16)2 ) && PumpBoards.Contains( (UInt16)11 ) )
+            {
+                int i = TempBoards.IndexOf( (UInt16)2 );
+                int j = PumpBoards.IndexOf( (UInt16)11 );
+                if( ((TemperatueBoard)TempBoards[i]).NewInData && ((PumpBoard)PumpBoards[j]).NewInData )
+                {
+                    UInt16[] temperature = ((TemperatueBoard)TempBoards[i]).GetTemperature();
+                    UInt16[] flowrate = ((PumpBoard)PumpBoards[j]).GetFlowrate();
+                    if(temperature[0] != 0x4000 && temperature[1] != 0x4000)
+                    {
+                        power = (temperature[1]-temperature[0])*(flowrate[0]+flowrate[1])*4.2/16.0/9.4;
+                        content += "Panel1:"+ string.Format("{0:0.00}",power)+"W;";
+                    }
+                    if(temperature[2] != 0x4000 && temperature[3] != 0x4000)
+                    {
+                        power = (temperature[3]-temperature[2])*(flowrate[2]+flowrate[3])*4.2/16.0/9.4;
+                        content += "Panel2:"+ string.Format("{0:0.00}",power)+"W;";
+                    }
+                }
+            }           
+
+            if(TempBoards.Contains( (UInt16)2 ) && PumpBoards.Contains( (UInt16)12 ) )
+            {
+                int i = TempBoards.IndexOf( (UInt16)2 );
+                int j = PumpBoards.IndexOf( (UInt16)12 );
+                if( ((TemperatueBoard)TempBoards[i]).NewInData && ((PumpBoard)PumpBoards[j]).NewInData )
+                {
+                    UInt16[] temperature = ((TemperatueBoard)TempBoards[i]).GetTemperature();
+                    UInt16[] flowrate = ((PumpBoard)PumpBoards[j]).GetFlowrate();
+                    if(temperature[4] != 0x4000 && temperature[8] != 0x4000)
+                    {
+                        power = (temperature[4] - temperature[8]) * flowrate[0] * 4.2 / 16.0 / 9.4;
+                        content += "Airbox1:"+ string.Format("{0:0.000}",power)+"W;";
+                    }
+                    if (temperature[5] != 0x4000 && temperature[9] != 0x4000)
+                    {
+                        power = (temperature[5] - temperature[9]) * flowrate[1] * 4.2 / 16.0 / 9.4;
+                        content += "Airbox2:" + string.Format("{0:0.000}", power) + "W;";
+                    }
+                    if (temperature[6] != 0x4000 && temperature[10] != 0x4000)
+                    {
+                        power = (temperature[6] - temperature[10]) * flowrate[2] * 4.2 / 16.0 / 9.4;
+                        content += "Airbox3:" + string.Format("{0:0.000}", power) + "W;";
+                    }
+                    if (temperature[7] != 0x4000 && temperature[11] != 0x4000)
+                    {
+                        power = (temperature[7] - temperature[11]) * flowrate[3] * 4.2 / 16.0 / 9.4;
+                        content += "Airbox4:" + string.Format("{0:0.000}", power) + "W;";
+                    }
+                    if (temperature[14] != 0x4000 && temperature[15] != 0x4000)
+                    {
+                        power = (temperature[15] - temperature[14]) * flowrate[4] * 4.2 / 16.0 / 9.4;
+                        content += "HeatRejection:" + string.Format("{0:0.000}", power) + "W;";
+                    }
+                }
+
+                if (content != string.Format("{0:yyyy-MM-dd;HH:mm:ss;}", currentTime) )
+                {
+                    content += "\r\n";
+                    filename = Directory.GetCurrentDirectory() + "\\Data\\Power.txt";
+                    fileMode = File.Exists(filename) ? FileMode.Append : FileMode.Create;
+                    fs = new FileStream(filename, fileMode, FileAccess.Write);
+                    sw = new StreamWriter(fs, Encoding.Default);
+                    sw.Write(content);
+                    sw.Close();
+                    fs.Close();
                 }
             }
         }
