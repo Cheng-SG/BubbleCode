@@ -473,6 +473,7 @@ namespace BubbleDataCollection
                         listBoxTBID.Items.Add(nodeID);
                         listBoxTBTemperature.Items.Add((0.0).ToString());
                         listBoxTBHumidity.Items.Add((0.0).ToString());
+                        listBoxTBDewPoint.Items.Add((0.0).ToString());
                     }
                     i = TelosbSensors.IndexOf(nodeID);
                     ((TelosbSensor)TelosbSensors[i]).SetTelosbdata(InBuf);
@@ -788,6 +789,7 @@ namespace BubbleDataCollection
                     int j = TelosbSensors.IndexOf(nodeID);
                     listBoxTBTemperature.Items[i] = string.Format("{0:0.00}", ((TelosbSensor)TelosbSensors[j]).Temperature);
                     listBoxTBHumidity.Items[i] = string.Format("{0:0.00}", ((TelosbSensor)TelosbSensors[j]).Humidity);
+                    listBoxTBDewPoint.Items[i] = string.Format("{0:0.00}", ((TelosbSensor)TelosbSensors[j]).DewPoint);
                     break;
                 default:
                     break;
@@ -1307,6 +1309,7 @@ namespace BubbleDataCollection
                     content = string.Format("{0:yyyy-MM-dd;HH:mm:ss}", currentTime);
                     content += string.Format(";{0:0.00}", ((TelosbSensor)o).Temperature);
                     content += string.Format(";{0:0.00}", ((TelosbSensor)o).Humidity);
+                    content += string.Format(";{0:0.00}", ((TelosbSensor)o).DewPoint);
                     content += "\n";
 
                     filename = datastoredirectory + "\\Telosb" + ((TelosbSensor)o).ID.ToString() + ".txt";

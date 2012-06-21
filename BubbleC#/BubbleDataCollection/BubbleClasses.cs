@@ -564,7 +564,7 @@ namespace BubbleDataCollection
         int type;
         bool online, online_t;
         UInt16[] telosbdata = new UInt16[2];
-        double temperature,humidity;
+        double temperature,humidity,dewpoint;
         bool newindata;
         bool uploadcreatenewfile;
        
@@ -635,6 +635,11 @@ namespace BubbleDataCollection
             get { return humidity; }
         }
 
+        public double DewPoint
+        {
+            get { return dewpoint; }
+        }
+
         public bool UploadCreateNewFile
         {
             get { return uploadcreatenewfile; }
@@ -661,6 +666,32 @@ namespace BubbleDataCollection
                 temperature = -39.4 + 0.01 * telosbdata[0];
                 humidity = -2.0468 + 0.0367 * telosbdata[1] - 0.00000015955 * telosbdata[1] * telosbdata[1];
                 humidity = (temperature - 25) * (0.01 + 0.00008 * telosbdata[1]) + humidity;
+                if (temperature > 0)
+                {
+                    if (humidity >= 100.0)
+                    {
+                        humidity = 100.0;
+                        dewpoint = temperature;
+                    }
+                    else
+                    {
+                        dewpoint = 243.12 * (Math.Log(humidity / 100.0) + 17.62 * temperature / (243.12 + temperature)) /
+                            (17.62 - Math.Log(humidity / 100) - 17.62 * temperature / (243.12 + temperature));
+                    }
+                }
+                else
+                {
+                    if (humidity >= 100.0)
+                    {
+                        humidity = 100.0;
+                        dewpoint = temperature;
+                    }
+                    else
+                    {
+                        dewpoint = 272.62 * (Math.Log(humidity / 100.0) + 22.46 * temperature / (22.46 + temperature)) /
+                            (22.46 - Math.Log(humidity / 100) - 22.46 * temperature / (22.46 + temperature));
+                    }
+                }
                 newindata = true;
                 ret = true;
             }

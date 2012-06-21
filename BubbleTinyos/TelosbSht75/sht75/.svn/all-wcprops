@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3194/trunk/tos/platforms/telosa/chips/sht11
+END
+HplSensirionSht11C.nc
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3033/trunk/tos/platforms/telosa/chips/sht11/HplSensirionSht11C.nc
+END
+HalSensirionSht11C.nc
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2977/trunk/tos/platforms/telosa/chips/sht11/HalSensirionSht11C.nc
+END
+SensirionSht11C.nc
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3194/trunk/tos/platforms/telosa/chips/sht11/SensirionSht11C.nc
+END
+HplSensirionSht11P.nc
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2977/trunk/tos/platforms/telosa/chips/sht11/HplSensirionSht11P.nc
+END

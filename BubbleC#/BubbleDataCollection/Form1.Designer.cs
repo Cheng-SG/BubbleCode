@@ -200,6 +200,8 @@
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.labelRecord = new System.Windows.Forms.Label();
             this.textBoxStrInterval = new System.Windows.Forms.TextBox();
+            this.listBoxTBDewPoint = new System.Windows.Forms.ListBox();
+            this.labelDewPoint = new System.Windows.Forms.Label();
             this.tabControlF.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1687,9 +1689,11 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.labelDewPoint);
             this.tabPage5.Controls.Add(this.label4);
             this.tabPage5.Controls.Add(this.label3);
             this.tabPage5.Controls.Add(this.label2);
+            this.tabPage5.Controls.Add(this.listBoxTBDewPoint);
             this.tabPage5.Controls.Add(this.listBoxTBHumidity);
             this.tabPage5.Controls.Add(this.listBoxTBTemperature);
             this.tabPage5.Controls.Add(this.listBoxTBID);
@@ -1703,25 +1707,25 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(366, 17);
+            this.label4.Location = new System.Drawing.Point(273, 17);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.Size = new System.Drawing.Size(61, 13);
             this.label4.TabIndex = 111;
-            this.label4.Text = "Humidity";
+            this.label4.Text = "Humidity(%)";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(180, 17);
+            this.label3.Location = new System.Drawing.Point(150, 17);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 111;
-            this.label3.Text = "Temperature";
+            this.label3.Text = "Temperature(°C)";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(70, 17);
+            this.label2.Location = new System.Drawing.Point(80, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 13);
             this.label2.TabIndex = 111;
@@ -1731,25 +1735,25 @@
             // 
             this.listBoxTBHumidity.ColumnWidth = 3;
             this.listBoxTBHumidity.FormattingEnabled = true;
-            this.listBoxTBHumidity.Location = new System.Drawing.Point(308, 33);
+            this.listBoxTBHumidity.Location = new System.Drawing.Point(249, 33);
             this.listBoxTBHumidity.Name = "listBoxTBHumidity";
-            this.listBoxTBHumidity.Size = new System.Drawing.Size(166, 433);
+            this.listBoxTBHumidity.Size = new System.Drawing.Size(104, 433);
             this.listBoxTBHumidity.TabIndex = 110;
             // 
             // listBoxTBTemperature
             // 
             this.listBoxTBTemperature.ColumnWidth = 3;
             this.listBoxTBTemperature.FormattingEnabled = true;
-            this.listBoxTBTemperature.Location = new System.Drawing.Point(134, 33);
+            this.listBoxTBTemperature.Location = new System.Drawing.Point(139, 33);
             this.listBoxTBTemperature.Name = "listBoxTBTemperature";
-            this.listBoxTBTemperature.Size = new System.Drawing.Size(166, 433);
+            this.listBoxTBTemperature.Size = new System.Drawing.Size(104, 433);
             this.listBoxTBTemperature.TabIndex = 110;
             // 
             // listBoxTBID
             // 
             this.listBoxTBID.ColumnWidth = 3;
             this.listBoxTBID.FormattingEnabled = true;
-            this.listBoxTBID.Location = new System.Drawing.Point(39, 33);
+            this.listBoxTBID.Location = new System.Drawing.Point(45, 33);
             this.listBoxTBID.Name = "listBoxTBID";
             this.listBoxTBID.Size = new System.Drawing.Size(88, 433);
             this.listBoxTBID.TabIndex = 110;
@@ -1815,6 +1819,24 @@
             this.textBoxStrInterval.Text = "2";
             this.textBoxStrInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxStrInterval.TextChanged += new System.EventHandler(this.textBoxStrInterval_TextChanged);
+            // 
+            // listBoxTBDewPoint
+            // 
+            this.listBoxTBDewPoint.ColumnWidth = 3;
+            this.listBoxTBDewPoint.FormattingEnabled = true;
+            this.listBoxTBDewPoint.Location = new System.Drawing.Point(359, 33);
+            this.listBoxTBDewPoint.Name = "listBoxTBDewPoint";
+            this.listBoxTBDewPoint.Size = new System.Drawing.Size(104, 433);
+            this.listBoxTBDewPoint.TabIndex = 110;
+            // 
+            // labelDewPoint
+            // 
+            this.labelDewPoint.AutoSize = true;
+            this.labelDewPoint.Location = new System.Drawing.Point(376, 17);
+            this.labelDewPoint.Name = "labelDewPoint";
+            this.labelDewPoint.Size = new System.Drawing.Size(70, 13);
+            this.labelDewPoint.TabIndex = 111;
+            this.labelDewPoint.Text = "DewPoint(°C)";
             // 
             // Form1
             // 
@@ -2032,6 +2054,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelDewPoint;
+        private System.Windows.Forms.ListBox listBoxTBDewPoint;
     }
 }
 
