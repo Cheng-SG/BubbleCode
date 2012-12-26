@@ -1,0 +1,22 @@
+19:28:03 **** Incremental Build of configuration Debug for project CMSISv2p00_LPC11xx ****
+make all 
+make: Nothing to be done for `all'.
+19:28:04 **** Incremental Build of configuration Debug for project RTOSCeilingSupplyControl ****
+make all 
+Building file: ../Source/main.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -DDEBUG -D__CODE_RED -D__USE_CMSIS=CMSISv2p00_LPC11xx -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSCeilingSupplyControl/Source/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/inc" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSCeilingSupplyControl/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSCeilingSupplyControl/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSCeilingSupplyControl/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -Wextra -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/main.d" -MT"Source/main.d" -o "Source/main.o" "../Source/main.c"
+../Source/main.c:182:13: warning: 'prvBlinkLedTask' defined but not used [-Wunused-function]
+Finished building: ../Source/main.c
+ 
+Building target: RTOSCeilingSupplyControl.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -L"/Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug" -Xlinker -Map=RTOSCeilingSupplyControl.map -Xlinker --gc-sections -mcpu=cortex-m0 -mthumb -T "RTOSCeilingSupplyControl_Debug.ld" -o "RTOSCeilingSupplyControl.axf"  ./Source/driver/adc.o ./Source/driver/can.o ./Source/driver/clkconfig.o ./Source/driver/crp.o ./Source/driver/debug_printf.o ./Source/driver/gpio.o ./Source/driver/i2c.o ./Source/driver/i2cslave.o ./Source/driver/lpc_swu.o ./Source/driver/rs485.o ./Source/driver/small_gpio.o ./Source/driver/ssp.o ./Source/driver/timer16.o ./Source/driver/timer32.o ./Source/driver/uart.o ./Source/driver/wdt.o  ./Source/FreeRTOS_Source/portable/MemMang/heap_1.o  ./Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.o  ./Source/FreeRTOS_Source/croutine.o ./Source/FreeRTOS_Source/list.o ./Source/FreeRTOS_Source/queue.o ./Source/FreeRTOS_Source/tasks.o ./Source/FreeRTOS_Source/timers.o  ./Source/UartPacket.o ./Source/control.o ./Source/cr_startup_lpc11.o ./Source/flowrate.o ./Source/main.o ./Source/pumps.o   -lCMSISv2p00_LPC11xx
+Finished building target: RTOSCeilingSupplyControl.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size RTOSCeilingSupplyControl.axf; # arm-none-eabi-objcopy -O binary RTOSCeilingSupplyControl.axf RTOSCeilingSupplyControl.bin ; checksum -p LPC1113_301 -d RTOSCeilingSupplyControl.bin;
+   text	   data	    bss	    dec	    hex	filename
+  15664	     16	   7680	  23360	   5b40	RTOSCeilingSupplyControl.axf
+ 

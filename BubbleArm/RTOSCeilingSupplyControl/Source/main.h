@@ -1,0 +1,61 @@
+#ifndef _MAIN_H_
+#define _MAIN_H_
+
+#define LED_PORT 0		// Port for led
+#define LED_GREEN_BIT 6 // Bit on port for green led
+#define LED_RED_BIT   7 // Bit on port for red led
+#define LED_ON 1		// Level to set port to turn on led
+#define LED_OFF 0		// Level to set port to turn off led
+
+#define ADT7410_ADDR  0x48
+
+#define DATA_SEND_TASK_PRIORITY  ( tskIDLE_PRIORITY + 4 )
+#define DATA_SEND_TASK_STACK_SIZE   (100)
+#define DATA_SEND_FREQUENCY      ( 1 )
+#define DATA_SEND_TASK_PARAMETER	 ( 0x4444UL )
+
+#define DATA_RECEIVE_TASK_PRIORITY     ( tskIDLE_PRIORITY + 3 )
+#define DATA_RECEIVE_TASK_STACK_SIZE   (100)
+#define DATA_RECEIVE_PARAMETER	 ( 0x3333UL )
+
+#define CONTROL_TASK_PRIORITY     ( tskIDLE_PRIORITY + 2 )
+#define CONTROL_TASK_STACK_SIZE   (120)
+#define CONTROL_PARAMETER	 ( 0x2222UL )
+
+#define	BLINKY_TASK_PRIORITY	 ( tskIDLE_PRIORITY + 1 )
+#define LED_FREQUENCY_MS		 ( 500 / portTICK_RATE_MS )
+#define LED_BLINK_PARAMETER		 ( 0x1111UL )
+
+//define PUMP channels
+#define PANEL1_SUPPLY_PUMP_CHANNEL  1
+#define PANEL1_RECYCLE_PUMP_CHANNEL 2
+#define PANEL2_SUPPLY_PUMP_CHANNEL  3
+#define PANEL2_RECYCLE_PUMP_CHANNEL 4
+
+//define TEMPERATURE channels
+#define PANEL1_SUPPLY_TEMPERATURE_CHANNEL   1
+#define PANEL1_RECYCLE_TEMPERATURE_CHANNEL  2
+#define PANEL1_MIX_TEMPERATURE_CHANNEL      4
+#define PANEL1_RETURN_TEMPERATURE_CHANNEL   11
+#define PANEL2_SUPPLY_TEMPERATURE_CHANNEL   5
+#define PANEL2_RECYCLE_TEMPERATURE_CHANNEL  7
+#define PANEL2_MIX_TEMPERATURE_CHANNEL      8
+#define PANEL2_RETURN_TEMPERATURE_CHANNEL   9
+
+//define FLOWRATE channels
+#define PANEL1_SUPPLY_FLOWRATE_CHANNEL   1
+#define PANEL1_RECYCLE_FLOWRATE_CHANNEL  2
+#define PANEL1_MIX_FLOWRATE_CHANNEL      3
+#define PANEL2_SUPPLY_FLOWRATE_CHANNEL   4
+#define PANEL2_RECYCLE_FLOWRATE_CHANNEL  5
+#define PANEL2_MIX_FLOWRATE_CHANNEL      6
+
+//define control parameters
+#define MAX     65535
+#define MIN     0
+#define EPSILON 2
+#define KP   20
+#define KI   0
+#define KD   0
+
+#endif

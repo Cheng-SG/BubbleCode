@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;FreeRTOS/OSSource&apos; to &apos;FreeRTOS_Source&apos;" description="Rename resource &apos;OSSource&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="OSSource" name="FreeRTOS_Source" stamp="1355648031656" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;FreeRTOS/src&apos; to &apos;Source&apos;" description="Rename resource &apos;src&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src" name="Source" stamp="1355648750254" updateReferences="true"/>
+</session>

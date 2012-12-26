@@ -1,0 +1,62 @@
+#ifndef PID_H_
+#define PID_H_
+
+#include "type.h"
+
+typedef struct
+{
+	int   epsilon;
+	int   max;
+	int   min;
+	float kp[2];
+	float ki;
+	float kd;
+	int   pre_error;
+	float integral;
+	int   setpoint;
+	int   setpointMax;
+	int   setpointMid;
+	int   setpointMin;
+	int   output;
+} PIDParam;
+
+#define MAX     65535
+#define MIN     0
+#define EPSILON 2
+
+#define KP   20
+#define KI   0
+#define KD   0
+
+//define PUMP channels
+#define PANEL1_SUPPLY_PUMP_CHANNEL  1
+#define PANEL1_RECYCLE_PUMP_CHANNEL 2
+#define PANEL2_SUPPLY_PUMP_CHANNEL  3
+#define PANEL2_RECYCLE_PUMP_CHANNEL 4
+
+//define TEMPERATURE channels
+#define PANEL1_SUPPLY_TEMPERATURE_CHANNEL   1
+#define PANEL1_RECYCLE_TEMPERATURE_CHANNEL  2
+#define PANEL1_MIX_TEMPERATURE_CHANNEL      4
+#define PANEL1_RETURN_TEMPERATURE_CHANNEL   11
+#define PANEL2_SUPPLY_TEMPERATURE_CHANNEL   5
+#define PANEL2_RECYCLE_TEMPERATURE_CHANNEL  7
+#define PANEL2_MIX_TEMPERATURE_CHANNEL      8
+#define PANEL2_RETURN_TEMPERATURE_CHANNEL   9
+
+//define FLOWRATE channels
+#define PANEL1_SUPPLY_FLOWRATE_CHANNEL   1
+#define PANEL1_RECYCLE_FLOWRATE_CHANNEL  2
+#define PANEL1_MIX_FLOWRATE_CHANNEL      3
+#define PANEL2_SUPPLY_FLOWRATE_CHANNEL   4
+#define PANEL2_RECYCLE_FLOWRATE_CHANNEL  5
+#define PANEL2_MIX_FLOWRATE_CHANNEL      6
+
+
+void ControlInit(void);
+void SetSpeeds(uint32_t* values);
+void SetTemperatures(uint16_t* values,uint32_t m);
+void Control(uint32_t* flowrates);
+void prvControlTask(void *pvParameters);
+
+#endif

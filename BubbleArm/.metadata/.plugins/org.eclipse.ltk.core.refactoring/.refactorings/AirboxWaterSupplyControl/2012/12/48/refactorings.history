@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;AirboxWaterSupplyControl/src/PID.h&apos; to &apos;Control.h&apos;" description="Rename resource &apos;PID.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/PID.h" name="Control.h" stamp="1354361787906" updateReferences="true"/>
+</session>

@@ -1,0 +1,50 @@
+#ifndef PID_H_
+#define PID_H_
+
+#include "type.h"
+
+typedef struct
+{
+	int   epsilon;
+	int   max;
+	int   min;
+	float kp[2];
+	float ki;
+	float kd;
+	int   pre_error;
+	float integral;
+	int   setpoint;
+	int   setpointMax;
+	int   setpointMid;
+	int   setpointMin;
+	int   output;
+} PIDParam;
+
+#define MAX     65535
+#define MIN     0
+#define EPSILON 2
+
+#define KP   20
+#define KI   0
+#define KD   0
+
+#define PANEL1_SUPPLY_CHANEL  1
+#define PANEL1_RECYCLE_CHANEL 2
+#define PANEL2_SUPPLY_CHANEL  3
+#define PANEL2_RECYCLE_CHANEL 4
+
+#define PANEL1_SUPPLY_TEMPERATURE_CHANEL   1
+#define PANEL1_RECYCLE_TEMPERATURE_CHANEL  2
+#define PANEL1_MIX_TEMPERATURE_CHANEL      4
+#define PANEL2_SUPPLY_TEMPERATURE_CHANEL   5
+#define PANEL2_RECYCLE_TEMPERATURE_CHANEL  7
+#define PANEL3_MIX_TEMPERATURE_CHANEL      8
+
+
+void ControlInit(void);
+void SetSpeeds(uint32_t* values);
+void SetTemperatures(uint16_t* values,uint32_t m);
+void Control(uint32_t* flowrates);
+void prvControlTask(void *pvParameters);
+
+#endif

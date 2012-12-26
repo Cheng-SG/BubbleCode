@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;RTOS_Sensors/Source/FreeRTOS.h&apos; to &apos;Serial.h&apos;" description="Rename resource &apos;FreeRTOS.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Source/FreeRTOS.h" name="Serial.h" stamp="1355731424090" updateReferences="true"/>
+</session>

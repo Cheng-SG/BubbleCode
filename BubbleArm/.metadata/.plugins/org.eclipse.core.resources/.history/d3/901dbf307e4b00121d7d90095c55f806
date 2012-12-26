@@ -1,0 +1,53 @@
+#ifndef PID_H_
+#define PID_H_
+
+#include "type.h"
+
+typedef struct
+{
+	int epsilon;
+	float dt;
+	int max;
+	int min;
+	float kp[2];
+	float ki;
+	float kd;
+	int pre_error;
+	float integral;
+	int setpoint;
+	int setpointMax;
+	int setpointMid;
+	int setpointMin;
+} PIDParam;
+
+#define MAX     65535
+#define MIN     0
+#define DT      0.1
+#define EPSILON 4
+
+#define AB1KP   500
+#define AB1KI   2
+#define AB1KD   0
+#define AB1_SENSOR_CH 0
+
+#define AB2KP   500
+#define AB2KI   2
+#define AB2KD   0
+#define AB2_SENSOR_CH 1
+
+#define AB3KP   1
+#define AB3KI   1
+#define AB3KD   0
+#define AB3_SENSOR_CH 2
+
+#define AB4KP   1
+#define AB4KI   1
+#define AB4KD   0
+#define AB4_SENSOR_CH 3
+
+void ControlInit(void);
+void SetSpeeds(uint32_t* values);
+void Control(uint32_t* flowrates);
+void prvControlTask(void *pvParameters);
+
+#endif

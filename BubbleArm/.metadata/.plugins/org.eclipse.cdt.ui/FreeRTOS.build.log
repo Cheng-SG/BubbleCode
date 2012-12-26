@@ -1,0 +1,176 @@
+17:32:48 **** Build of configuration Debug for project FreeRTOS ****
+make all 
+Building file: ../driver/adc.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/adc.d" -MT"driver/adc.d" -o "driver/adc.o" "../driver/adc.c"
+Finished building: ../driver/adc.c
+ 
+Building file: ../driver/can.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/can.d" -MT"driver/can.d" -o "driver/can.o" "../driver/can.c"
+Finished building: ../driver/can.c
+ 
+Building file: ../driver/clkconfig.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/clkconfig.d" -MT"driver/clkconfig.d" -o "driver/clkconfig.o" "../driver/clkconfig.c"
+Finished building: ../driver/clkconfig.c
+ 
+Building file: ../driver/crp.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/crp.d" -MT"driver/crp.d" -o "driver/crp.o" "../driver/crp.c"
+../Source/cr_startup_lpc11.c: In function 'pop_registers_from_fault_stack':
+Finished building: ../driver/crp.c
+ 
+../Source/cr_startup_lpc11.c:348:23: warning: variable 'stacked_psr' set but not used [-Wunused-but-set-variable]
+Building file: ../driver/debug_printf.c
+Invoking: MCU C Compiler
+../Source/cr_startup_lpc11.c:347:23: warning: variable 'stacked_pc' set but not used [-Wunused-but-set-variable]
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/debug_printf.d" -MT"driver/debug_printf.d" -o "driver/debug_printf.o" "../driver/debug_printf.c"
+Finished building: ../driver/debug_printf.c
+ 
+../Source/cr_startup_lpc11.c:346:23: warning: variable 'stacked_lr' set but not used [-Wunused-but-set-variable]
+Building file: ../driver/gpio.c
+../Source/cr_startup_lpc11.c:345:23: warning: variable 'stacked_r12' set but not used [-Wunused-but-set-variable]
+Invoking: MCU C Compiler
+../Source/cr_startup_lpc11.c:344:23: warning: variable 'stacked_r3' set but not used [-Wunused-but-set-variable]
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/gpio.d" -MT"driver/gpio.d" -o "driver/gpio.o" "../driver/gpio.c"
+Finished building: ../driver/gpio.c
+ 
+../Source/cr_startup_lpc11.c:343:23: warning: variable 'stacked_r2' set but not used [-Wunused-but-set-variable]
+../Source/cr_startup_lpc11.c:342:23: warning: variable 'stacked_r1' set but not used [-Wunused-but-set-variable]
+Building file: ../driver/i2c.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/i2c.d" -MT"driver/i2c.d" -o "driver/i2c.o" "../driver/i2c.c"
+../Source/cr_startup_lpc11.c:341:23: warning: variable 'stacked_r0' set but not used [-Wunused-but-set-variable]
+Finished building: ../driver/i2c.c
+ 
+Building file: ../driver/i2cslave.c
+Invoking: MCU C Compiler
+/var/folders/76/yjn2gcsn3cqf0nfpskftdf5h0000gn/T//ccOg5kIr.s: Assembler messages:
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/i2cslave.d" -MT"driver/i2cslave.d" -o "driver/i2cslave.o" "../driver/i2cslave.c"
+/var/folders/76/yjn2gcsn3cqf0nfpskftdf5h0000gn/T//ccOg5kIr.s:423: Error: invalid offset, target not word aligned (0x00000126)
+Finished building: ../driver/i2cslave.c
+ 
+Building file: ../driver/lpc_swu.c
+Invoking: MCU C Compiler
+/var/folders/76/yjn2gcsn3cqf0nfpskftdf5h0000gn/T//ccOg5kIr.s:423: Error: invalid offset, value too big (0x00000002)
+make: *** [Source/cr_startup_lpc11.o] Error 1
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/lpc_swu.d" -MT"driver/lpc_swu.d" -o "driver/lpc_swu.o" "../driver/lpc_swu.c"
+Finished building: ../driver/lpc_swu.c
+ 
+Building file: ../driver/rs485.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/rs485.d" -MT"driver/rs485.d" -o "driver/rs485.o" "../driver/rs485.c"
+Finished building: ../driver/rs485.c
+ 
+Building file: ../driver/small_gpio.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/small_gpio.d" -MT"driver/small_gpio.d" -o "driver/small_gpio.o" "../driver/small_gpio.c"
+Finished building: ../driver/small_gpio.c
+ 
+Building file: ../driver/ssp.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/ssp.d" -MT"driver/ssp.d" -o "driver/ssp.o" "../driver/ssp.c"
+Finished building: ../driver/ssp.c
+ 
+Building file: ../driver/timer16.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/timer16.d" -MT"driver/timer16.d" -o "driver/timer16.o" "../driver/timer16.c"
+Finished building: ../driver/timer16.c
+ 
+Building file: ../driver/timer32.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/timer32.d" -MT"driver/timer32.d" -o "driver/timer32.o" "../driver/timer32.c"
+Finished building: ../driver/timer32.c
+ 
+Building file: ../driver/uart.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/uart.d" -MT"driver/uart.d" -o "driver/uart.o" "../driver/uart.c"
+Finished building: ../driver/uart.c
+ 
+Building file: ../driver/wdt.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"driver/wdt.d" -MT"driver/wdt.d" -o "driver/wdt.o" "../driver/wdt.c"
+Finished building: ../driver/wdt.c
+ 
+Building file: ../cmsis/core_cm0.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -O0 -Os -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"cmsis/core_cm0.d" -MT"cmsis/core_cm0.d" -o "cmsis/core_cm0.o" "../cmsis/core_cm0.c"
+Finished building: ../cmsis/core_cm0.c
+ 
+Building file: ../cmsis/system_LPC11xx.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -O0 -Os -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"cmsis/system_LPC11xx.d" -MT"cmsis/system_LPC11xx.d" -o "cmsis/system_LPC11xx.o" "../cmsis/system_LPC11xx.c"
+Finished building: ../cmsis/system_LPC11xx.c
+ 
+Building file: ../Source/FreeRTOS_Source/portable/MemMang/heap_1.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/FreeRTOS_Source/portable/MemMang/heap_1.d" -MT"Source/FreeRTOS_Source/portable/MemMang/heap_1.d" -o "Source/FreeRTOS_Source/portable/MemMang/heap_1.o" "../Source/FreeRTOS_Source/portable/MemMang/heap_1.c"
+Finished building: ../Source/FreeRTOS_Source/portable/MemMang/heap_1.c
+ 
+Building file: ../Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.d" -MT"Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.d" -o "Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.o" "../Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.c"
+Finished building: ../Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.c
+ 
+Building file: ../Source/FreeRTOS_Source/croutine.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/FreeRTOS_Source/croutine.d" -MT"Source/FreeRTOS_Source/croutine.d" -o "Source/FreeRTOS_Source/croutine.o" "../Source/FreeRTOS_Source/croutine.c"
+Finished building: ../Source/FreeRTOS_Source/croutine.c
+ 
+Building file: ../Source/FreeRTOS_Source/list.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/FreeRTOS_Source/list.d" -MT"Source/FreeRTOS_Source/list.d" -o "Source/FreeRTOS_Source/list.o" "../Source/FreeRTOS_Source/list.c"
+Finished building: ../Source/FreeRTOS_Source/list.c
+ 
+Building file: ../Source/FreeRTOS_Source/queue.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/FreeRTOS_Source/queue.d" -MT"Source/FreeRTOS_Source/queue.d" -o "Source/FreeRTOS_Source/queue.o" "../Source/FreeRTOS_Source/queue.c"
+Finished building: ../Source/FreeRTOS_Source/queue.c
+ 
+Building file: ../Source/FreeRTOS_Source/tasks.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/FreeRTOS_Source/tasks.d" -MT"Source/FreeRTOS_Source/tasks.d" -o "Source/FreeRTOS_Source/tasks.o" "../Source/FreeRTOS_Source/tasks.c"
+Finished building: ../Source/FreeRTOS_Source/tasks.c
+ 
+Building file: ../Source/FreeRTOS_Source/timers.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/FreeRTOS_Source/timers.d" -MT"Source/FreeRTOS_Source/timers.d" -o "Source/FreeRTOS_Source/timers.o" "../Source/FreeRTOS_Source/timers.c"
+Finished building: ../Source/FreeRTOS_Source/timers.c
+ 
+Building file: ../Source/Common_Demo_Task/IntQueue.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/Common_Demo_Task/IntQueue.d" -MT"Source/Common_Demo_Task/IntQueue.d" -o "Source/Common_Demo_Task/IntQueue.o" "../Source/Common_Demo_Task/IntQueue.c"
+Finished building: ../Source/Common_Demo_Task/IntQueue.c
+ 
+Building file: ../Source/Common_Demo_Task/blocktim.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/Common_Demo_Task/blocktim.d" -MT"Source/Common_Demo_Task/blocktim.d" -o "Source/Common_Demo_Task/blocktim.o" "../Source/Common_Demo_Task/blocktim.c"
+Finished building: ../Source/Common_Demo_Task/blocktim.c
+ 
+Building file: ../Source/Common_Demo_Task/countsem.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/Common_Demo_Task/countsem.d" -MT"Source/Common_Demo_Task/countsem.d" -o "Source/Common_Demo_Task/countsem.o" "../Source/Common_Demo_Task/countsem.c"
+Finished building: ../Source/Common_Demo_Task/countsem.c
+ 
+Building file: ../Source/Common_Demo_Task/recmutex.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/Common_Demo_Task/recmutex.d" -MT"Source/Common_Demo_Task/recmutex.d" -o "Source/Common_Demo_Task/recmutex.o" "../Source/Common_Demo_Task/recmutex.c"
+Finished building: ../Source/Common_Demo_Task/recmutex.c
+ 
+Building file: ../Source/IntQueueTimer.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/IntQueueTimer.d" -MT"Source/IntQueueTimer.d" -o "Source/IntQueueTimer.o" "../Source/IntQueueTimer.c"
+Finished building: ../Source/IntQueueTimer.c
+ 
+Building file: ../Source/RegTest.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/RegTest.d" -MT"Source/RegTest.d" -o "Source/RegTest.o" "../Source/RegTest.c"
+Finished building: ../Source/RegTest.c
+ 
+Building file: ../Source/cr_startup_lpc11.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -D__USE_CMSIS -DDEBUG -D__CODE_RED -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/Common_Demo_Task/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/FreeRTOS/config" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/cr_startup_lpc11.d" -MT"Source/cr_startup_lpc11.d" -o "Source/cr_startup_lpc11.o" "../Source/cr_startup_lpc11.c"
+
+17:33:02 Build Finished (took 13s.747ms)
+

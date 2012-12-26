@@ -1,0 +1,145 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AMPacket	ProgramAppC.nc	/^  AppC.AMPacket -> AMSenderC;$/;"	d
+AMSend	ProgramAppC.nc	/^  AppC.AMSend -> AMSenderC;$/;"	d
+ArbiterInfo	HplSensirionSht75_1C.nc	/^  SplitControlPowerManagerC.ArbiterInfo -> Arbiter.ArbiterInfo;$/;"	d
+ArbiterInfo	HplSensirionSht75_2C.nc	/^  SplitControlPowerManagerC.ArbiterInfo -> Arbiter.ArbiterInfo;$/;"	d
+CLOCK	HalSensirionSht75_1C.nc	/^  SensirionSht75LogicP.CLOCK -> HplSensirionSht75_1C.SCK;$/;"	d
+CLOCK	HalSensirionSht75_2C.nc	/^  SensirionSht75LogicP.CLOCK -> HplSensirionSht75_2C.SCK;$/;"	d
+CLOCK	SensirionSht75LogicP.nc	/^  uses interface HplMsp430GeneralIO as CLOCK;$/;"	u
+DATA	HalSensirionSht75_1C.nc	/^  SensirionSht75LogicP.DATA -> HplSensirionSht75_1C.DATA;$/;"	d
+DATA	HalSensirionSht75_2C.nc	/^  SensirionSht75LogicP.DATA -> HplSensirionSht75_2C.DATA;$/;"	d
+DATA	HplSensirionSht75_1C.nc	/^  HplSensirionSht75_1P.DATA -> HplMsp430GeneralIOC.Port61;$/;"	d
+DATA	HplSensirionSht75_1P.nc	/^  uses interface HplMsp430GeneralIO as DATA;$/;"	u
+DATA	HplSensirionSht75_2C.nc	/^  HplSensirionSht75_2P.DATA -> HplMsp430GeneralIOC.Port20;$/;"	d
+DATA	HplSensirionSht75_2P.nc	/^  uses interface HplMsp430GeneralIO as DATA;$/;"	u
+DATA	SensirionSht75LogicP.nc	/^  uses interface HplMsp430GeneralIO as DATA;$/;"	u
+HalSensirionSht75_1C	HalSensirionSht75_1C.nc	/^configuration HalSensirionSht75_1C {$/;"	b
+HalSensirionSht75_2C	HalSensirionSht75_2C.nc	/^configuration HalSensirionSht75_2C {$/;"	b
+HalSht75Advanced	HalSht75Advanced.nc	/^interface HalSht75Advanced {$/;"	i
+HalSht75ControlP	HalSht75ControlP.nc	/^module HalSht75ControlP {$/;"	m
+HplInterrupt	HplSensirionSht75_1C.nc	/^  InterruptDATAC.HplInterrupt -> HplMsp430InterruptC.Port21;$/;"	d
+HplInterrupt	HplSensirionSht75_2C.nc	/^  InterruptDATAC.HplInterrupt -> HplMsp430InterruptC.Port20;$/;"	d
+HplSensirionSht75_1C	HplSensirionSht75_1C.nc	/^configuration HplSensirionSht75_1C {$/;"	b
+HplSensirionSht75_1P	HplSensirionSht75_1P.nc	/^module HplSensirionSht75_1P {$/;"	m
+HplSensirionSht75_2C	HplSensirionSht75_2C.nc	/^configuration HplSensirionSht75_2C {$/;"	b
+HplSensirionSht75_2P	HplSensirionSht75_2P.nc	/^module HplSensirionSht75_2P {$/;"	m
+HumResource	SensirionSht75ReaderP.nc	/^  uses interface Resource as HumResource;$/;"	u
+HumResource	SensirionSht75_1C.nc	/^  SensirionSht75ReaderP.HumResource -> HalSensirionSht75_1C.Resource[ HUM_KEY ];$/;"	d
+HumResource	SensirionSht75_2C.nc	/^  SensirionSht75ReaderP.HumResource -> HalSensirionSht75_2C.Resource[ HUM_KEY ];$/;"	d
+Humidity1	ProgramAppC.nc	/^  AppC.Humidity1 -> Sht1C.Humidity;$/;"	d
+Humidity2	ProgramAppC.nc	/^  AppC.Humidity2 -> Sht2C.Humidity;$/;"	d
+InterruptDATA	HalSensirionSht75_1C.nc	/^  SensirionSht75LogicP.InterruptDATA -> HplSensirionSht75_1C.InterruptDATA;$/;"	d
+InterruptDATA	HalSensirionSht75_2C.nc	/^  SensirionSht75LogicP.InterruptDATA -> HplSensirionSht75_2C.InterruptDATA;$/;"	d
+InterruptDATA	SensirionSht75LogicP.nc	/^  uses interface GpioInterrupt as InterruptDATA;$/;"	u
+Leds	HalSensirionSht75_1C.nc	/^  SensirionSht75LogicP.Leds -> LedsC;$/;"	d
+Leds	HalSensirionSht75_2C.nc	/^  SensirionSht75LogicP.Leds -> LedsC;$/;"	d
+Leds	ProgramAppC.nc	/^  AppC.Leds -> LedsC;$/;"	d
+PWR	HplSensirionSht75_1C.nc	/^  HplSensirionSht75_1P.PWR -> HplMsp430GeneralIOC.Port21;$/;"	d
+PWR	HplSensirionSht75_1P.nc	/^  uses interface HplMsp430GeneralIO as PWR;$/;"	u
+PWR	HplSensirionSht75_2C.nc	/^  HplSensirionSht75_2P.PWR -> HplMsp430GeneralIOC.Port63;$/;"	d
+PWR	HplSensirionSht75_2P.nc	/^  uses interface HplMsp430GeneralIO as PWR;$/;"	u
+Packet	ProgramAppC.nc	/^  AppC.Packet -> AMSenderC;$/;"	d
+ProgramAppC	ProgramAppC.nc	/^configuration ProgramAppC$/;"	b
+ProgramC	ProgramC.nc	/^module ProgramC$/;"	m
+RadioControl	ProgramAppC.nc	/^  AppC.RadioControl -> ActiveMessageC;$/;"	d
+RadioControl	ProgramC.nc	/^    uses interface SplitControl as RadioControl;$/;"	u
+ResourceDefaultOwner	HplSensirionSht75_1C.nc	/^  SplitControlPowerManagerC.ResourceDefaultOwner -> Arbiter.ResourceDefaultOwner;$/;"	d
+ResourceDefaultOwner	HplSensirionSht75_2C.nc	/^  SplitControlPowerManagerC.ResourceDefaultOwner -> Arbiter.ResourceDefaultOwner;$/;"	d
+SCK	HplSensirionSht75_1C.nc	/^  HplSensirionSht75_1P.SCK -> HplMsp430GeneralIOC.Port62;$/;"	d
+SCK	HplSensirionSht75_1P.nc	/^  uses interface HplMsp430GeneralIO as SCK;$/;"	u
+SCK	HplSensirionSht75_2C.nc	/^  HplSensirionSht75_2P.SCK -> HplMsp430GeneralIOC.Port60;$/;"	d
+SCK	HplSensirionSht75_2P.nc	/^  uses interface HplMsp430GeneralIO as SCK;$/;"	u
+SensirionSht75	SensirionSht75.nc	/^interface SensirionSht75 {$/;"	i
+SensirionSht75LogicP	SensirionSht75LogicP.nc	/^generic module SensirionSht75LogicP() {$/;"	m
+SensirionSht75ReaderP	SensirionSht75ReaderP.nc	/^generic module SensirionSht75ReaderP() {$/;"	m
+SensirionSht75_1C	SensirionSht75_1C.nc	/^generic configuration SensirionSht75_1C() {$/;"	b
+SensirionSht75_2C	SensirionSht75_2C.nc	/^generic configuration SensirionSht75_2C() {$/;"	b
+Sht75Hum	SensirionSht75ReaderP.nc	/^  uses interface SensirionSht75 as Sht75Hum;$/;"	u
+Sht75Hum	SensirionSht75_1C.nc	/^  SensirionSht75ReaderP.Sht75Hum -> HalSensirionSht75_1C.SensirionSht75[ HUM_KEY ];$/;"	d
+Sht75Hum	SensirionSht75_2C.nc	/^  SensirionSht75ReaderP.Sht75Hum -> HalSensirionSht75_2C.SensirionSht75[ HUM_KEY ];$/;"	d
+Sht75Temp	SensirionSht75ReaderP.nc	/^  uses interface SensirionSht75 as Sht75Temp;$/;"	u
+Sht75Temp	SensirionSht75_1C.nc	/^  SensirionSht75ReaderP.Sht75Temp -> HalSensirionSht75_1C.SensirionSht75[ TEMP_KEY ];$/;"	d
+Sht75Temp	SensirionSht75_2C.nc	/^  SensirionSht75ReaderP.Sht75Temp -> HalSensirionSht75_2C.SensirionSht75[ TEMP_KEY ];$/;"	d
+SplitControl	HplSensirionSht75_1C.nc	/^  SplitControlPowerManagerC.SplitControl -> HplSensirionSht75_1P;$/;"	d
+SplitControl	HplSensirionSht75_2C.nc	/^  SplitControlPowerManagerC.SplitControl -> HplSensirionSht75_2P;$/;"	d
+TempResource	SensirionSht75ReaderP.nc	/^  uses interface Resource as TempResource;$/;"	u
+TempResource	SensirionSht75_1C.nc	/^  SensirionSht75ReaderP.TempResource -> HalSensirionSht75_1C.Resource[ TEMP_KEY ];$/;"	d
+TempResource	SensirionSht75_2C.nc	/^  SensirionSht75ReaderP.TempResource -> HalSensirionSht75_2C.Resource[ TEMP_KEY ];$/;"	d
+Temperature1	ProgramAppC.nc	/^  AppC.Temperature1 -> Sht1C.Temperature;$/;"	d
+Temperature2	ProgramAppC.nc	/^  AppC.Temperature2 -> Sht2C.Temperature;$/;"	d
+Timer	HalSensirionSht75_1C.nc	/^  SensirionSht75LogicP.Timer -> TimerMilliC;$/;"	d
+Timer	HalSensirionSht75_2C.nc	/^  SensirionSht75LogicP.Timer -> TimerMilliC;$/;"	d
+Timer	HplSensirionSht75_1C.nc	/^  HplSensirionSht75_1P.Timer -> TimerMilliC;$/;"	d
+Timer	HplSensirionSht75_2C.nc	/^  HplSensirionSht75_2P.Timer -> TimerMilliC;$/;"	d
+Timer0	ProgramAppC.nc	/^  AppC.Timer0 -> Timer0;$/;"	d
+error_t HalSht75Advanced.getVoltageStatus	HalSht75ControlP.nc	/^  command error_t HalSht75Advanced.getVoltageStatus() {$/;"	c
+error_t HalSht75Advanced.setHeater	HalSht75ControlP.nc	/^  command error_t HalSht75Advanced.setHeater(bool isOn) {$/;"	c
+error_t HalSht75Advanced.setResolution	HalSht75ControlP.nc	/^  command error_t HalSht75Advanced.setResolution(bool resolution) {$/;"	c
+error_t Humidity.read	SensirionSht75ReaderP.nc	/^  command error_t Humidity.read() {$/;"	c
+error_t SplitControl.start	HplSensirionSht75_1P.nc	/^  command error_t SplitControl.start() {$/;"	c
+error_t SplitControl.start	HplSensirionSht75_2P.nc	/^  command error_t SplitControl.start() {$/;"	c
+error_t SplitControl.stop	HplSensirionSht75_1P.nc	/^  command error_t SplitControl.stop() {$/;"	c
+error_t SplitControl.stop	HplSensirionSht75_2P.nc	/^  command error_t SplitControl.stop() {$/;"	c
+error_t Temperature.read	SensirionSht75ReaderP.nc	/^  command error_t Temperature.read() {$/;"	c
+uint8_t HumidityMetadata.getSignificantBits	SensirionSht75ReaderP.nc	/^  command uint8_t HumidityMetadata.getSignificantBits() { return SHT75_HUMIDITY_BITS; }$/;"	c
+uint8_t TemperatureMetadata.getSignificantBits	SensirionSht75ReaderP.nc	/^  command uint8_t TemperatureMetadata.getSignificantBits() { return SHT75_TEMPERATURE_BITS; }$/;"	c
+void AMSend.sendDone	ProgramC.nc	/^    event void AMSend.sendDone(message_t* msg, error_t error)$/;"	e
+void Boot.booted	ProgramC.nc	/^    event void Boot.booted()$/;"	e
+void HumResource.granted	SensirionSht75ReaderP.nc	/^  event void HumResource.granted() {$/;"	e
+void Humidity1.readDone	ProgramC.nc	/^    event void Humidity1.readDone(error_t result, uint16_t val)$/;"	e
+void Humidity2.readDone	ProgramC.nc	/^    event void Humidity2.readDone(error_t result, uint16_t val)$/;"	e
+void RadioControl.startDone	ProgramC.nc	/^    event void RadioControl.startDone(error_t error)$/;"	e
+void RadioControl.stopDone	ProgramC.nc	/^    event void RadioControl.stopDone(error_t error)$/;"	e
+void Resource.granted	HalSht75ControlP.nc	/^  event void Resource.granted() { \/* intentionally left blank *\/ }$/;"	e
+void SensirionSht75.measureHumidityDone	HalSht75ControlP.nc	/^  event void SensirionSht75.measureHumidityDone( error_t result, uint16_t val ) {}$/;"	e
+void SensirionSht75.measureTemperatureDone	HalSht75ControlP.nc	/^  event void SensirionSht75.measureTemperatureDone( error_t result, uint16_t val ) {}$/;"	e
+void SensirionSht75.readStatusRegDone	HalSht75ControlP.nc	/^  event void SensirionSht75.readStatusRegDone( error_t result, uint8_t val ) {$/;"	e
+void SensirionSht75.resetDone	HalSht75ControlP.nc	/^  event void SensirionSht75.resetDone( error_t result ) {}$/;"	e
+void SensirionSht75.writeStatusRegDone	HalSht75ControlP.nc	/^  event void SensirionSht75.writeStatusRegDone( error_t result ) {$/;"	e
+void Sht75Hum.measureHumidityDone	SensirionSht75ReaderP.nc	/^  event void Sht75Hum.measureHumidityDone( error_t result, uint16_t val ) {$/;"	e
+void Sht75Hum.measureTemperatureDone	SensirionSht75ReaderP.nc	/^  event void Sht75Hum.measureTemperatureDone( error_t result, uint16_t val ) { }$/;"	e
+void Sht75Hum.readStatusRegDone	SensirionSht75ReaderP.nc	/^  event void Sht75Hum.readStatusRegDone( error_t result, uint8_t val ) { }$/;"	e
+void Sht75Hum.resetDone	SensirionSht75ReaderP.nc	/^  event void Sht75Hum.resetDone( error_t result ) { }$/;"	e
+void Sht75Hum.writeStatusRegDone	SensirionSht75ReaderP.nc	/^  event void Sht75Hum.writeStatusRegDone( error_t result ) { }$/;"	e
+void Sht75Temp.measureHumidityDone	SensirionSht75ReaderP.nc	/^  event void Sht75Temp.measureHumidityDone( error_t result, uint16_t val ) { }$/;"	e
+void Sht75Temp.measureTemperatureDone	SensirionSht75ReaderP.nc	/^  event void Sht75Temp.measureTemperatureDone( error_t result, uint16_t val ) {$/;"	e
+void Sht75Temp.readStatusRegDone	SensirionSht75ReaderP.nc	/^  event void Sht75Temp.readStatusRegDone( error_t result, uint8_t val ) { }$/;"	e
+void Sht75Temp.resetDone	SensirionSht75ReaderP.nc	/^  event void Sht75Temp.resetDone( error_t result ) { }$/;"	e
+void Sht75Temp.writeStatusRegDone	SensirionSht75ReaderP.nc	/^  event void Sht75Temp.writeStatusRegDone( error_t result ) { }$/;"	e
+void TempResource.granted	SensirionSht75ReaderP.nc	/^  event void TempResource.granted() {$/;"	e
+void Temperature1.readDone	ProgramC.nc	/^    event void Temperature1.readDone(error_t result, uint16_t val)$/;"	e
+void Temperature2.readDone	ProgramC.nc	/^    event void Temperature2.readDone(error_t result, uint16_t val)$/;"	e
+void Timer.fired	HplSensirionSht75_1P.nc	/^  event void Timer.fired() {$/;"	e
+void Timer.fired	HplSensirionSht75_2P.nc	/^  event void Timer.fired() {$/;"	e
+void Timer.fired	SensirionSht75LogicP.nc	/^  event void Timer.fired() {$/;"	e
+void Timer0.fired	ProgramC.nc	/^    event void Timer0.fired()$/;"	e
+void ack	SensirionSht75LogicP.nc	/^  void ack() {$/;"	f
+void ack	SensirionSht75LogicP.nc	/^  void ack();$/;"	f
+void enableInterrupt	SensirionSht75LogicP.nc	/^  void enableInterrupt() {$/;"	f
+void enableInterrupt	SensirionSht75LogicP.nc	/^  void enableInterrupt();$/;"	f
+void endTransmission	SensirionSht75LogicP.nc	/^  void endTransmission() {$/;"	f
+void endTransmission	SensirionSht75LogicP.nc	/^  void endTransmission();$/;"	f
+void initPins	SensirionSht75LogicP.nc	/^  void initPins() {$/;"	f
+void initPins	SensirionSht75LogicP.nc	/^  void initPins();$/;"	f
+void readSensor	SensirionSht75LogicP.nc	/^  task void readSensor() {$/;"	t
+void readSensor	SensirionSht75LogicP.nc	/^  task void readSensor();$/;"	t
+void resetDevice	SensirionSht75LogicP.nc	/^  void resetDevice() {$/;"	f
+void resetDevice	SensirionSht75LogicP.nc	/^  void resetDevice();$/;"	f
+void sendCommand	SensirionSht75LogicP.nc	/^  void sendCommand(uint8_t _cmd) {$/;"	f
+void sendCommand	SensirionSht75LogicP.nc	/^  void sendCommand(uint8_t _cmd);$/;"	f
+void signalStatusDone	SensirionSht75LogicP.nc	/^  task void signalStatusDone() {$/;"	t
+void signalStatusDone	SensirionSht75LogicP.nc	/^  task void signalStatusDone();$/;"	t
+void signal_Task	HalSht75ControlP.nc	/^  task void signal_Task() {$/;"	t
+void stopTask	HplSensirionSht75_1P.nc	/^  task void stopTask() {$/;"	t
+void stopTask	HplSensirionSht75_1P.nc	/^  task void stopTask();$/;"	t
+void stopTask	HplSensirionSht75_2P.nc	/^  task void stopTask() {$/;"	t
+void stopTask	HplSensirionSht75_2P.nc	/^  task void stopTask();$/;"	t
+void transmissionStart	SensirionSht75LogicP.nc	/^  void transmissionStart() {$/;"	f
+void transmissionStart	SensirionSht75LogicP.nc	/^  void transmissionStart();$/;"	f
+void writeByte	SensirionSht75LogicP.nc	/^  void writeByte(uint8_t byte) {$/;"	f
+void writeByte	SensirionSht75LogicP.nc	/^  void writeByte(uint8_t byte);$/;"	f
