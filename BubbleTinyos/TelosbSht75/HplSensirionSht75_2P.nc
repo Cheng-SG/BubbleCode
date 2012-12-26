@@ -42,9 +42,9 @@
 module HplSensirionSht75_2P {
   provides interface SplitControl;
   uses interface Timer<TMilli>;
-  uses interface GeneralIO as PWR;
-  uses interface GeneralIO as DATA;
-  uses interface GeneralIO as SCK;
+  uses interface HplMsp430GeneralIO as PWR;
+  uses interface HplMsp430GeneralIO as DATA;
+  uses interface HplMsp430GeneralIO as SCK;
 }
 implementation {
   task void stopTask();
@@ -52,7 +52,7 @@ implementation {
   command error_t SplitControl.start() {
     call PWR.makeOutput();
     call PWR.set();
-    call Timer.startOneShot( 11 );
+    call Timer.startOneShot( 13 );
     return SUCCESS;
   }
   

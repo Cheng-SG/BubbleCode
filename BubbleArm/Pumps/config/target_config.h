@@ -29,8 +29,8 @@
 
 #define SYS_TICK    (SystemCoreClock/8-1)
 
-#define TX_BUFSIZE    20
-#define RX_BUFSIZE    20
+#define TX_BUFSIZE    64
+#define RX_BUFSIZE    64
 
 
 /*********************************************************************************

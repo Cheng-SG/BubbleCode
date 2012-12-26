@@ -58,6 +58,7 @@ implementation
   AppC.MySerial -> MySerialC;
 
   AppC.RadioControl -> ActiveMessageC;
+  AppC.Ack -> ActiveMessageC;
   AppC.Packet -> AMSenderC;
   AppC.AMPacket -> AMSenderC;
   AppC.AMSend -> AMSenderC;

@@ -13,11 +13,20 @@ at a steady rate and uses the bottom three bits of a counter to display
 on the LEDs.
 
 Pin assignment:
-TelosbPIN     SensironPIN    OldTelosb  NewTelosb 
-GIO0(P2.0) ->    VCC         U2 - 10    U2 - 12
-GND        ->    GND         U2 - 9     U2 - 11
-GIO1(P2.1) ->    DATA        U2 - 7     U2 - 9
-GIO2(P2.3) ->    SCK         U28- 2     U28- 2
+
+Sensor 1:
+TelosbPIN     SensironPIN   NewTelosb 
+GIO0(P6.0) ->    VCC         U2 - 3
+GIO2(P6.1) ->    SCK         U2 - 5
+GIO1(P2.1) ->    DATA        U2 - 9
+GND        ->    GND         U2 - 11
+
+Sensor 2:
+TelosbPIN     SensironPIN   NewTelosb 
+GIO0(P6.2) ->    VCC         U2 - 7
+GIO2(P6.3) ->    SCK         U2 - 10
+GIO1(P2.0) ->    DATA        U2 - 12
+GND        ->    GND         U2 - 11
 
 Tools:
 

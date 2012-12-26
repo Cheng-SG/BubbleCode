@@ -13,14 +13,19 @@ module ProgramC
     uses interface Packet;
     uses interface AMPacket;
     uses interface AMSend;
+    uses interface PacketAcknowledgements as Ack;
 }
 implementation
 {
 #define BASESTATION_ID 0
+#define MAX_RETRY      5
 
     uint16_t temp1,humi1;
     uint16_t temp2,humi2;
     message_t pkt;
+    uint8_t RetryCount;
+
+    task void SendTask();
 
     event void Boot.booted()
     {
@@ -47,7 +52,7 @@ implementation
         if(result == SUCCESS)
         {
             humi1 = val;
-	    call Temperature2.read();
+            call Temperature2.read();
         }
     }
 
@@ -85,19 +90,47 @@ implementation
             *data++ = (temp2 >> 8);
             *data++ = humi2;
             *data++ = (humi2 >> 8);
+            RetryCount = 0;
+            post SendTask();
+        }
+        else
+        {
+            call RadioControl.stop();
+        }
+    }
+
+    task void SendTask()
+    {
+        if(RetryCount < MAX_RETRY)
+        {
+            call Ack.requestAck(&pkt);
             if( call AMSend.send(BASESTATION_ID,&pkt,10) != SUCCESS)
             {
-                call RadioControl.stop();
+                RetryCount++;
+                post SendTask();
             }
         }
         else
+        {
+            RetryCount = 0;
             call RadioControl.stop();
+            //call Leds.led0Toggle();
+        }
     }
 
     event void AMSend.sendDone(message_t* msg, error_t error)
     {
-        call RadioControl.stop();
-        //call Leds.led1Toggle();
+        if(call Ack.wasAcked(msg))
+        {
+            RetryCount = 0;
+            call RadioControl.stop();
+            //call Leds.led1Toggle();
+        }
+        else
+        {
+            RetryCount++;
+            post SendTask();
+        }
     }
 
     event void RadioControl.stopDone(error_t error)

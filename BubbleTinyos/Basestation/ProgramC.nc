@@ -50,6 +50,7 @@ module ProgramC
     uses interface Packet;
     uses interface AMPacket;
     uses interface AMSend;
+    uses interface PacketAcknowledgements as Ack;
     uses interface Receive;
 }
 implementation
@@ -59,6 +60,7 @@ implementation
         UARTBUF_SIZE = 32,
         UARTQUEUE_SIZE = 32,
         RADIOQUEUE_SIZE = 32,
+        MAX_RETRY = 5,
     };
 
     uint8_t Ubuf[UARTQUEUE_SIZE][UARTBUF_SIZE];
@@ -67,7 +69,7 @@ implementation
 
     message_t Rbuf[RADIOQUEUE_SIZE];
     uint8_t Rlen[RADIOQUEUE_SIZE];
-    uint8_t Rin,Rout;
+    uint8_t Rin,Rout,RetryCount;
     bool    Rfull,Rbusy;
 
     event void Boot.booted()
@@ -76,7 +78,7 @@ implementation
         Ufull= FALSE;
         Ubusy = FALSE;
         
-        Rin=0;Rout=0;
+        Rin=0;Rout=0;RetryCount=0;
         Rfull= FALSE;
         Rbusy = FALSE;
         call MySerial.init();
@@ -190,25 +192,58 @@ implementation
         dst = call AMPacket.destination(&(Rbuf[Rout]));
         if(dst == TOS_NODE_ID)
         {
+            atomic
+            {
+                Rout = (Rout+1) % RADIOQUEUE_SIZE;
+                if(Rfull == TRUE)Rfull = FALSE;
+                RetryCount = 0;
+            }
             post Radio_sendTask();
             return;
         }
+        call Ack.requestAck(&(Rbuf[Rout]));
         if(call AMSend.send(dst,&(Rbuf[Rout]),Rlen[Rout])!=SUCCESS)
+        {
+            atomic
+            {
+                RetryCount++;
+                if(RetryCount >= MAX_RETRY)
+                {
+                    Rout = (Rout+1) % RADIOQUEUE_SIZE;
+                    if(Rfull == TRUE)Rfull = FALSE;
+                    RetryCount = 0;
+                    call Leds.led0Toggle();
+                }
+            }
             post Radio_sendTask();
+        }
     }
 
     event void AMSend.sendDone(message_t* msg, error_t error)
     {
         atomic
         {
-            if(error == SUCCESS)
+            if(call Ack.wasAcked(msg))
             {
                 Rout = (Rout+1) % RADIOQUEUE_SIZE;
                 if(Rfull == TRUE)Rfull = FALSE;
+                RetryCount = 0;
+                call Leds.led1Toggle();
             }
+            else
+            {
+                RetryCount++;
+                if(RetryCount >= MAX_RETRY)
+                {
+                    Rout = (Rout+1) % RADIOQUEUE_SIZE;
+                    if(Rfull == TRUE)Rfull = FALSE;
+                    RetryCount = 0;
+                    call Leds.led0Toggle();
+                }
+            }
+            
         }
         post Radio_sendTask();
-        call Leds.led1Toggle();
     }
 
     event void MySerial.receive(uint8_t *rbuf,uint8_t len)
@@ -242,6 +277,8 @@ implementation
         {
             call Leds.led0Toggle(); 
         }
+
+        //call Leds.led0Toggle(); 
     }
 }
 

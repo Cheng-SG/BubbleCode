@@ -28,7 +28,7 @@
 #include "gpio.h"
 #include "i2c.h"
 #include "type.h"
-#include "uart.h"
+#include "UartPacket.h"
 
 /* In order to start the I2CEngine, the all the parameters
  must be set in advance, including I2CWriteLength, I2CReadLength,
@@ -57,15 +57,16 @@ extern volatile uint32_t I2CReadLength, I2CWriteLength;
 
 /*Global Variables*/
 volatile uint32_t temperature[16][2];
-volatile uint8_t TxBuffer[TX_BUFSIZE];
-volatile uint32_t TxCount;
+volatile uint8_t TxBuffer[32];
+volatile uint32_t TxFlag;
 
 void I2CArbitrationRecovery();
 
 /* Main Program */
-int main(void) {
-	uint32_t i = 0,j = 0, n = 0;
-	uint16_t sum,tmp;
+int main(void)
+{
+	uint32_t i = 0, j = 0, n = 0;
+	uint16_t tmp;
 	/* Basic chip initialization is taken care of in SystemInit() called
 	 * from the startup code. SystemInit() and chip settings are defined
 	 * in the CMSIS system_<part family>.c file.
@@ -89,9 +90,7 @@ int main(void) {
 	GPIOSetValue(LED_PORT, LED_RED_BIT, 0);
 
 	//Initialize UART
-	UARTInit(115200);
-	TxCount = TX_BUFSIZE+1;
-	LPC_UART->IER = IER_THRE;	/* Enable UART interrupt */
+	PacketInit(115200);
 
 	GPIOSetDir(3, 0, 1);
 	GPIOSetDir(3, 1, 1);
@@ -103,14 +102,16 @@ int main(void) {
 	if (I2CInit((uint32_t) I2CMASTER) == FALSE) /* initialize I2c */
 	{
 		GPIOSetValue(LED_PORT, LED_RED_BIT, 1);
-		while (1); /* Fatal error */
+		while (1)
+			; /* Fatal error */
 	}
 
-	for(i=0;i<16;i++)
+	for (i = 0; i < 16; i++)
 	{
 		temperature[i][0] = 0;
 		temperature[i][1] = 0;
 	}
+	TxFlag = 0;
 	i = 0;
 
 	while (1) /* Loop forever */
@@ -125,12 +126,14 @@ int main(void) {
 		I2CMasterBuffer[0] = (ADT7410_ADDR + (i & 0x03)) << 1;
 		I2CMasterBuffer[1] = 0x00; /* address */
 		I2CMasterBuffer[2] = ((ADT7410_ADDR + (i & 0x03)) << 1) | RD_BIT;
-		for(j=0;j<5;j++)
+		for (j = 0; j < 5; j++)
 		{
 			I2CEngine();
-			if(I2CMasterState != I2C_ARBITRATION_LOST)
+			if (I2CMasterState == I2C_ARBITRATION_LOST)
+				I2CArbitrationRecovery();
+			else if (I2CMasterState == I2C_OK || I2CMasterState
+					== I2C_NACK_ON_ADDRESS)
 				break;
-			I2CArbitrationRecovery();
 		}
 		GPIOSetValue(3, 2, 1);
 		if (I2CMasterState == I2C_OK)
@@ -139,32 +142,25 @@ int main(void) {
 					+ ((uint16_t) (I2CSlaveBuffer[1])));
 			tmp >>= 3;
 			temperature[i][0] += tmp;
-			temperature[i][1] ++;
+			temperature[i][1]++;
 		}
 		i++;
-		if ( i == 16 )
+		if (i == 16)
 		{
-			if(TxCount == (TX_BUFSIZE+1))
+			if (TxFlag == 0)
 			{
-				TxBuffer[0] = 0xAA;
-				TxBuffer[1] = 0x55;
-				sum = 0x55AA;
 				for (n = 0; n < 16; n++)
 				{
-					if(temperature[n][1] == 0)
+					if (temperature[n][1] == 0)
 						tmp = 0x4000;
 					else
 						tmp = temperature[n][0] / temperature[n][1];
 					temperature[n][0] = 0;
 					temperature[n][1] = 0;
-					TxBuffer[((n + 1) * 2)] = tmp;
-					TxBuffer[((n + 1) * 2 + 1)] = (tmp >> 8);
-					sum += tmp;
+					TxBuffer[(n * 2)] = tmp;
+					TxBuffer[(n * 2 + 1)] = (tmp >> 8);
 				}
-				sum = (~sum)+1;
-				TxBuffer[((n + 1) * 2)] = sum;
-				TxBuffer[((n + 1) * 2 + 1)] = (sum >> 8);
-				TxCount++;
+				TxFlag = 1;
 			}
 		}
 		i &= 15;
@@ -173,25 +169,26 @@ int main(void) {
 
 void I2CArbitrationRecovery()
 {
-	int i,j;
-	LPC_IOCON->PIO0_4 &= ~0x3F;	/*  I2C I/O configured for IO */
+	int i, j;
+	LPC_IOCON->PIO0_4 &= ~0x3F; /*  I2C I/O configured for IO */
 	LPC_IOCON->PIO0_5 &= ~0x3F;
 	NVIC_DisableIRQ(I2C_IRQn);
-	for(i=0;i<32;i++)
+	for (i = 0; i < 32; i++)
 	{
 		LPC_GPIO0->DATA = (LPC_GPIO0->DATA) ^ (1 << (4));
-		for(j=0;j<512;j++);
+		for (j = 0; j < 512; j++)
+			;
 	}
-	LPC_IOCON->PIO0_4 &= ~0x3F;	/*  I2C I/O config */
-	LPC_IOCON->PIO0_4 |= 0x01;		/* I2C SCL */
+	LPC_IOCON->PIO0_4 &= ~0x3F; /*  I2C I/O config */
+	LPC_IOCON->PIO0_4 |= 0x01; /* I2C SCL */
 	LPC_IOCON->PIO0_5 &= ~0x3F;
-	LPC_IOCON->PIO0_5 |= 0x01;		/* I2C SDA */
+	LPC_IOCON->PIO0_5 |= 0x01; /* I2C SDA */
 	NVIC_ClearPendingIRQ(I2C_IRQn);
 	NVIC_EnableIRQ(I2C_IRQn);
 }
 
 #ifndef CONFIG_TIMER32_DEFAULT_TIMER32_0_IRQHANDLER
-volatile uint32_t timer0_count=0;
+volatile uint32_t timer0_count = 0;
 volatile uint32_t DataSend = 0;
 void TIMER32_0_IRQHandler(void)
 {
@@ -205,68 +202,17 @@ void TIMER32_0_IRQHandler(void)
 		LPC_TMR32B0->IR = 0x1 << 4; /* clear interrupt flag */
 	}
 
-	if(timer0_count%8 == 0)
-			DataSend = 0;
+	if (timer0_count % 8 == 0)
+		DataSend = 0;
 
-	if( timer0_count%4 == 0 )
-	LPC_GPIO0->DATA = (LPC_GPIO0->DATA) ^ (1 << (LED_GREEN_BIT));
+	if (timer0_count % 4 == 0)
+		LPC_GPIO0->DATA = (LPC_GPIO0->DATA) ^ (1 << (LED_GREEN_BIT));
 
-	if( timer0_count%8 == 0 && TxCount == (TX_BUFSIZE+2) )
+	if (timer0_count % 8 == 0 && TxFlag == 1)
 	{
-		LPC_UART->THR = TxBuffer[0];
-		TxCount = 1;
-		DataSend = 1;
-		LPC_GPIO0->DATA = (LPC_GPIO0->DATA) ^ (1 << (LED_RED_BIT));
+		PacketSend((uint8_t*) TxBuffer, 32);
+		TxFlag = 0;
 	}
 	return;
 }
 #endif
-
-void UART_IRQHandler(void) {
-	uint8_t IIRValue, LSRValue;
-	uint8_t Dummy = Dummy;
-
-	IIRValue = LPC_UART->IIR;
-
-	IIRValue >>= 1; /* skip pending bit in IIR */
-	IIRValue &= 0x07; /* check bit 1~3, interrupt identification */
-	if (IIRValue == IIR_RLS) /* Receive Line Status */
-	{
-		LSRValue = LPC_UART->LSR;
-		/* Receive Line Status */
-		if (LSRValue & (LSR_OE | LSR_PE | LSR_FE | LSR_RXFE | LSR_BI)) {
-			/* There are errors or break interrupt */
-			/* Read LSR will clear the interrupt */
-			Dummy = LPC_UART->RBR; /* Dummy read on RX to clear
-			 interrupt, then bail out */
-			return;
-		}
-		if (LSRValue & LSR_RDR) /* Receive Data Ready */
-		{
-			/* If no error on RLS, normal ready, save into the data buffer. */
-			/* Note: read RBR will clear the interrupt */
-			Dummy = LPC_UART->RBR;
-
-		}
-	}
-	else if (IIRValue == IIR_RDA) /* Receive Data Available */
-	{
-		/* Receive Data Available */
-		Dummy = LPC_UART->RBR;
-
-	}
-	else if (IIRValue == IIR_CTI) /* Character timeout indicator */
-	{
-		/* Character Time-out indicator */
-	}
-	else if (IIRValue == IIR_THRE) /* THRE, transmit holding register empty */
-	{
-		/* THRE interrupt */
-		if (TxCount < TX_BUFSIZE) {
-			LPC_UART->THR = TxBuffer[TxCount];
-			TxCount++;
-		}
-		else if(TxCount == TX_BUFSIZE)TxCount++;
-	}
-	return;
-}

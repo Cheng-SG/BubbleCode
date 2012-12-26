@@ -17,7 +17,7 @@ C_DEPS += \
 startup/%.o: ../startup/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: MCU C Compiler'
-	arm-none-eabi-gcc -D__REDLIB__ -I"C:\Users\vivid\Dropbox\My files\code\Program\Pumps\config" -I"C:\Users\vivid\Dropbox\My files\code\Program\Pumps\cmsis" -I"C:\Users\vivid\Dropbox\My files\code\Program\Pumps\driver" -O1 -Os -g -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	arm-none-eabi-gcc -D__REDLIB__ -I"/Users/vivid/Dropbox/My files/code/BubbleArm/Pumps/config" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/Pumps/cmsis" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/Pumps/driver" -O1 -Os -g -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m0 -mthumb -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
