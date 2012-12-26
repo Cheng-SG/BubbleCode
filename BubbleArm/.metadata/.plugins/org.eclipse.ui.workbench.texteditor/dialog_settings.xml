@@ -3,18 +3,19 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="130" key="DIALOG_Y_ORIGIN"/>
-		<item value="225" key="DIALOG_X_ORIGIN"/>
 		<item value="395" key="DIALOG_HEIGHT"/>
+		<item value="225" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="true" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="dt" key="selection"/>
+		<item value="PIDCalcu" key="selection"/>
 		<list key="findhistory">
+			<item value="PIDControl"/>
 			<item value="dt"/>
 			<item value="DT"/>
 			<item value="&#x09;Pump4PIDControl(&amp;(Airbox4),*(flowrates+AB4_SENSOR_CH));"/>
@@ -22,9 +23,9 @@
 			<item value="RxPointer"/>
 			<item value="RxBuffer"/>
 			<item value="New"/>
-			<item value="TxCount"/>
 		</list>
 		<list key="replacehistory">
+			<item value="PIDCalcu"/>
 			<item value="TxFlag"/>
 			<item value="TxFlag&#x0A;&#x09;{&#x0A;&#x09;&#x09;temperature[i][0] = 0;&#x0A;&#x09;&#x09;temperature[i][1] = 0;&#x0A;&#x09;}&#x0A;&#x09;TxFlap = 0;&#x0A;&#x09;i = 0;"/>
 			<item value="RxBuffer"/>
@@ -32,7 +33,6 @@
 			<item value="TxFlap"/>
 			<item value="SetFlowrates"/>
 			<item value="FLOWRATE_"/>
-			<item value="counts"/>
 		</list>
 	</section>
 </section>

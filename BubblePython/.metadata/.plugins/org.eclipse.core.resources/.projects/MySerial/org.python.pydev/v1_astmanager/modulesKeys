@@ -1,4 +1,5 @@
 MODULES_MANAGER_V2
+CeilingControl|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/CeilingControl.py
 DataLogger|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/DataLogger.py
 MySerial|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/MySerial.py
 MySerialPump|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/MySerialPump.py
