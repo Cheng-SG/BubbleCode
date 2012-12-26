@@ -1,0 +1,16 @@
+import sys
+import MySerial.Packet as Packet
+
+if len(sys.argv) != 3:
+    print "Usage:python {0} Port filename".format(sys.argv[0])
+    print "Example:python {0} /dev/ttyS1 record1.txt".format(sys.argv[0])
+    sys.exit(1)
+
+try:
+    pkt = Packet(sys.argv[1])
+except:
+    print "Unable to open port {0}, check it availability".format(sys.argv[1])
+    sys.exit()
+
+try:
+    f = open(sys.argv[3],'a+')

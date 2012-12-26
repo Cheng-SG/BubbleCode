@@ -1,5 +1,7 @@
-#Fri Jun 01 15:59:41 SGT 2012
+#Sat Dec 01 22:01:42 SGT 2012
 spelling_locale_initialized=true
+formatter_settings_version=1
 useAnnotationsPrefPage=true
 eclipse.preferences.version=1
+formatter_profile=org.eclipse.cdt.ui.default.allman_profile
 useQuickDiffPrefPage=true

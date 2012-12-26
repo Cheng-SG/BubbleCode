@@ -1,13 +1,16 @@
-driver/crp.d driver/crp.o: ../driver/crp.c ../config/driver_config.h \
- ../cmsis/LPC11xx.h ../cmsis/core_cm0.h ../config/system_LPC11xx.h \
+driver/crp.d: ../driver/crp.c \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/Sensors/config/driver_config.h \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/Sensors/cmsis/LPC11xx.h \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/Sensors/cmsis/core_cm0.h \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/Sensors/config/system_LPC11xx.h \
  ../driver/crp.h
 
-../config/driver_config.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/Sensors/config/driver_config.h:
 
-../cmsis/LPC11xx.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/Sensors/cmsis/LPC11xx.h:
 
-../cmsis/core_cm0.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/Sensors/cmsis/core_cm0.h:
 
-../config/system_LPC11xx.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/Sensors/config/system_LPC11xx.h:
 
 ../driver/crp.h:

@@ -1,0 +1,8 @@
+MODULES_MANAGER_V2
+DataLogger|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/DataLogger.py
+MySerial|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/MySerial.py
+MySerialPump|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/MySerialPump.py
+MySerialSensor|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/MySerialSensor.py
+PumpTest|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/PumpTest.py
+SetFlowrate|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/SetFlowrate.py
+TemperatureLogger|/Users/vivid/Dropbox/My files/code/BubblePython/MySerial/TemperatureLogger.py

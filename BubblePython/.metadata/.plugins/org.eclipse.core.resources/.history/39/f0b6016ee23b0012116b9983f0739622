@@ -1,0 +1,74 @@
+import sys,os
+
+try:
+    import serial
+except:
+    print "You don't have serial module installed. Please install pySerial firrst!"
+    sys.exit(1)
+
+class Packet:
+    Txlenth = 0
+    ser  = ''
+    MaxPacketLength = 64
+    TxPacket = [0xAA,0x55,0x00,0xFF]
+        
+    def __init__(self,port,baudrate=115200):
+        self.ser = serial.Serial(port,baudrate)
+        
+    def sendpacket(self,payload):
+        self.TxPacket[0] = 0xAA
+        self.TxPacket[1] = 0x55
+        self.TxPacket[2] = len(payload)+4
+        self.TxPacket[3] = 0x00
+        for i in range(len(payload)):
+            payload[i] %= 256
+        self.TxPacket[4:] = payload[:]
+        self.TxPacket[3] = 256 - sum(self.TxPacket)%256
+        mstr = []
+        for m in self.TxPacket:
+            mstr.append(chr(m))
+        fstr = ''.join(mstr)
+        self.ser.write(fstr)
+        
+    def reveivePacket(self):
+        RxCount = 0
+        RxLength = 0
+        RxSum = 0
+        Payload = []
+        RxPacket = range(self.MaxPacketLength)
+        while True:
+            data = self.ser.read(1)
+            if RxCount==0:
+                if data=='\xAA':
+                    RxCount += 1
+                    RxSum = ord(data)
+                    RxPacket[0] = ord(data)
+            elif RxCount==1:
+                if data =='\x55':
+                    RxCount +=1
+                    RxSum += ord(data)
+                    RxPacket[1] = ord(data)
+                elif data != 'xAA':
+                    RxCount = 0
+                    RxLength = 0
+            elif RxCount==2:
+                RxCount += 1
+                RxLength = ord(data)
+                RxSum += ord(data)
+                RxPacket[2] = ord(data)
+            elif RxCount < RxLength:
+                RxCount += 1
+                RxSum += ord(data)
+                RxPacket[RxCount] = ord(data)
+                if RxCount == RxLength:
+                    RxSum %= 256
+                    if RxSum == 0:
+                        Payload[:] = RxPacket[4:RxLength]
+                        break
+                    RxCount = 0
+                    RxLength = 0
+        return RxPacket
+                        
+                        
+        
+            

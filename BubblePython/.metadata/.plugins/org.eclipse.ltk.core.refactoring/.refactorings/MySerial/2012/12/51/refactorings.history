@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;MySerial/SeFlowrate.py&apos; to &apos;SetFlowrate.py&apos;" description="Rename resource &apos;SeFlowrate.py&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="SeFlowrate.py" name="SetFlowrate.py" stamp="1356083923286" updateReferences="true"/>
+</session>

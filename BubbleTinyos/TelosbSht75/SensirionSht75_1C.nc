@@ -30,8 +30,8 @@
  */
 
 /**
- * SensirionSht11C is a top-level access component for the Sensirion
- * SHT11 model humidity and temperature sensor, available on the
+ * SensirionSht75C is a top-level access component for the Sensirion
+ * SHT75 model humidity and temperature sensor, available on the
  * telosb platform. Because this component represents one physical
  * device, simultaneous calls to read temperature and humidity will be
  * arbitrated and executed in sequential order. Feel free to read both
@@ -42,27 +42,27 @@
  * @version $Revision: 1.5 $ $Date: 2007-04-13 21:46:18 $
  */
 
-generic configuration SensirionSht75C() {
+generic configuration SensirionSht75_1C() {
   provides interface Read<uint16_t> as Temperature;
   provides interface DeviceMetadata as TemperatureMetadata;
   provides interface Read<uint16_t> as Humidity;
   provides interface DeviceMetadata as HumidityMetadata;
 }
 implementation {
-  components new SensirionSht11ReaderP();
+  components new SensirionSht75ReaderP();
 
-  Temperature = SensirionSht11ReaderP.Temperature;
-  TemperatureMetadata = SensirionSht11ReaderP.TemperatureMetadata;
-  Humidity = SensirionSht11ReaderP.Humidity;
-  HumidityMetadata = SensirionSht11ReaderP.HumidityMetadata;
+  Temperature = SensirionSht75ReaderP.Temperature;
+  TemperatureMetadata = SensirionSht75ReaderP.TemperatureMetadata;
+  Humidity = SensirionSht75ReaderP.Humidity;
+  HumidityMetadata = SensirionSht75ReaderP.HumidityMetadata;
 
   components HalSensirionSht75_1C;
 
-  enum { TEMP_KEY = unique("Sht11.Resource") };
-  enum { HUM_KEY = unique("Sht11.Resource") };
+  enum { TEMP_KEY = unique("Sht75_1.Resource") };
+  enum { HUM_KEY = unique("Sht75_1.Resource") };
 
-  SensirionSht11ReaderP.TempResource -> HalSensirionSht75_1C.Resource[ TEMP_KEY ];
-  SensirionSht11ReaderP.Sht11Temp -> HalSensirionSht75_1C.SensirionSht11[ TEMP_KEY ];
-  SensirionSht11ReaderP.HumResource -> HalSensirionSht75_1C.Resource[ HUM_KEY ];
-  SensirionSht11ReaderP.Sht11Hum -> HalSensirionSht75_1C.SensirionSht11[ HUM_KEY ];
+  SensirionSht75ReaderP.TempResource -> HalSensirionSht75_1C.Resource[ TEMP_KEY ];
+  SensirionSht75ReaderP.Sht75Temp -> HalSensirionSht75_1C.SensirionSht75[ TEMP_KEY ];
+  SensirionSht75ReaderP.HumResource -> HalSensirionSht75_1C.Resource[ HUM_KEY ];
+  SensirionSht75ReaderP.Sht75Hum -> HalSensirionSht75_1C.SensirionSht75[ HUM_KEY ];
 }

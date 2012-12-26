@@ -1,0 +1,43 @@
+import time
+from threading import Thread
+import sys,datetime
+import MySerial as Packet
+
+setpoints = [0] * 4
+configures = [2200,2200,4700,4700]
+
+def SendSpeeds(pkt):
+    tmp = [12,0,1,1];
+    for k in range(4):
+        m = setpoints[k]
+        tmp.append(m%256)
+        tmp.append(m/256)
+        tmp.append(m/65536)
+        tmp.append(m/16777216)
+    pkt.send(tmp)
+    
+
+if __name__ == "__main__":
+    import code
+    if len(sys.argv) != 2:
+        print "Usage:python {0} port".format(sys.argv[0])
+        sys.exit(1)
+    try:
+        pkt = Packet(sys.argv[1])
+    except:
+        print "Error: invalid port. Check the port is right"
+        sys.exit(1)
+        
+    print '\n'
+    print "*******************************************************"
+    print 'Usage:\n    pkt.send(content) to send a packet'
+    print '\n    pkt.receive() to receive a packet'
+    print 'example:\n    send a packet'
+    print '    >>>content = [1,0,0,1,2,3]'
+    print '    >>>pkt.send(content)\n'
+    print '    receive a packet'
+    print '    >>>pkt.receive()'
+    print '    you may get this: [1, 0, 0, 4, 96, 28, 243, 6]'
+    print "*******************************************************"
+    print '\n'
+    code.InteractiveConsole(locals=globals()).interact() 

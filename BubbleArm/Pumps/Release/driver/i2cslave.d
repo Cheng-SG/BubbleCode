@@ -1,13 +1,13 @@
-driver/i2cslave.d driver/i2cslave.o: ../driver/i2cslave.c \
- C:\Users\vivid\Dropbox\My\ files\code\Program\Pumps\config/driver_config.h \
- C:\Users\vivid\Dropbox\My\ files\code\Program\Pumps\cmsis/LPC11xx.h \
- C:\Users\vivid\Dropbox\My\ files\code\Program\Pumps\cmsis/core_cm0.h \
- C:\Users\vivid\Dropbox\My\ files\code\Program\Pumps\config/system_LPC11xx.h
+driver/i2cslave.d: ../driver/i2cslave.c \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/Pumps/config/driver_config.h \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/Pumps/cmsis/LPC11xx.h \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/Pumps/cmsis/core_cm0.h \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/Pumps/config/system_LPC11xx.h
 
-C:\Users\vivid\Dropbox\My\ files\code\Program\Pumps\config/driver_config.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/Pumps/config/driver_config.h:
 
-C:\Users\vivid\Dropbox\My\ files\code\Program\Pumps\cmsis/LPC11xx.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/Pumps/cmsis/LPC11xx.h:
 
-C:\Users\vivid\Dropbox\My\ files\code\Program\Pumps\cmsis/core_cm0.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/Pumps/cmsis/core_cm0.h:
 
-C:\Users\vivid\Dropbox\My\ files\code\Program\Pumps\config/system_LPC11xx.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/Pumps/config/system_LPC11xx.h:

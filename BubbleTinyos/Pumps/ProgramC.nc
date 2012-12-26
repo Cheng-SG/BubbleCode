@@ -1,39 +1,3 @@
-// $Id: BlinkC.nc,v 1.5 2008/06/26 03:38:26 regehr Exp $
-
-/*									tab:4
- * "Copyright (c) 2000-2005 The Regents of the University  of California.  
- * All rights reserved.
- *
- * Permission to use, copy, modify, and distribute this software and its
- * documentation for any purpose, without fee, and without written agreement is
- * hereby granted, provided that the above copyright notice, the following
- * two paragraphs and the author appear in all copies of this software.
- * 
- * IN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR
- * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
- * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE UNIVERSITY OF
- * CALIFORNIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
- * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
- * ON AN "AS IS" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATION TO
- * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
- *
- * Copyright (c) 2002-2003 Intel Corporation
- * All rights reserved.
- *
- * This file is distributed under the terms in the attached INTEL-LICENSE     
- * file. If you do not find these files, copies can be found by writing to
- * Intel Research Berkeley, 2150 Shattuck Avenue, Suite 1300, Berkeley, CA, 
- * 94704.  Attention:  Intel License Inquiry.
- */
-
-/**
- * Implementation for Blink application.  Toggle the red LED when a
- * Timer fires.
- **/
-
 #include "Timer.h"
 #include "I2C.h"
 #include "msp430usart.h"
@@ -44,26 +8,33 @@ module ProgramC
     uses interface Leds;
     uses interface Boot;
 
-    uses interface PumpSerial;
+    uses interface MySerial;
 
     uses interface SplitControl as RadioControl;
     uses interface Packet;
     uses interface AMPacket;
     uses interface AMSend;
+    uses interface PacketAcknowledgements as Ack;
     uses interface Receive;
+//    uses interface Receive as Snoop;
 }
 implementation
 {
+#define BASESTATION_ID 0
+#define MAX_RETRY      5
 
     norace uint8_t buf[36];
     norace uint8_t *bp;
     message_t pkt;
     norace bool    Rbusy;
+    uint8_t RetryCount;
+
+    task void SendTask();
 
     event void Boot.booted()
     {
         Rbusy = FALSE;
-        call PumpSerial.init();
+        call MySerial.init();
         call RadioControl.start();
     }
 
@@ -75,7 +46,8 @@ implementation
         }
         else 
         {
-            //call Timer0.startPeriodic(500);
+            call Timer0.startPeriodic(4);
+            WDTCTL = 0x5A09;
         }
     }
 
@@ -86,44 +58,31 @@ implementation
     event void Timer0.fired()
     {
         //call Leds.led1Toggle();
+        WDTCTL = 0x5A09;
     }
 
-    event void AMSend.sendDone(message_t* msg, error_t error)
-    {
-        Rbusy = FALSE;
-    }
 
     event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len)
     {
-        uint8_t* p;
+        uint8_t  *p;
         uint8_t  i;
-        uint16_t sum;
-        if(TOS_NODE_ID == 0)
+        uint16_t type;
+        if(TOS_NODE_ID == BASESTATION_ID)
             return msg;
         else 
         {
             if(call AMPacket.isForMe(msg)== TRUE && len == 18 )
             {
                 p = (uint8_t*)payload;
-                sum = *p++;
-                sum += (((uint16_t)(*p++))<<8);
-                if(sum == 0x0101)
+                type = *p;
+                type += (((uint16_t)(*(p+1)))<<8);
+                if(type == 0x0101)
                 {
-                    buf[0] = 0xAA;
-                    buf[1] = 0x55;
-                    sum = 0x55AA;
-                    p = (uint8_t*)payload;
-                    p += 2;
                     for(i=0;i<16;i++)
                     {
-                        buf[i+2]=*p;
-                        if(i&0x01)sum += (((uint16_t)(*p))<<8);
-                        else      sum += *p;
-                        p++;
+                        buf[i]=*(p+i+2);
                     }
-                    buf[18] = sum;
-                    buf[19] = (sum>>8);
-                    if(call PumpSerial.send(buf,20) == SUCCESS)
+                    if(call MySerial.send(buf,16) == SUCCESS)
                         call Leds.led1Toggle();
                     else
                         call Leds.led0Toggle();
@@ -133,13 +92,83 @@ implementation
         return msg;
     }
 
-    event void PumpSerial.sendDone(){}
+    /*
+    event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len)
+    {
+        uint8_t  *p;
+        uint8_t  i;
+        uint16_t src;
+        uint16_t type;
+        if(TOS_NODE_ID == BASESTATION_ID)
+            return msg;
+        else 
+        {
+            if(call AMPacket.isForMe(msg)== TRUE && len == 18 )
+            {
+                src = AMPacket.source(msg);
+                p = (uint8_t*)payload;
+                type = *p;
+                type += (((uint16_t)(*(p+1)))<<8);
+                if(type == 0x0101)
+                {
+                    buf[0] = src;
+                    buf[1] = (src>>8);
+                    for(i=0;i<18;i++)
+                    {
+                        buf[i+2]=*(p+i);
+                    }
+                    if(call MySerial.send(buf,20) == SUCCESS)
+                        call Leds.led1Toggle();
+                    else
+                        call Leds.led0Toggle();
+                }
+            }       
+        }
+        return msg;
+    }
 
-    event void PumpSerial.receive(uint8_t *rbuf)
+    event message_t* Snoop.receive(message_t* msg, void* payload, uint8_t len)
+    {
+        uint8_t  *p;
+        uint8_t  i;
+        uint16_t src;
+        uint16_t type;
+        if(TOS_NODE_ID == BASESTATION_ID)
+            return msg;
+        else 
+        {
+            src = call AMPacket.source(msg);
+            if( len == 18 )
+            {
+                p = (uint8_t*)payload;
+                type = *p;
+                type += (((uint16_t)(*(p+1)))<<8);
+                if(type == 0x0000 || type == 0x0001)
+                {
+                    buf[0] = src;
+                    buf[1] = (src >> 8);
+                    for(i=0;i<18;i++)
+                    {
+                        buf[i+2]=*(p+i+2);
+                    }
+                    if(call MySerial.send(buf,20) == SUCCESS)
+                        call Leds.led1Toggle();
+                    else
+                        call Leds.led0Toggle();
+                }
+            }       
+        }
+        return msg;
+    }
+    */
+
+    event void MySerial.sendDone(){}
+
+    event void MySerial.receive(uint8_t *payload,uint8_t len)
     {
         uint8_t* data;
         uint8_t  i;
-        if( Rbusy == FALSE )
+        if( Rbusy == FALSE && len == 16)
         {
             if(TOS_NODE_ID == 0)
                 return;
@@ -148,14 +177,45 @@ implementation
                 data = (uint8_t*)(call Packet.getPayload(&pkt,18));
                 *data++ = 0x00;
                 *data++ = 0x01;
-                rbuf += 2;
-                for(i=0;i<16;i++)*data++ = *rbuf++;
-                if(SUCCESS == call AMSend.send(0, &pkt, 18))
-                {
-                    Rbusy = TRUE;
-                    call Leds.led2Toggle();
-                }
+                for(i=0;i<16;i++)*data++ = *payload++;
+                RetryCount = 0;
+                Rbusy = TRUE;
+                post SendTask();
             }
+        }
+    }
+
+    task void SendTask()
+    {
+        if(RetryCount < MAX_RETRY)
+        {
+            call Ack.requestAck(&pkt);
+            if( call AMSend.send(BASESTATION_ID,&pkt,18) != SUCCESS)
+            {
+                RetryCount++;
+                post SendTask();
+            }				
+        }
+        else
+        {
+            RetryCount = 0;
+            Rbusy = FALSE;
+            //call Leds.led0Toggle();
+        }
+    }
+
+    event void AMSend.sendDone(message_t* msg, error_t error)
+    {
+        if(call Ack.wasAcked(msg))
+        {
+            RetryCount = 0;
+            call Leds.led2Toggle();
+            Rbusy = FALSE;
+        }
+        else
+        {
+            RetryCount++;
+            post SendTask();
         }
     }
 }

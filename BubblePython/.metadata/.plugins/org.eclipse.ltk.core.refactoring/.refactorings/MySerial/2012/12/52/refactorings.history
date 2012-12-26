@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;MySerial/CeilingControl&apos; to &apos;CeilingControl.py&apos;" description="Rename resource &apos;CeilingControl&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="CeilingControl" name="CeilingControl.py" stamp="1356527037406" updateReferences="true"/>
+</session>

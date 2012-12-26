@@ -1,0 +1,39 @@
+import time
+from threading import Thread
+import sys,datetime
+import MySerial as P
+
+setpoints = [0] * 8
+Fconfigures = [4700,4700]
+Tconfigures = [16,16]
+
+def SendSpeeds(pkt):
+    tmp = [11,0,1,1];
+    for k in range(8):
+        m = setpoints[k]
+        tmp.append(m%256)
+        tmp.append(m/256)
+    pkt.send(tmp)
+    
+def SetSpeed(pkt,ch,Flow,Temp):
+    if ch==1:
+        setpoints[0] = Flow*Fconfigures[ch-1]*2/1000
+        setpoints[1] = Temp*Tconfigures[ch-1]
+        SendSpeeds(pkt)
+    if ch==2:
+        setpoints[2] = Flow*Fconfigures[ch-1]*2/1000
+        setpoints[3] = Temp*Tconfigures[ch-1]
+        SendSpeeds(pkt)
+
+if __name__ == "__main__":
+    import code
+    if len(sys.argv) != 2:
+        print "Usage:python {0} port".format(sys.argv[0])
+        sys.exit(1)
+    try:
+        pkt = P.Packet(sys.argv[1])
+    except:
+        print "Error: invalid port. Check the port is right"
+        sys.exit(1)
+        
+    code.InteractiveConsole(locals=globals()).interact() 

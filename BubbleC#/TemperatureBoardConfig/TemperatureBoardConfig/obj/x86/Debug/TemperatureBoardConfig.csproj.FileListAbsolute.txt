@@ -1,0 +1,27 @@
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\bin\Debug\TemperatureBoardConfig.exe
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\bin\Debug\TemperatureBoardConfig.pdb
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.Form1.resources
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.Properties.Resources.resources
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.exe
+C:\Users\vivid\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.pdb
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.exe
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.pdb
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\bin\Debug\TemperatureBoardConfig.exe
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\bin\Debug\TemperatureBoardConfig.pdb
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.Form1.resources
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.Properties.Resources.resources
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\IT Admin\Dropbox\My files\code\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResGen.write.1.tlog
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.exe
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.pdb
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.Form1.resources
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\TemperatureBoardConfig.Properties.Resources.resources
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResGen.read.1.tlog
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\obj\x86\Debug\ResGen.write.1.tlog
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\bin\Debug\TemperatureBoardConfig.exe
+D:\BubbleC#\TemperatureBoardConfig\TemperatureBoardConfig\bin\Debug\TemperatureBoardConfig.pdb

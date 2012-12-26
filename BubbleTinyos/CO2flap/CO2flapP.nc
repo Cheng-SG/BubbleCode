@@ -23,23 +23,23 @@ implementation
         msp430_uart_union_config_t config =
         {
             {
-                utxe : 1,
-                urxe : 1,
-                ubr : UBR_1MHZ_9600,
-                umctl : UMCTL_1MHZ_9600,
-                ssel : 0x02,
-                pena : 0,
-                pev : 0,
-                spb : 0,
-                clen : 1,
-                listen : 0,
-                mm : 0,
-                ckpl : 0,
-                urxse : 0,
-                urxeie : 1,
-                urxwie : 0,
-                utxe : 1,
-                urxe : 1
+utxe : 1,
+       urxe : 1,
+       ubr : UBR_1MHZ_9600,
+       umctl : UMCTL_1MHZ_9600,
+       ssel : 0x02,
+       pena : 0,
+       pev : 0,
+       spb : 0,
+       clen : 1,
+       listen : 0,
+       mm : 0,
+       ckpl : 0,
+       urxse : 0,
+       urxeie : 1,
+       urxwie : 0,
+       utxe : 1,
+       urxe : 1
             }
         };
         atomic
@@ -58,7 +58,8 @@ implementation
         Register[11]= 30;
         Register[12]= 150;
         Register[13]= 10;
-        Register[14]= 0xE0;
+        //Register[14]= 0xE0;  //flap automatic control
+        Register[14]= 0x00;  //flap manual control
         Register[15]= 0;
         Register[16]= 0;
         Register[17]= 100;

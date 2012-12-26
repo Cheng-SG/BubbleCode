@@ -42,28 +42,20 @@
 
 configuration HplSensirionSht75_2C {
   provides interface Resource[ uint8_t id ];
-  provides interface GeneralIO as DATA;
-  provides interface GeneralIO as SCK;
+  provides interface HplMsp430GeneralIO as DATA;
+  provides interface HplMsp430GeneralIO as SCK;
   provides interface GpioInterrupt as InterruptDATA;
 }
 implementation {
   components HplMsp430GeneralIOC;
   
-  components new Msp430GpioC() as DATAM;
-  components new Msp430GpioC() as SCKM;
-  components new Msp430GpioC() as PWRM;
-
-  DATAM -> HplMsp430GeneralIOC.Port20;
-  SCKM -> HplMsp430GeneralIOC.Port63;
-  PWRM -> HplMsp430GeneralIOC.Port62;
-
-  DATA = DATAM;
-  SCK = SCKM;
+  DATA = HplMsp430GeneralIOC.Port20;
+  SCK = HplMsp430GeneralIOC.Port60;
 
   components HplSensirionSht75_2P;
-  HplSensirionSht75_2P.PWR -> PWRM;
-  HplSensirionSht75_2P.DATA -> DATAM;
-  HplSensirionSht75_2P.SCK -> SCKM;
+  HplSensirionSht75_2P.PWR -> HplMsp430GeneralIOC.Port63;
+  HplSensirionSht75_2P.DATA -> HplMsp430GeneralIOC.Port20;
+  HplSensirionSht75_2P.SCK -> HplMsp430GeneralIOC.Port60;
 
   components new TimerMilliC();
   HplSensirionSht75_2P.Timer -> TimerMilliC;
@@ -73,7 +65,7 @@ implementation {
   InterruptDATAC.HplInterrupt -> HplMsp430InterruptC.Port20;
   InterruptDATA = InterruptDATAC.Interrupt;
 
-  components new FcfsArbiterC( "Sht11.Resource" ) as Arbiter;
+  components new FcfsArbiterC( "Sht75_2.Resource" ) as Arbiter;
   Resource = Arbiter;
   
   components new SplitControlPowerManagerC();

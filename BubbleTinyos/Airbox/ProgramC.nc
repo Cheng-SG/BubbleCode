@@ -1,39 +1,3 @@
-// $Id: BlinkC.nc,v 1.5 2008/06/26 03:38:26 regehr Exp $
-
-/*									tab:4
- * "Copyright (c) 2000-2005 The Regents of the University  of California.  
- * All rights reserved.
- *
- * Permission to use, copy, modify, and distribute this software and its
- * documentation for any purpose, without fee, and without written agreement is
- * hereby granted, provided that the above copyright notice, the following
- * two paragraphs and the author appear in all copies of this software.
- * 
- * IN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR
- * DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT
- * OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE UNIVERSITY OF
- * CALIFORNIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
- * AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
- * ON AN "AS IS" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATION TO
- * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS."
- *
- * Copyright (c) 2002-2003 Intel Corporation
- * All rights reserved.
- *
- * This file is distributed under the terms in the attached INTEL-LICENSE     
- * file. If you do not find these files, copies can be found by writing to
- * Intel Research Berkeley, 2150 Shattuck Avenue, Suite 1300, Berkeley, CA, 
- * 94704.  Attention:  Intel License Inquiry.
- */
-
-/**
- * Implementation for Blink application.  Toggle the red LED when a
- * Timer fires.
- **/
-
 #include "Timer.h"
 #include "I2C.h"
 #include "msp430usart.h"
@@ -50,13 +14,19 @@ module ProgramC
     uses interface Packet;
     uses interface AMPacket;
     uses interface AMSend;
+    uses interface PacketAcknowledgements as Ack;
     uses interface Receive;
 }
 implementation
 {
-    uint8_t   cnt;
+#define BASESTATION_ID 0
+#define MAX_RETRY      5
+
+    uint8_t   cnt,RetryCount;
     bool      Rbusy;
     message_t pkt;
+
+    task void SendTask();
 
     event void Boot.booted()
     {
@@ -103,6 +73,8 @@ implementation
                 call Airbox.read(33,data);
                 data++;
                 call Airbox.read(34,data);
+                RetryCount = 0;
+                post SendTask();
                 if(SUCCESS == call AMSend.send(0, &pkt, 8))
                 {
                     Rbusy = TRUE;
@@ -112,9 +84,35 @@ implementation
         }
     }
 
-    event void AMSend.sendDone(message_t* msg,error_t error)
+    task void SendTask()
     {
-        Rbusy = FALSE;
+        if(RetryCount < MAX_RETRY)
+        {
+            call Ack.requestAck(&pkt);
+            if( call AMSend.send(BASESTATION_ID,&pkt,8) != SUCCESS)
+            {
+                RetryCount++;
+                post SendTask();
+            }
+        }
+        else
+        {
+            RetryCount = 0;
+            call Leds.led0Toggle();
+        }
+    }
+
+    event void AMSend.sendDone(message_t* msg, error_t error)
+    {
+        if(call Ack.wasAcked(msg))
+        {
+            call Leds.led2Toggle();
+        }
+        else
+        {
+            RetryCount++;
+            post SendTask();
+        }
     }
 
     event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len)

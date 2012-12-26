@@ -1,0 +1,16 @@
+import sys,os
+
+try:
+    import serial
+except:
+    print "You don't have serial module installed. Please install pySerial firrst!"
+    sys.exit(1)
+
+ser = serial.Serial('/dev/tty.usbserial-M4AP1122',115200)
+print ser.portstr
+t = [0xAA,0xx55,0x04,0xFD,0x00,0x00,0x00,0x00]
+mstr = [];
+for m in t
+    mstr.append(chr(m))
+fstr= ''.join(mstr)
+print mstr

@@ -1,5 +1,6 @@
-
-**** Build of configuration Debug for project Pumps ****
-
+14:13:54 **** Incremental Build of configuration Debug for project Pumps ****
 make all 
 make: Nothing to be done for `all'.
+
+14:13:54 Build Finished (took 76ms)
+

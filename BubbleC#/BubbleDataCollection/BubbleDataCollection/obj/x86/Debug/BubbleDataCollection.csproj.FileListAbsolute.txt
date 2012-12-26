@@ -1,0 +1,10 @@
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\bin\Debug\BubbleDataCollection.exe
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\bin\Debug\BubbleDataCollection.pdb
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\obj\x86\Debug\BubbleDataCollection.Form1.resources
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\obj\x86\Debug\BubbleDataCollection.Properties.Resources.resources
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\obj\x86\Debug\ResGen.read.1.tlog
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\obj\x86\Debug\ResGen.write.1.tlog
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\obj\x86\Debug\BubbleDataCollection.exe
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\obj\x86\Debug\BubbleDataCollection.pdb
+c:\users\vivid\documents\visual studio 2010\Projects\BubbleDataCollection\BubbleDataCollection\obj\x86\Debug\BubbleDataCollection.ComSet.resources

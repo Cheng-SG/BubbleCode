@@ -1,5 +1,6 @@
-
-**** Build of configuration Debug for project Sensors ****
-
+21:31:41 **** Build of configuration Debug for project Sensors ****
 make all 
-make: 没有什么可以做的为 `all'。
+make: Nothing to be done for `all'.
+
+21:31:41 Build Finished (took 82ms)
+

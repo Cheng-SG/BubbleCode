@@ -1,0 +1,82 @@
+import sys,os
+
+try:
+    import serial
+except:
+    print "You don't have serial module installed. Please install pySerial firrst!"
+    sys.exit(1)
+
+ser = serial.Serial('/dev/tty.usbserial-M4AP1122',115200)
+print ser.portstr
+t = [0xAA,0x55,0x04,0x00,0x01,0x00,0x01,0x00]
+t[3] = 256-sum(t)%256
+print t
+mstr = [];
+for m in t:
+    mstr.append(chr(m))
+fstr= ''.join(mstr)
+print mstr
+ser.write(fstr)
+
+class MySerial:
+    Txlenth = 0
+    ser  = ''
+    MaxPacketLength = 64
+    TxPacket = [0xAA,0x55,0x00,0xFF]
+        
+    def __init__(self,port,baudrate=115200):
+        self.ser = serial.Serial(port,baudrate)
+        
+    def sendpacket(self,payload,length):
+        self.TxPacket[2] = length
+        self.TxPacket[3] = 0x00
+        for i in range(length):
+            payload[i] %= 256
+        self.TxPacket[4:] = payload[:]
+        self.TxPacket[2] = 256 - sum(self.TxPacket)%256
+        mstr = []
+        for m in self.TxPacket:
+            mstr.append(chr(m))
+        fstr = ''.join(mstr)
+        ser.write(fstr)
+        
+    def reveivePacket(self):
+        RxCount = 0
+        RxLength = 0
+        RxSum = 0
+        Payload = []
+        RxPacket = range(self.MaxPacketLength)
+        while True:
+            data = ser.read(1)
+            if RxCount==0:
+                if data=='\xAA':
+                    RxCount++
+                    RxSum = ord(data)
+                    RxPacket[0] = ord(data)
+            elif RxCount==1:
+                if data =='\x55':
+                    RxCount++
+                    RxSum += ord(data)
+                    RxPacket[1] = ord(data)
+                elif data != 'xAA':
+                    RxCount = 0
+                    RxLength = 0
+            elif RxCount==2:
+                RxCount++
+                RxLength = ord(data)+4
+                RxSum += ord(data)
+                RxPacket[2] = ord(data)
+            elif RxCount < RxLength:
+                RxCount++
+                RxSum += ord(data)
+                RxPacket[RxCount] = ord(data)
+                if RxCount == RxLength:
+                    RxSum %= 256
+                    if RxSum == 0:
+                        Payload[:] = RxPacket[4:RxLength]
+                    RxCount = 0
+                    RxLength = 0
+                        
+                        
+        
+            

@@ -1,0 +1,35 @@
+import sys,os
+
+try:
+    import serial
+except:
+    print "You don't have serial module installed. Please install pySerial firrst!"
+    sys.exit(1)
+
+ser = serial.Serial('/dev/tty.usbserial-M4AP1122',115200)
+print ser.portstr
+t = [0xAA,0x55,0x04,0x00,0x01,0x00,0x01,0x00]
+t[3] = 256-sum(t)%256
+print t
+mstr = [];
+for m in t:
+    mstr.append(chr(m))
+fstr= ''.join(mstr)
+print mstr
+ser.write(fstr)
+
+class MySerial:
+    lenth = 0
+    ser  = ''
+    packet = [0xAA,0x55,0x00,0xFF]
+        
+    def __init__(self,port,baudrate=115200):
+        self.ser = serial.Serial(port,baudrate)
+        
+    def sendpacket(self,payload,length):
+        self.packet[2] = length
+        self.packet[3] = 0x00
+        for i in range(length):
+            payload[i] %= 256
+        self.packet[4:] = payload[:]
+            
