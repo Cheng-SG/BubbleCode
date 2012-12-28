@@ -22,7 +22,7 @@ typedef struct
 
 void ControlInit(void);
 void SetSpeeds(uint16_t* values);
-void SetTemperatures(uint16_t* values,uint32_t m);
+void SetTemperatures(uint16_t* values);
 void Control(uint32_t* flowrates);
 void prvControlTask(void *pvParameters);
 

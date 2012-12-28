@@ -1,5 +1,5 @@
 Source/driver/timer32.d: ../Source/driver/timer32.c \
- /Users/vivid/Dropbox/My\ files/code/BubbleArm/RTOS_Sensors/Source/driver_config.h \
+ /Users/vivid/Dropbox/My\ files/code/BubbleArm/RTOSSensors/Source/driver_config.h \
  /Users/vivid/Dropbox/My\ files/code/BubbleArm/CMSISv2p00_LPC11xx/inc/LPC11xx.h \
  /Users/vivid/Dropbox/My\ files/code/BubbleArm/CMSISv2p00_LPC11xx/inc/core_cm0.h \
  /Users/vivid/Dropbox/My\ files/code/BubbleArm/CMSISv2p00_LPC11xx/inc/core_cmInstr.h \
@@ -7,7 +7,7 @@ Source/driver/timer32.d: ../Source/driver/timer32.c \
  /Users/vivid/Dropbox/My\ files/code/BubbleArm/CMSISv2p00_LPC11xx/inc/system_LPC11xx.h \
  ../Source/driver/timer32.h
 
-/Users/vivid/Dropbox/My\ files/code/BubbleArm/RTOS_Sensors/Source/driver_config.h:
+/Users/vivid/Dropbox/My\ files/code/BubbleArm/RTOSSensors/Source/driver_config.h:
 
 /Users/vivid/Dropbox/My\ files/code/BubbleArm/CMSISv2p00_LPC11xx/inc/LPC11xx.h:
 

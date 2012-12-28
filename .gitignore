@@ -3,3 +3,4 @@ BubbleC#/BubbleDataCollection/obj/
 BubbleC#/BubbleDataCollection/bin/*.txt
 BubbleARM/*/Debug/
 BubbleARM/*/Release/
+BubbleARM/.*

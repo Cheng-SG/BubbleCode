@@ -1,11 +1,9 @@
-17:56:48 **** Incremental Build of configuration Debug for project RTOSSensors ****
+16:11:56 **** Incremental Build of configuration Debug for project RTOSSensors ****
 make all 
-Building file: ../Source/UartPacket.c
+Building file: ../Source/Sensors.c
 Invoking: MCU C Compiler
-arm-none-eabi-gcc -D__REDLIB__ -DDEBUG -D__CODE_RED -D__USE_CMSIS=CMSISv2p00_LPC11xx -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSSensors/Source/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/inc" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSSensors/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSSensors/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSSensors/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -Wextra -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/UartPacket.d" -MT"Source/UartPacket.d" -o "Source/UartPacket.o" "../Source/UartPacket.c"
-../Source/UartPacket.c: In function 'PacketReceive':
-Finished building: ../Source/UartPacket.c
-../Source/UartPacket.c:22:32: warning: parameter 'payload' set but not used [-Wunused-but-set-parameter]
+arm-none-eabi-gcc -D__REDLIB__ -DDEBUG -D__CODE_RED -D__USE_CMSIS=CMSISv2p00_LPC11xx -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSSensors/Source/driver" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/inc" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSSensors/Source" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSSensors/Source/FreeRTOS_Source/include" -I"/Users/vivid/Dropbox/My files/code/BubbleArm/RTOSSensors/Source/FreeRTOS_Source/portable/GCC/ARM_CM0" -O0 -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -Wextra -mcpu=cortex-m0 -mthumb -MMD -MP -MF"Source/Sensors.d" -MT"Source/Sensors.d" -o "Source/Sensors.o" "../Source/Sensors.c"
+Finished building: ../Source/Sensors.c
  
 Building target: RTOSSensors.axf
 Invoking: MCU Linker
@@ -16,8 +14,8 @@ make --no-print-directory post-build
 Performing post-build steps
 arm-none-eabi-size RTOSSensors.axf; # arm-none-eabi-objcopy -O binary RTOSSensors.axf RTOSSensors.bin ; checksum -p LPC1113_301 -d RTOSSensors.bin;
    text	   data	    bss	    dec	    hex	filename
-   8252	     16	   7424	  15692	   3d4c	RTOSSensors.axf
+   8276	     16	   7424	  15716	   3d64	RTOSSensors.axf
  
 
-17:56:48 Build Finished (took 475ms)
+16:11:57 Build Finished (took 437ms)
 

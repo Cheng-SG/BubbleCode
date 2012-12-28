@@ -2,4 +2,4 @@
 //org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.attachLaunchType=org.eclipse.cdt.dsf.gdb.launch.attachCLaunch,debug
 //org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.postmortemLaunchType=org.eclipse.cdt.dsf.gdb.launch.coreCLaunch,debug
 eclipse.preferences.version=1
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="NewSpeed"/>\n<expression enabled\="true" text\="TxBuffer"/>\n<expression enabled\="true" text\="Flowrate"/>\n<expression enabled\="true" text\="Airbox1"/>\n<expression enabled\="true" text\="Airbox2"/>\n<expression enabled\="true" text\="Airbox3"/>\n<expression enabled\="true" text\="Airbox4"/>\n</watchExpressions>\n
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="CeilingPumps"/>\n</watchExpressions>\n

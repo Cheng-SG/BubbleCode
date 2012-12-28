@@ -33,12 +33,16 @@ void prvDataSendTask(void *pvParameters)
 	{
 		vTaskDelayUntil(&xNextWakeTime,
 				1000 / DATA_SEND_FREQUENCY / portTICK_RATE_MS);
+		TxBuffer[0] = 0;
+		TxBuffer[1] = 0;
+		TxBuffer[2] = 0x00;
+		TxBuffer[3] = 0x01;
 		for (n = 0; n < 8; n++)
 		{
-			TxBuffer[(n * 2)] = Flowrate[n];
-			TxBuffer[(n * 2 + 1)] = (Flowrate[n] >> 8);
+			TxBuffer[(n * 2 + 4)] = Flowrate[n];
+			TxBuffer[(n * 2 + 5)] = (Flowrate[n] >> 8);
 		}
-		PacketSend((uint8_t*) TxBuffer, 16);
+		PacketSend((uint8_t*) TxBuffer, 20);
 		GPIOToggle(LED_PORT,LED_GREEN_BIT);
 	}
 }

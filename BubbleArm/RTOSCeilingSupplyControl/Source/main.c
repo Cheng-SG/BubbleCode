@@ -217,7 +217,7 @@ unsigned long ulInterruptStackSize;
 
 	PumpsInit();
 	FlowrateInit();
-	PacketInit(115200);
+	PacketInit(230400);
 
 	/* The size of the stack used by main and interrupts is not defined in
 	the linker, but just uses whatever RAM is left.  Calculate the amount of

@@ -18,7 +18,7 @@ xSemaphoreHandle xSerialSemaphore = 0;
 
 void prvDataReceiveTask(void *pvParameters)
 {
-	uint8_t m, n;
+	uint8_t m;
 	uint16_t src, type;
 	pvParameters = pvParameters;
 	vSemaphoreCreateBinary( xSerialSemaphore);
@@ -32,6 +32,7 @@ void prvDataReceiveTask(void *pvParameters)
 	{
 		if (xSemaphoreTake( xSerialSemaphore, portMAX_DELAY ) == pdTRUE)
 		{
+			m = (InBuff+3)&0x03;
 			src = InputPayload[m][0];
 			src += ((uint16_t) (InputPayload[m][1])) << 8;
 			type = InputPayload[m][2];
@@ -42,11 +43,7 @@ void prvDataReceiveTask(void *pvParameters)
 			}
 			if (src == 1 && type == 0x0000)
 			{
-				SetTemperatures((uint16_t*)(&InputPayload[m][4]),0);
-			}
-			if (src == 1 && type == 0x0001)
-			{
-				SetTemperatures((uint16_t*)(&InputPayload[m][4]),1);
+				SetTemperatures((uint16_t*)(&InputPayload[m][4]));
 			}
 			GPIOToggle(LED_PORT, LED_RED_BIT);
 		}

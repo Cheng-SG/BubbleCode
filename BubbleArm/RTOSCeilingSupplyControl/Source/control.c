@@ -7,8 +7,9 @@
 #include "main.h"
 
 extern uint32_t Flowrate[8];
-uint16_t Temperature[8];
+uint16_t Temperature[16];
 xSemaphoreHandle xControlSemaphore;
+uint16_t SetFlow[2],SetTemp[2];
 
 void ControlInit(void);
 void Control(uint32_t* flowrates);
@@ -83,59 +84,106 @@ void ControlInit()
 		CeilingPumps[i].kd = KD;
 		CeilingPumps[i].output = 0;
 	}
+	SetFlow[0] = 0;
+	SetFlow[1] = 0;
+	SetTemp[0] = 0;
+	SetTemp[0] = 0;
 }
 
 void SetSpeeds(uint16_t* values)
 {
-	int flow, temp, f1, f2;
-	flow = *(values);
-	temp = *(values + 1);
-	f1 = flow * (temp - Temperature[PANEL1_SUPPLY_TEMPERATURE_CHANNEL - 1])
-			/ (Temperature[PANEL1_SUPPLY_TEMPERATURE_CHANNEL - 1]
-					- Temperature[PANEL1_RECYCLE_TEMPERATURE_CHANNEL - 1]);
-	f2 = flow - f1;
-	CeilingPumps[0].setpoint = f1;
-	CeilingPumps[1].setpoint = f2;
-
-	flow = *(values + 2);
-	temp = *(values + 3);
-	f1 = flow * (temp - Temperature[PANEL2_SUPPLY_TEMPERATURE_CHANNEL - 1])
-			/ (Temperature[PANEL2_SUPPLY_TEMPERATURE_CHANNEL - 1]
-					- Temperature[PANEL2_RECYCLE_TEMPERATURE_CHANNEL - 1]);
-	f2 = flow - f1;
-	CeilingPumps[2].setpoint = f1;
-	CeilingPumps[3].setpoint = f2;
+	SetFlow[0] = *(values);
+	SetTemp[0] = *(values + 1);
+	SetFlow[1] = *(values + 2);
+	SetTemp[1] = *(values + 3);
 }
 
-void SetTemperatures(uint16_t* values, uint32_t m)
+void CalcuSpeeds()
 {
-	uint32_t i;
-	if (m == 0)
+	int flow,temp,f1, f2;
+	if(Temperature[PANEL1_SUPPLY_TEMPERATURE_CHANNEL - 1] !=0 && Temperature[PANEL1_RECYCLE_TEMPERATURE_CHANNEL - 1] !=0 )
 	{
-		for (i = 0; i < 8; i++)
-			Temperature[i] = *(values + i);
+		flow = SetFlow[0];
+		temp = SetTemp[0];
+		if(temp<Temperature[PANEL1_SUPPLY_TEMPERATURE_CHANNEL - 1])
+		{
+			CeilingPumps[0].setpoint = flow;
+			CeilingPumps[1].setpoint = 0;
+		}
+		else if(temp>=Temperature[PANEL1_SUPPLY_TEMPERATURE_CHANNEL - 1] && temp < Temperature[PANEL1_RECYCLE_TEMPERATURE_CHANNEL - 1])
+		{
+			f1 = flow * (temp - Temperature[PANEL1_SUPPLY_TEMPERATURE_CHANNEL - 1])
+				/ (Temperature[PANEL1_SUPPLY_TEMPERATURE_CHANNEL - 1]
+						- Temperature[PANEL1_RECYCLE_TEMPERATURE_CHANNEL - 1]);
+			f2 = flow - f1;
+			CeilingPumps[0].setpoint = f1;
+			CeilingPumps[1].setpoint = f2;
+		}
+		else
+		{
+			CeilingPumps[0].setpoint = 0;
+			CeilingPumps[1].setpoint = flow;
+		}
 	}
 	else
 	{
-		for (i = 0; i < 8; i++)
-			Temperature[i + 8] = *(values + i);
+		CeilingPumps[0].setpoint = 0;
+		CeilingPumps[1].setpoint = 0;
 	}
+
+	if(Temperature[PANEL2_SUPPLY_TEMPERATURE_CHANNEL - 1] !=0 && Temperature[PANEL2_RECYCLE_TEMPERATURE_CHANNEL - 1] !=0 )
+	{
+		flow = SetFlow[1];
+		temp = SetTemp[1];
+		if(temp<Temperature[PANEL2_SUPPLY_TEMPERATURE_CHANNEL - 1])
+		{
+			CeilingPumps[2].setpoint = flow;
+			CeilingPumps[3].setpoint = 0;
+		}
+		else if(temp>=Temperature[PANEL2_SUPPLY_TEMPERATURE_CHANNEL - 1] && temp < Temperature[PANEL2_RECYCLE_TEMPERATURE_CHANNEL - 1])
+		{
+			f1 = flow * (temp - Temperature[PANEL2_SUPPLY_TEMPERATURE_CHANNEL - 1])
+				/ (Temperature[PANEL2_SUPPLY_TEMPERATURE_CHANNEL - 1]
+						- Temperature[PANEL2_RECYCLE_TEMPERATURE_CHANNEL - 1]);
+			f2 = flow - f1;
+			CeilingPumps[2].setpoint = f1;
+			CeilingPumps[3].setpoint = f2;
+		}
+		else
+		{
+			CeilingPumps[2].setpoint = 0;
+			CeilingPumps[3].setpoint = flow;
+		}
+	}
+	else
+	{
+		CeilingPumps[2].setpoint = 0;
+		CeilingPumps[3].setpoint = 0;
+	}
+}
+
+void SetTemperatures(uint16_t* values)
+{
+	uint32_t i;
+	for (i = 0; i < 16; i++)
+		Temperature[i] = *(values + i);
 }
 
 void Control(uint32_t* flowrates)
 {
 	uint16_t out;
+	CalcuSpeeds();
 	out = PIDCalcu(&(CeilingPumps[0]),
 			*(flowrates + (PANEL1_SUPPLY_FLOWRATE_CHANNEL - 1)));
-	PumpsSetSpeed(out, PANEL1_SUPPLY_PUMP_CHANNEL);
+	PumpsSetSpeed(PANEL1_SUPPLY_PUMP_CHANNEL, out );
 	out = PIDCalcu(&(CeilingPumps[1]),
 			*(flowrates + (PANEL1_RECYCLE_FLOWRATE_CHANNEL - 1)));
-	PumpsSetSpeed(out, PANEL1_RECYCLE_FLOWRATE_CHANNEL);
-	out = PIDCalcu(&(CeilingPumps[0]),
+	PumpsSetSpeed(PANEL1_RECYCLE_FLOWRATE_CHANNEL, out);
+	out = PIDCalcu(&(CeilingPumps[2]),
 			*(flowrates + (PANEL2_SUPPLY_FLOWRATE_CHANNEL - 1)));
-	PumpsSetSpeed(out, PANEL1_SUPPLY_PUMP_CHANNEL);
-	out = PIDCalcu(&(CeilingPumps[1]),
+	PumpsSetSpeed(PANEL2_SUPPLY_PUMP_CHANNEL, out );
+	out = PIDCalcu(&(CeilingPumps[3]),
 			*(flowrates + (PANEL2_RECYCLE_FLOWRATE_CHANNEL - 1)));
-	PumpsSetSpeed(out, PANEL2_RECYCLE_FLOWRATE_CHANNEL);
+	PumpsSetSpeed(PANEL2_RECYCLE_FLOWRATE_CHANNEL, out);
 }
 

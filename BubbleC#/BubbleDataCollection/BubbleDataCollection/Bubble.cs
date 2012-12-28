@@ -384,7 +384,7 @@ namespace BubbleDataCollection
                             {
                                 Type = (UInt16)SerialRxBuf[6];
                                 Type += (UInt16)(((UInt16)SerialRxBuf[7]) << 8);
-                                if (Type == 0x0000 || Type == 0x0001 || Type == 0x0100 || Type == 0x0200 || Type == 0x0300 || Type == 0x0400 || Type == 0x0401)
+                                if (Type == 0x0000 || Type == 0x0100 || Type == 0x0200 || Type == 0x0300 || Type == 0x0400 || Type == 0x0401)
                                 {
                                     for (int i = 4; i < len; i++)
                                     {
@@ -474,7 +474,7 @@ namespace BubbleDataCollection
                             {
                                 Type = (UInt16)SerialRxBuf[6];
                                 Type += (UInt16)(((UInt16)SerialRxBuf[7]) << 8);
-                                if (Type == 0x0000 || Type == 0x0001 || Type == 0x0100 || Type == 0x0200 || Type == 0x0300 || Type == 0x0400 || Type == 0x0401)
+                                if (Type == 0x0000 || Type == 0x0100 || Type == 0x0200 || Type == 0x0300 || Type == 0x0400 || Type == 0x0401)
                                 {
                                     for (int i = 4; i < len; i++)
                                     {
@@ -970,7 +970,6 @@ namespace BubbleDataCollection
             switch (type)
             {
                 case 0x0000:
-                case 0x0001:
                     if (TempBoards.Contains(nodeID) == false)
                     {
                         if (Temperatureconfig.Contains(nodeID) == true)
@@ -990,7 +989,7 @@ namespace BubbleDataCollection
                         }
                     }
                     i = TempBoards.IndexOf(nodeID);
-                    ((TemperatueBoard)TempBoards[i]).SetTemperature(InBuf1, (type & 0x01));
+                    ((TemperatueBoard)TempBoards[i]).SetTemperature(InBuf1);
                     ((TemperatueBoard)TempBoards[i]).Port = 1;
                     ((TemperatueBoard)TempBoards[i]).Online_T = true;
                     break;
@@ -1142,7 +1141,6 @@ namespace BubbleDataCollection
             switch (type)
             {
                 case 0x0000:
-                case 0x0001:
                     if (TempBoards.Contains(nodeID) == false)
                     {
                         if (Temperatureconfig.Contains(nodeID) == true)
@@ -1162,7 +1160,7 @@ namespace BubbleDataCollection
                         }
                     }
                     i = TempBoards.IndexOf(nodeID);
-                    ((TemperatueBoard)TempBoards[i]).SetTemperature(InBuf2, (type & 0x01));
+                    ((TemperatueBoard)TempBoards[i]).SetTemperature(InBuf2);
                     ((TemperatueBoard)TempBoards[i]).Port = 2;
                     ((TemperatueBoard)TempBoards[i]).Online_T = true;
                     break;
@@ -1312,7 +1310,7 @@ namespace BubbleDataCollection
             int i = 0;
             switch (type)
             {
-                case 0x0001:
+                case 0x0000:
                     if (nodeID == CurTempNodID)
                     {
                         i = TempBoards.IndexOf(nodeID);

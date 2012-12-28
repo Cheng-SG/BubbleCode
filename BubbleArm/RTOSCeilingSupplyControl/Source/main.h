@@ -30,7 +30,7 @@
 #define PANEL1_SUPPLY_PUMP_CHANNEL  1
 #define PANEL1_RECYCLE_PUMP_CHANNEL 2
 #define PANEL2_SUPPLY_PUMP_CHANNEL  3
-#define PANEL2_RECYCLE_PUMP_CHANNEL 4
+#define PANEL2_RECYCLE_PUMP_CHANNEL 5
 
 //define TEMPERATURE channels
 #define PANEL1_SUPPLY_TEMPERATURE_CHANNEL   1
@@ -54,7 +54,7 @@
 #define MAX     65535
 #define MIN     0
 #define EPSILON 2
-#define KP   20
+#define KP   0.2
 #define KI   0
 #define KD   0
 

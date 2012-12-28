@@ -139,32 +139,18 @@ namespace TemperatureBoardConfig
             return base.GetHashCode();
         }
 
-        public bool SetTemperature(byte[] Buf, int half)
+        public bool SetTemperature(byte[] Buf)
         {
             bool ret = false;
             try
             {
-                if (half == 0)
+                for (int i = 0; i < 16; i++)
                 {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        temperature[i] = (UInt16)((UInt16)(((UInt16)Buf[2 * i + 5]) << 8) + (UInt16)Buf[2 * i + 4]);
-                        if (temperature[i] != 0x4000)
-                            temperature[i] = (UInt16)(temperature[i] + config[i]);
-                    }
-                    ret = true;
+                    temperature[i] = (UInt16)((UInt16)(((UInt16)Buf[2 * i + 5]) << 8) + (UInt16)Buf[2 * i + 4]);
+                    if (temperature[i] != 0x4000)
+                        temperature[i] = (UInt16)(temperature[i] + config[i]);
                 }
-                else if (half == 1)
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        temperature[i + 8] = (UInt16)((UInt16)(((UInt16)Buf[2 * i + 5]) << 8) + (UInt16)Buf[2 * i + 4]);
-                        if (temperature[i + 8] != 0x4000)
-                            temperature[i + 8] = (UInt16)(temperature[i + 8] + config[i + 8]);
-                    }
-                    newindata = true;
-                    ret = true;
-                }
+                ret = true;
             }
             catch
             {

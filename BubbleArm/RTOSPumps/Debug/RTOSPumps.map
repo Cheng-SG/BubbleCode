@@ -613,7 +613,7 @@ END GROUP
                 0x0000000000006000                __top_MFlash24 = 0x6000
                 0x0000000010002000                __top_RamLoc8 = 0x10002000
 
-.text           0x0000000000000000     0x352c
+.text           0x0000000000000000     0x3548
  FILL mask 0xff
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0xc0 ./Source/cr_startup_lpc11.o
@@ -621,7 +621,7 @@ END GROUP
                 0x00000000000000c0                . = ALIGN (0x4)
                 0x00000000000000c0                __section_table_start = .
                 0x00000000000000c0                __data_section_table = .
-                0x00000000000000c0        0x4 LONG 0x352c LOADADDR (.data)
+                0x00000000000000c0        0x4 LONG 0x3548 LOADADDR (.data)
                 0x00000000000000c4        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000c8        0x4 LONG 0x10 SIZEOF (.data)
                 0x00000000000000cc                __data_section_table_end = .
@@ -830,118 +830,118 @@ END GROUP
  .text.NVIC_EnableIRQ
                 0x00000000000021cc       0x2c ./Source/Flowrate.o
  .text.prvDataSendTask
-                0x00000000000021f8       0xa0 ./Source/Flowrate.o
+                0x00000000000021f8       0xbc ./Source/Flowrate.o
                 0x00000000000021f8                prvDataSendTask
  .text.FlowrateInit
-                0x0000000000002298      0x21c ./Source/Flowrate.o
-                0x0000000000002298                FlowrateInit
+                0x00000000000022b4      0x21c ./Source/Flowrate.o
+                0x00000000000022b4                FlowrateInit
  .text.TIMER32_1_IRQHandler
-                0x00000000000024b4       0xac ./Source/Flowrate.o
-                0x00000000000024b4                TIMER32_1_IRQHandler
+                0x00000000000024d0       0xac ./Source/Flowrate.o
+                0x00000000000024d0                TIMER32_1_IRQHandler
  .text.PIOINT2_IRQHandler
-                0x0000000000002560      0x258 ./Source/Flowrate.o
-                0x0000000000002560                PIOINT2_IRQHandler
+                0x000000000000257c      0x258 ./Source/Flowrate.o
+                0x000000000000257c                PIOINT2_IRQHandler
  .text.PumpsInit
-                0x00000000000027b8      0x170 ./Source/Pumps.o
-                0x00000000000027b8                PumpsInit
+                0x00000000000027d4      0x170 ./Source/Pumps.o
+                0x00000000000027d4                PumpsInit
  .text.PumpsSetSpeed
-                0x0000000000002928      0x16c ./Source/Pumps.o
-                0x0000000000002928                PumpsSetSpeed
+                0x0000000000002944      0x16c ./Source/Pumps.o
+                0x0000000000002944                PumpsSetSpeed
  .text.prvDataReceiveTask
-                0x0000000000002a94      0x1b4 ./Source/UartPacket.o
-                0x0000000000002a94                prvDataReceiveTask
+                0x0000000000002ab0      0x1b4 ./Source/UartPacket.o
+                0x0000000000002ab0                prvDataReceiveTask
  .text.PacketInit
-                0x0000000000002c48       0x48 ./Source/UartPacket.o
-                0x0000000000002c48                PacketInit
+                0x0000000000002c64       0x48 ./Source/UartPacket.o
+                0x0000000000002c64                PacketInit
  .text.PacketSend
-                0x0000000000002c90      0x118 ./Source/UartPacket.o
-                0x0000000000002c90                PacketSend
+                0x0000000000002cac      0x118 ./Source/UartPacket.o
+                0x0000000000002cac                PacketSend
  .text.UART_IRQHandler
-                0x0000000000002da8      0x280 ./Source/UartPacket.o
-                0x0000000000002da8                UART_IRQHandler
+                0x0000000000002dc4      0x280 ./Source/UartPacket.o
+                0x0000000000002dc4                UART_IRQHandler
  .text.pop_registers_from_fault_stack
-                0x0000000000003028       0x28 ./Source/cr_startup_lpc11.o
-                0x0000000000003028                pop_registers_from_fault_stack
- .text.main     0x0000000000003050       0x68 ./Source/main.o
-                0x0000000000003050                main
+                0x0000000000003044       0x28 ./Source/cr_startup_lpc11.o
+                0x0000000000003044                pop_registers_from_fault_stack
+ .text.main     0x000000000000306c       0x68 ./Source/main.o
+                0x000000000000306c                main
  .text.prvSetupHardware
-                0x00000000000030b8       0x68 ./Source/main.o
+                0x00000000000030d4       0x68 ./Source/main.o
  .text.vApplicationMallocFailedHook
-                0x0000000000003120        0x8 ./Source/main.o
-                0x0000000000003120                vApplicationMallocFailedHook
+                0x000000000000313c        0x8 ./Source/main.o
+                0x000000000000313c                vApplicationMallocFailedHook
  .text.vApplicationStackOverflowHook
-                0x0000000000003128       0x10 ./Source/main.o
-                0x0000000000003128                vApplicationStackOverflowHook
+                0x0000000000003144       0x10 ./Source/main.o
+                0x0000000000003144                vApplicationStackOverflowHook
  .text.vApplicationTickHook
-                0x0000000000003138       0x28 ./Source/main.o
-                0x0000000000003138                vApplicationTickHook
+                0x0000000000003154       0x28 ./Source/main.o
+                0x0000000000003154                vApplicationTickHook
  .text.SystemInit
-                0x0000000000003160       0x90 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
-                0x0000000000003160                SystemInit
- .text.memcpy   0x00000000000031f0        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcpy.o)
-                0x00000000000031f0                memcpy
- .text.memset   0x00000000000031f8        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memset.o)
-                0x00000000000031f8                memset
+                0x000000000000317c       0x90 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+                0x000000000000317c                SystemInit
+ .text.memcpy   0x000000000000320c        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcpy.o)
+                0x000000000000320c                memcpy
+ .text.memset   0x0000000000003214        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memset.o)
+                0x0000000000003214                memset
  .text.__weak_main
-                0x0000000000003200        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__weak__main.o)
-                0x0000000000003200                __main
-                0x0000000000003200                __weak_main
- .text.memcmp   0x0000000000003208       0x38 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcmp.o)
-                0x0000000000003208                memcmp
- .text.strncpy  0x0000000000003240       0x54 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(strncpy.o)
-                0x0000000000003240                strncpy
+                0x000000000000321c        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__weak__main.o)
+                0x000000000000321c                __main
+                0x000000000000321c                __weak_main
+ .text.memcmp   0x0000000000003224       0x38 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcmp.o)
+                0x0000000000003224                memcmp
+ .text.strncpy  0x000000000000325c       0x54 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(strncpy.o)
+                0x000000000000325c                strncpy
  .text.__aeabi_division_uidivmod
-                0x0000000000003294       0x72 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x0000000000003294                __aeabi_uidiv
-                0x0000000000003294                __aeabi_uidivmod
+                0x00000000000032b0       0x72 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x00000000000032b0                __aeabi_uidiv
+                0x00000000000032b0                __aeabi_uidivmod
  .text.__aeabi_division_idiv0
-                0x0000000000003306        0x2 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x0000000000003306                __aeabi_idiv0
+                0x0000000000003322        0x2 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x0000000000003322                __aeabi_idiv0
  .text.__aeabi_memcpy
-                0x0000000000003308       0x2c /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
-                0x0000000000003308                __aeabi_memcpy
-                0x0000000000003308                __aeabi_memcpy4
-                0x0000000000003308                __aeabi_memcpy8
+                0x0000000000003324       0x2c /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
+                0x0000000000003324                __aeabi_memcpy
+                0x0000000000003324                __aeabi_memcpy4
+                0x0000000000003324                __aeabi_memcpy8
  .text.__aeabi_memset_lowlevel
-                0x0000000000003334       0x2a /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
-                0x0000000000003334                __aeabi_lowlevel_memset
+                0x0000000000003350       0x2a /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
+                0x0000000000003350                __aeabi_lowlevel_memset
  *(.rodata .rodata.*)
- *fill*         0x000000000000335e        0x2 00
+ *fill*         0x000000000000337a        0x2 00
  .rodata.LPC_GPIO
-                0x0000000000003360       0x10 ./Source/driver/gpio.o
+                0x000000000000337c       0x10 ./Source/driver/gpio.o
  .rodata.I2C_IRQHandler
-                0x0000000000003370      0x144 ./Source/driver/i2c.o
- .rodata        0x00000000000034b4       0x20 ./Source/FreeRTOS_Source/tasks.o
+                0x000000000000338c      0x144 ./Source/driver/i2c.o
+ .rodata        0x00000000000034d0       0x20 ./Source/FreeRTOS_Source/tasks.o
  .rodata.ucExpectedStackBytes.4425
-                0x00000000000034d4       0x14 ./Source/FreeRTOS_Source/tasks.o
+                0x00000000000034f0       0x14 ./Source/FreeRTOS_Source/tasks.o
  .rodata.PumpsSetSpeed
-                0x00000000000034e8       0x20 ./Source/Pumps.o
+                0x0000000000003504       0x20 ./Source/Pumps.o
  .rodata.ucExpectedInterruptStackValues
-                0x0000000000003508       0x10 ./Source/main.o
-                0x0000000000003508                ucExpectedInterruptStackValues
- .rodata        0x0000000000003518       0x14 ./Source/main.o
-                0x000000000000352c                . = ALIGN (0x4)
+                0x0000000000003524       0x10 ./Source/main.o
+                0x0000000000003524                ucExpectedInterruptStackValues
+ .rodata        0x0000000000003534       0x14 ./Source/main.o
+                0x0000000000003548                . = ALIGN (0x4)
 
-.glue_7         0x000000000000352c        0x0
+.glue_7         0x0000000000003548        0x0
  .glue_7        0x0000000000000000        0x0 linker stubs
 
-.glue_7t        0x000000000000352c        0x0
+.glue_7t        0x0000000000003548        0x0
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x000000000000352c        0x0
+.vfp11_veneer   0x0000000000003548        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x000000000000352c        0x0
+.v4_bx          0x0000000000003548        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x000000000000352c                __exidx_start = .
+                0x0000000000003548                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x000000000000352c                __exidx_end = .
-                0x000000000000352c                _etext = .
+                0x0000000000003548                __exidx_end = .
+                0x0000000000003548                _etext = .
 
 .uninit_RESERVED
                 0x0000000010000000        0x0
@@ -949,7 +949,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000       0x10 load address 0x000000000000352c
+.data           0x0000000010000000       0x10 load address 0x0000000000003548
  FILL mask 0xff
                 0x0000000010000000                _data = .
  *(vtable)
@@ -968,7 +968,7 @@ END GROUP
                 0x0000000010000010                . = ALIGN (0x4)
                 0x0000000010000010                _edata = .
 
-.bss            0x0000000010000010     0x1d28 load address 0x0000000000003540
+.bss            0x0000000010000010     0x1d28 load address 0x0000000000003558
                 0x0000000010000010                _bss = .
  *(.bss*)
  .bss.I2CMasterState
@@ -1129,7 +1129,7 @@ OUTPUT(RTOSPumps.axf elf32-littlearm)
  .debug_abbrev  0x0000000000001485      0x193 ./Source/main.o
  .debug_abbrev  0x0000000000001618       0xec /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_line     0x0000000000000000     0x979d
+.debug_line     0x0000000000000000     0x97a1
  .debug_line    0x0000000000000000      0x411 ./Source/driver/adc.o
  .debug_line    0x0000000000000411      0x411 ./Source/driver/can.o
  .debug_line    0x0000000000000822      0x417 ./Source/driver/clkconfig.o
@@ -1153,12 +1153,12 @@ OUTPUT(RTOSPumps.axf elf32-littlearm)
  .debug_line    0x0000000000005ac4      0x97b ./Source/FreeRTOS_Source/queue.o
  .debug_line    0x000000000000643f      0xc26 ./Source/FreeRTOS_Source/tasks.o
  .debug_line    0x0000000000007065      0x504 ./Source/FreeRTOS_Source/timers.o
- .debug_line    0x0000000000007569      0x719 ./Source/Flowrate.o
- .debug_line    0x0000000000007c82      0x4d0 ./Source/Pumps.o
- .debug_line    0x0000000000008152      0x75a ./Source/UartPacket.o
- .debug_line    0x00000000000088ac      0x41d ./Source/cr_startup_lpc11.o
- .debug_line    0x0000000000008cc9      0x6c5 ./Source/main.o
- .debug_line    0x000000000000938e      0x40f /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_line    0x0000000000007569      0x71d ./Source/Flowrate.o
+ .debug_line    0x0000000000007c86      0x4d0 ./Source/Pumps.o
+ .debug_line    0x0000000000008156      0x75a ./Source/UartPacket.o
+ .debug_line    0x00000000000088b0      0x41d ./Source/cr_startup_lpc11.o
+ .debug_line    0x0000000000008ccd      0x6c5 ./Source/main.o
+ .debug_line    0x0000000000009392      0x40f /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
 .debug_macinfo  0x0000000000000000    0xa4c49
  .debug_macinfo

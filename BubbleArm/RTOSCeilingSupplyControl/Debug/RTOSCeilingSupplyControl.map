@@ -63,7 +63,7 @@ Common symbol       size              file
 I2CReadLength       0x4               ./Source/driver/i2c.o
 rate                0x40              ./Source/flowrate.o
 I2CSlaveBuffer      0x40              ./Source/driver/i2c.o
-Temperature         0x10              ./Source/control.o
+Temperature         0x20              ./Source/control.o
 InCount             0x1               ./Source/UartPacket.o
 OutCount            0x1               ./Source/UartPacket.o
 InBuff              0x1               ./Source/UartPacket.o
@@ -84,9 +84,11 @@ TxBuffer            0x20              ./Source/flowrate.o
 count               0x20              ./Source/flowrate.o
 OutBusy             0x1               ./Source/UartPacket.o
 InTempLength        0x1               ./Source/UartPacket.o
+SetTemp             0x4               ./Source/control.o
 __heaps             0x4               /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__init_alloc.o)
 PumpsSpeed          0x10              ./Source/pumps.o
 __end_of_heap       0x4               /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__init_alloc.o)
+SetFlow             0x4               ./Source/control.o
 InputPayload        0x100             ./Source/UartPacket.o
 OutputBuff          0x44              ./Source/UartPacket.o
 __Ciob              0x140             /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(stdio.o)
@@ -658,7 +660,7 @@ END GROUP
                 0x0000000000006000                __top_MFlash24 = 0x6000
                 0x0000000010002000                __top_RamLoc8 = 0x10002000
 
-.text           0x0000000000000000     0x3d30
+.text           0x0000000000000000     0x3e24
  FILL mask 0xff
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0xc0 ./Source/cr_startup_lpc11.o
@@ -666,13 +668,13 @@ END GROUP
                 0x00000000000000c0                . = ALIGN (0x4)
                 0x00000000000000c0                __section_table_start = .
                 0x00000000000000c0                __data_section_table = .
-                0x00000000000000c0        0x4 LONG 0x3d30 LOADADDR (.data)
+                0x00000000000000c0        0x4 LONG 0x3e24 LOADADDR (.data)
                 0x00000000000000c4        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000c8        0x4 LONG 0x10 SIZEOF (.data)
                 0x00000000000000cc                __data_section_table_end = .
                 0x00000000000000cc                __bss_section_table = .
                 0x00000000000000cc        0x4 LONG 0x10000010 ADDR (.bss)
-                0x00000000000000d0        0x4 LONG 0x1e00 SIZEOF (.bss)
+                0x00000000000000d0        0x4 LONG 0x1e18 SIZEOF (.bss)
                 0x00000000000000d4                __bss_section_table_end = .
                 0x00000000000000d4                __section_table_end = .
  *(.after_vectors*)
@@ -873,164 +875,167 @@ END GROUP
                 0x0000000000002150       0x7c ./Source/FreeRTOS_Source/tasks.o
                 0x0000000000002150                vTaskPriorityDisinherit
  .text.prvDataReceiveTask
-                0x00000000000021cc      0x174 ./Source/UartPacket.o
+                0x00000000000021cc      0x15c ./Source/UartPacket.o
                 0x00000000000021cc                prvDataReceiveTask
  .text.PacketInit
-                0x0000000000002340       0x48 ./Source/UartPacket.o
-                0x0000000000002340                PacketInit
+                0x0000000000002328       0x48 ./Source/UartPacket.o
+                0x0000000000002328                PacketInit
  .text.PacketSend
-                0x0000000000002388      0x118 ./Source/UartPacket.o
-                0x0000000000002388                PacketSend
+                0x0000000000002370      0x118 ./Source/UartPacket.o
+                0x0000000000002370                PacketSend
  .text.UART_IRQHandler
-                0x00000000000024a0      0x280 ./Source/UartPacket.o
-                0x00000000000024a0                UART_IRQHandler
+                0x0000000000002488      0x280 ./Source/UartPacket.o
+                0x0000000000002488                UART_IRQHandler
  .text.prvControlTask
-                0x0000000000002720       0x6c ./Source/control.o
-                0x0000000000002720                prvControlTask
- .text.abs      0x000000000000278c       0x20 ./Source/control.o
-                0x000000000000278c                abs
+                0x0000000000002708       0x6c ./Source/control.o
+                0x0000000000002708                prvControlTask
+ .text.abs      0x0000000000002774       0x20 ./Source/control.o
+                0x0000000000002774                abs
  .text.PIDCalcu
-                0x00000000000027ac       0xfc ./Source/control.o
-                0x00000000000027ac                PIDCalcu
+                0x0000000000002794       0xfc ./Source/control.o
+                0x0000000000002794                PIDCalcu
  .text.ControlInit
-                0x00000000000028a8       0xbc ./Source/control.o
-                0x00000000000028a8                ControlInit
+                0x0000000000002890       0xdc ./Source/control.o
+                0x0000000000002890                ControlInit
  .text.SetSpeeds
-                0x0000000000002964       0xa8 ./Source/control.o
-                0x0000000000002964                SetSpeeds
+                0x000000000000296c       0x38 ./Source/control.o
+                0x000000000000296c                SetSpeeds
+ .text.CalcuSpeeds
+                0x00000000000029a4      0x170 ./Source/control.o
+                0x00000000000029a4                CalcuSpeeds
  .text.SetTemperatures
-                0x0000000000002a0c       0x68 ./Source/control.o
-                0x0000000000002a0c                SetTemperatures
- .text.Control  0x0000000000002a74       0xb4 ./Source/control.o
-                0x0000000000002a74                Control
+                0x0000000000002b14       0x38 ./Source/control.o
+                0x0000000000002b14                SetTemperatures
+ .text.Control  0x0000000000002b4c       0xb8 ./Source/control.o
+                0x0000000000002b4c                Control
  .text.pop_registers_from_fault_stack
-                0x0000000000002b28       0x28 ./Source/cr_startup_lpc11.o
-                0x0000000000002b28                pop_registers_from_fault_stack
+                0x0000000000002c04       0x28 ./Source/cr_startup_lpc11.o
+                0x0000000000002c04                pop_registers_from_fault_stack
  .text.NVIC_EnableIRQ
-                0x0000000000002b50       0x2c ./Source/flowrate.o
+                0x0000000000002c2c       0x2c ./Source/flowrate.o
  .text.prvDataSendTask
-                0x0000000000002b7c       0x94 ./Source/flowrate.o
-                0x0000000000002b7c                prvDataSendTask
+                0x0000000000002c58       0xac ./Source/flowrate.o
+                0x0000000000002c58                prvDataSendTask
  .text.FlowrateInit
-                0x0000000000002c10      0x21c ./Source/flowrate.o
-                0x0000000000002c10                FlowrateInit
+                0x0000000000002d04      0x21c ./Source/flowrate.o
+                0x0000000000002d04                FlowrateInit
  .text.TIMER32_1_IRQHandler
-                0x0000000000002e2c      0x148 ./Source/flowrate.o
-                0x0000000000002e2c                TIMER32_1_IRQHandler
+                0x0000000000002f20      0x148 ./Source/flowrate.o
+                0x0000000000002f20                TIMER32_1_IRQHandler
  .text.PIOINT2_IRQHandler
-                0x0000000000002f74      0x248 ./Source/flowrate.o
-                0x0000000000002f74                PIOINT2_IRQHandler
- .text.main     0x00000000000031bc       0x90 ./Source/main.o
-                0x00000000000031bc                main
+                0x0000000000003068      0x248 ./Source/flowrate.o
+                0x0000000000003068                PIOINT2_IRQHandler
+ .text.main     0x00000000000032b0       0x90 ./Source/main.o
+                0x00000000000032b0                main
  .text.prvSetupHardware
-                0x000000000000324c       0x7c ./Source/main.o
+                0x0000000000003340       0x7c ./Source/main.o
  .text.vApplicationMallocFailedHook
-                0x00000000000032c8        0x8 ./Source/main.o
-                0x00000000000032c8                vApplicationMallocFailedHook
+                0x00000000000033bc        0x8 ./Source/main.o
+                0x00000000000033bc                vApplicationMallocFailedHook
  .text.vApplicationStackOverflowHook
-                0x00000000000032d0       0x10 ./Source/main.o
-                0x00000000000032d0                vApplicationStackOverflowHook
+                0x00000000000033c4       0x10 ./Source/main.o
+                0x00000000000033c4                vApplicationStackOverflowHook
  .text.vApplicationTickHook
-                0x00000000000032e0       0x28 ./Source/main.o
-                0x00000000000032e0                vApplicationTickHook
+                0x00000000000033d4       0x28 ./Source/main.o
+                0x00000000000033d4                vApplicationTickHook
  .text.PumpsInit
-                0x0000000000003308      0x170 ./Source/pumps.o
-                0x0000000000003308                PumpsInit
+                0x00000000000033fc      0x170 ./Source/pumps.o
+                0x00000000000033fc                PumpsInit
  .text.PumpsSetSpeed
-                0x0000000000003478      0x16c ./Source/pumps.o
-                0x0000000000003478                PumpsSetSpeed
+                0x000000000000356c      0x16c ./Source/pumps.o
+                0x000000000000356c                PumpsSetSpeed
  .text.SystemInit
-                0x00000000000035e4       0x90 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
-                0x00000000000035e4                SystemInit
- .text.memcpy   0x0000000000003674        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcpy.o)
-                0x0000000000003674                memcpy
- .text.memset   0x000000000000367c        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memset.o)
-                0x000000000000367c                memset
+                0x00000000000036d8       0x90 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+                0x00000000000036d8                SystemInit
+ .text.memcpy   0x0000000000003768        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcpy.o)
+                0x0000000000003768                memcpy
+ .text.memset   0x0000000000003770        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memset.o)
+                0x0000000000003770                memset
  .text.__weak_main
-                0x0000000000003684        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__weak__main.o)
-                0x0000000000003684                __main
-                0x0000000000003684                __weak_main
- .text.memcmp   0x000000000000368c       0x38 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcmp.o)
-                0x000000000000368c                memcmp
- .text.strncpy  0x00000000000036c4       0x54 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(strncpy.o)
-                0x00000000000036c4                strncpy
+                0x0000000000003778        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__weak__main.o)
+                0x0000000000003778                __main
+                0x0000000000003778                __weak_main
+ .text.memcmp   0x0000000000003780       0x38 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcmp.o)
+                0x0000000000003780                memcmp
+ .text.strncpy  0x00000000000037b8       0x54 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(strncpy.o)
+                0x00000000000037b8                strncpy
  .text.__aeabi_division_idivmod
-                0x0000000000003718        0x6 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x0000000000003718                __aeabi_idiv
-                0x0000000000003718                __aeabi_idivmod
+                0x000000000000380c        0x6 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x000000000000380c                __aeabi_idiv
+                0x000000000000380c                __aeabi_idivmod
  .text.__aeabi_division_uidivmod
-                0x000000000000371e       0x72 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x000000000000371e                __aeabi_uidiv
-                0x000000000000371e                __aeabi_uidivmod
+                0x0000000000003812       0x72 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x0000000000003812                __aeabi_uidiv
+                0x0000000000003812                __aeabi_uidivmod
  .text.__aeabi_division_idiv0
-                0x0000000000003790        0x2 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x0000000000003790                __aeabi_idiv0
- *fill*         0x0000000000003792        0x2 00
+                0x0000000000003884        0x2 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x0000000000003884                __aeabi_idiv0
+ *fill*         0x0000000000003886        0x2 00
  .text.__aeabi_fmul
-                0x0000000000003794       0xd0 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
-                0x0000000000003794                __aeabi_fmul
+                0x0000000000003888       0xd0 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
+                0x0000000000003888                __aeabi_fmul
  .text.__aeabi_fsub
-                0x0000000000003864      0x124 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
-                0x0000000000003864                __aeabi_fsub
+                0x0000000000003958      0x124 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
+                0x0000000000003958                __aeabi_fsub
  .text.__aeabi_fadd
-                0x0000000000003988       0xa8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
-                0x0000000000003988                __aeabi_fadd
+                0x0000000000003a7c       0xa8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
+                0x0000000000003a7c                __aeabi_fadd
  .text.__aeabi_f2iz
-                0x0000000000003a30       0x38 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
-                0x0000000000003a30                __aeabi_f2iz
+                0x0000000000003b24       0x38 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
+                0x0000000000003b24                __aeabi_f2iz
  .text.__bhs_ui2f
-                0x0000000000003a68       0x62 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
-                0x0000000000003a68                __bhs_ui2f
+                0x0000000000003b5c       0x62 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
+                0x0000000000003b5c                __bhs_ui2f
  .text.__aeabi_i2f
-                0x0000000000003aca       0x16 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
-                0x0000000000003aca                __aeabi_i2f
+                0x0000000000003bbe       0x16 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(float.o)
+                0x0000000000003bbe                __aeabi_i2f
  .text.__aeabi_llong_lmul
-                0x0000000000003ae0       0x2e /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(llong.o)
-                0x0000000000003ae0                __aeabi_lmul
+                0x0000000000003bd4       0x2e /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(llong.o)
+                0x0000000000003bd4                __aeabi_lmul
  .text.__aeabi_memcpy
-                0x0000000000003b0e       0x2c /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
-                0x0000000000003b0e                __aeabi_memcpy
-                0x0000000000003b0e                __aeabi_memcpy4
-                0x0000000000003b0e                __aeabi_memcpy8
+                0x0000000000003c02       0x2c /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
+                0x0000000000003c02                __aeabi_memcpy
+                0x0000000000003c02                __aeabi_memcpy4
+                0x0000000000003c02                __aeabi_memcpy8
  .text.__aeabi_memset_lowlevel
-                0x0000000000003b3a       0x2a /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
-                0x0000000000003b3a                __aeabi_lowlevel_memset
+                0x0000000000003c2e       0x2a /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
+                0x0000000000003c2e                __aeabi_lowlevel_memset
  *(.rodata .rodata.*)
  .rodata.LPC_GPIO
-                0x0000000000003b64       0x10 ./Source/driver/gpio.o
+                0x0000000000003c58       0x10 ./Source/driver/gpio.o
  .rodata.I2C_IRQHandler
-                0x0000000000003b74      0x144 ./Source/driver/i2c.o
- .rodata        0x0000000000003cb8       0x20 ./Source/FreeRTOS_Source/tasks.o
+                0x0000000000003c68      0x144 ./Source/driver/i2c.o
+ .rodata        0x0000000000003dac       0x20 ./Source/FreeRTOS_Source/tasks.o
  .rodata.ucExpectedStackBytes.4425
-                0x0000000000003cd8       0x14 ./Source/FreeRTOS_Source/tasks.o
+                0x0000000000003dcc       0x14 ./Source/FreeRTOS_Source/tasks.o
  .rodata.ucExpectedInterruptStackValues
-                0x0000000000003cec       0x10 ./Source/main.o
-                0x0000000000003cec                ucExpectedInterruptStackValues
- .rodata        0x0000000000003cfc       0x14 ./Source/main.o
+                0x0000000000003de0       0x10 ./Source/main.o
+                0x0000000000003de0                ucExpectedInterruptStackValues
+ .rodata        0x0000000000003df0       0x14 ./Source/main.o
  .rodata.PumpsSetSpeed
-                0x0000000000003d10       0x20 ./Source/pumps.o
-                0x0000000000003d30                . = ALIGN (0x4)
+                0x0000000000003e04       0x20 ./Source/pumps.o
+                0x0000000000003e24                . = ALIGN (0x4)
 
-.glue_7         0x0000000000003d30        0x0
+.glue_7         0x0000000000003e24        0x0
  .glue_7        0x0000000000000000        0x0 linker stubs
 
-.glue_7t        0x0000000000003d30        0x0
+.glue_7t        0x0000000000003e24        0x0
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000003d30        0x0
+.vfp11_veneer   0x0000000000003e24        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x0000000000003d30        0x0
+.v4_bx          0x0000000000003e24        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000003d30                __exidx_start = .
+                0x0000000000003e24                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000003d30                __exidx_end = .
-                0x0000000000003d30                _etext = .
+                0x0000000000003e24                __exidx_end = .
+                0x0000000000003e24                _etext = .
 
 .uninit_RESERVED
                 0x0000000010000000        0x0
@@ -1038,7 +1043,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000       0x10 load address 0x0000000000003d30
+.data           0x0000000010000000       0x10 load address 0x0000000000003e24
  FILL mask 0xff
                 0x0000000010000000                _data = .
  *(vtable)
@@ -1057,7 +1062,7 @@ END GROUP
                 0x0000000010000010                . = ALIGN (0x4)
                 0x0000000010000010                _edata = .
 
-.bss            0x0000000010000010     0x1e00 load address 0x0000000000003d40
+.bss            0x0000000010000010     0x1e18 load address 0x0000000000003e38
                 0x0000000010000010                _bss = .
  *(.bss*)
  .bss.I2CMasterState
@@ -1120,9 +1125,9 @@ END GROUP
  .bss.xSerialSemaphore
                 0x0000000010001a94        0x4 ./Source/UartPacket.o
                 0x0000000010001a94                xSerialSemaphore
- .bss.xHigherPriorityTaskWoken.4412
+ .bss.xHigherPriorityTaskWoken.4410
                 0x0000000010001a98        0x4 ./Source/UartPacket.o
- .bss.xHigherPriorityTaskWoken.4528
+ .bss.xHigherPriorityTaskWoken.4527
                 0x0000000010001a9c        0x4 ./Source/flowrate.o
  *(COMMON)
  COMMON         0x0000000010001aa0       0x8c ./Source/driver/i2c.o
@@ -1143,25 +1148,27 @@ END GROUP
                 0x0000000010001b34                InTempLength
                 0x0000000010001b38                InputPayload
                 0x0000000010001c38                OutputBuff
- COMMON         0x0000000010001c7c       0xe4 ./Source/control.o
+ COMMON         0x0000000010001c7c       0xfc ./Source/control.o
                 0x0000000010001c7c                Temperature
-                0x0000000010001c8c                xControlSemaphore
-                0x0000000010001c90                CeilingPumps
- COMMON         0x0000000010001d60       0xa0 ./Source/flowrate.o
-                0x0000000010001d60                rate
-                0x0000000010001da0                Flowrate
-                0x0000000010001dc0                TxBuffer
-                0x0000000010001de0                count
- COMMON         0x0000000010001e00       0x10 ./Source/pumps.o
-                0x0000000010001e00                PumpsSpeed
-                0x0000000010001e10                . = ALIGN (0x4)
-                0x0000000010001e10                _ebss = .
-                0x0000000010001e10                PROVIDE (end, .)
-                0x0000000010001e10                PROVIDE (_pvHeapStart, .)
+                0x0000000010001c9c                xControlSemaphore
+                0x0000000010001ca0                CeilingPumps
+                0x0000000010001d70                SetTemp
+                0x0000000010001d74                SetFlow
+ COMMON         0x0000000010001d78       0xa0 ./Source/flowrate.o
+                0x0000000010001d78                rate
+                0x0000000010001db8                Flowrate
+                0x0000000010001dd8                TxBuffer
+                0x0000000010001df8                count
+ COMMON         0x0000000010001e18       0x10 ./Source/pumps.o
+                0x0000000010001e18                PumpsSpeed
+                0x0000000010001e28                . = ALIGN (0x4)
+                0x0000000010001e28                _ebss = .
+                0x0000000010001e28                PROVIDE (end, .)
+                0x0000000010001e28                PROVIDE (_pvHeapStart, .)
                 0x0000000010002000                PROVIDE (_vStackTop, (__top_RamLoc8 - 0x0))
 OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x720a
+.debug_info     0x0000000000000000     0x725c
  .debug_info    0x0000000000000000       0x70 ./Source/driver/adc.o
  .debug_info    0x0000000000000070       0x70 ./Source/driver/can.o
  .debug_info    0x00000000000000e0       0x70 ./Source/driver/clkconfig.o
@@ -1185,15 +1192,15 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .debug_info    0x00000000000030b0      0xa34 ./Source/FreeRTOS_Source/queue.o
  .debug_info    0x0000000000003ae4      0xfd2 ./Source/FreeRTOS_Source/tasks.o
  .debug_info    0x0000000000004ab6       0x77 ./Source/FreeRTOS_Source/timers.o
- .debug_info    0x0000000000004b2d      0x6c1 ./Source/UartPacket.o
- .debug_info    0x00000000000051ee      0x3ed ./Source/control.o
- .debug_info    0x00000000000055db      0x344 ./Source/cr_startup_lpc11.o
- .debug_info    0x000000000000591f      0xaa3 ./Source/flowrate.o
- .debug_info    0x00000000000063c2      0x38f ./Source/main.o
- .debug_info    0x0000000000006751      0x603 ./Source/pumps.o
- .debug_info    0x0000000000006d54      0x4b6 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_info    0x0000000000004b2d      0x6b8 ./Source/UartPacket.o
+ .debug_info    0x00000000000051e5      0x448 ./Source/control.o
+ .debug_info    0x000000000000562d      0x344 ./Source/cr_startup_lpc11.o
+ .debug_info    0x0000000000005971      0xaa3 ./Source/flowrate.o
+ .debug_info    0x0000000000006414      0x38f ./Source/main.o
+ .debug_info    0x00000000000067a3      0x603 ./Source/pumps.o
+ .debug_info    0x0000000000006da6      0x4b6 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_abbrev   0x0000000000000000     0x1855
+.debug_abbrev   0x0000000000000000     0x184e
  .debug_abbrev  0x0000000000000000       0x2c ./Source/driver/adc.o
  .debug_abbrev  0x000000000000002c       0x2c ./Source/driver/can.o
  .debug_abbrev  0x0000000000000058       0x2c ./Source/driver/clkconfig.o
@@ -1217,15 +1224,15 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .debug_abbrev  0x0000000000000bc7      0x139 ./Source/FreeRTOS_Source/queue.o
  .debug_abbrev  0x0000000000000d00      0x184 ./Source/FreeRTOS_Source/tasks.o
  .debug_abbrev  0x0000000000000e84       0x2c ./Source/FreeRTOS_Source/timers.o
- .debug_abbrev  0x0000000000000eb0      0x189 ./Source/UartPacket.o
- .debug_abbrev  0x0000000000001039      0x12f ./Source/control.o
- .debug_abbrev  0x0000000000001168      0x12c ./Source/cr_startup_lpc11.o
- .debug_abbrev  0x0000000000001294      0x1c5 ./Source/flowrate.o
- .debug_abbrev  0x0000000000001459      0x1a8 ./Source/main.o
- .debug_abbrev  0x0000000000001601      0x168 ./Source/pumps.o
- .debug_abbrev  0x0000000000001769       0xec /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_abbrev  0x0000000000000eb0      0x17c ./Source/UartPacket.o
+ .debug_abbrev  0x000000000000102c      0x135 ./Source/control.o
+ .debug_abbrev  0x0000000000001161      0x12c ./Source/cr_startup_lpc11.o
+ .debug_abbrev  0x000000000000128d      0x1c5 ./Source/flowrate.o
+ .debug_abbrev  0x0000000000001452      0x1a8 ./Source/main.o
+ .debug_abbrev  0x00000000000015fa      0x168 ./Source/pumps.o
+ .debug_abbrev  0x0000000000001762       0xec /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_line     0x0000000000000000     0xa1a3
+.debug_line     0x0000000000000000     0xa1e8
  .debug_line    0x0000000000000000      0x420 ./Source/driver/adc.o
  .debug_line    0x0000000000000420      0x420 ./Source/driver/can.o
  .debug_line    0x0000000000000840      0x426 ./Source/driver/clkconfig.o
@@ -1249,15 +1256,15 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .debug_line    0x0000000000005c3b      0x9a8 ./Source/FreeRTOS_Source/queue.o
  .debug_line    0x00000000000065e3      0xc53 ./Source/FreeRTOS_Source/tasks.o
  .debug_line    0x0000000000007236      0x531 ./Source/FreeRTOS_Source/timers.o
- .debug_line    0x0000000000007767      0x790 ./Source/UartPacket.o
- .debug_line    0x0000000000007ef7      0x6c9 ./Source/control.o
- .debug_line    0x00000000000085c0      0x41d ./Source/cr_startup_lpc11.o
- .debug_line    0x00000000000089dd      0x794 ./Source/flowrate.o
- .debug_line    0x0000000000009171      0x744 ./Source/main.o
- .debug_line    0x00000000000098b5      0x4df ./Source/pumps.o
- .debug_line    0x0000000000009d94      0x40f /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_line    0x0000000000007767      0x787 ./Source/UartPacket.o
+ .debug_line    0x0000000000007eee      0x713 ./Source/control.o
+ .debug_line    0x0000000000008601      0x41d ./Source/cr_startup_lpc11.o
+ .debug_line    0x0000000000008a1e      0x798 ./Source/flowrate.o
+ .debug_line    0x00000000000091b6      0x744 ./Source/main.o
+ .debug_line    0x00000000000098fa      0x4df ./Source/pumps.o
+ .debug_line    0x0000000000009dd9      0x40f /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_macinfo  0x0000000000000000    0xad965
+.debug_macinfo  0x0000000000000000    0xad969
  .debug_macinfo
                 0x0000000000000000     0x541c ./Source/driver/adc.o
  .debug_macinfo
@@ -1305,21 +1312,21 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .debug_macinfo
                 0x0000000000078a9b     0x698d ./Source/FreeRTOS_Source/timers.o
  .debug_macinfo
-                0x000000000007f428     0x8377 ./Source/UartPacket.o
+                0x000000000007f428     0x8378 ./Source/UartPacket.o
  .debug_macinfo
-                0x000000000008779f     0x7125 ./Source/control.o
+                0x00000000000877a0     0x7126 ./Source/control.o
  .debug_macinfo
-                0x000000000008e8c4     0x3ca7 ./Source/cr_startup_lpc11.o
+                0x000000000008e8c6     0x3ca7 ./Source/cr_startup_lpc11.o
  .debug_macinfo
-                0x000000000009256b     0x8a07 ./Source/flowrate.o
+                0x000000000009256d     0x8a08 ./Source/flowrate.o
  .debug_macinfo
-                0x000000000009af72     0x7b09 ./Source/main.o
+                0x000000000009af75     0x7b0a ./Source/main.o
  .debug_macinfo
-                0x00000000000a2a7b     0x583c ./Source/pumps.o
+                0x00000000000a2a7f     0x583c ./Source/pumps.o
  .debug_macinfo
-                0x00000000000a82b7     0x56ae /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+                0x00000000000a82bb     0x56ae /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_str      0x0000000000000000     0x231d
+.debug_str      0x0000000000000000     0x2339
  .debug_str     0x0000000000000000      0x103 ./Source/driver/adc.o
                                         0x125 (size before relaxing)
  .debug_str     0x0000000000000103       0x17 ./Source/driver/can.o
@@ -1368,17 +1375,17 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
                                         0x143 (size before relaxing)
  .debug_str     0x0000000000001d06      0x12b ./Source/UartPacket.o
                                         0x31c (size before relaxing)
- .debug_str     0x0000000000001e31      0x123 ./Source/control.o
-                                        0x29e (size before relaxing)
- .debug_str     0x0000000000001f54      0x18e ./Source/cr_startup_lpc11.o
+ .debug_str     0x0000000000001e31      0x13f ./Source/control.o
+                                        0x2ba (size before relaxing)
+ .debug_str     0x0000000000001f70      0x18e ./Source/cr_startup_lpc11.o
                                         0x2d0 (size before relaxing)
- .debug_str     0x00000000000020e2       0x91 ./Source/flowrate.o
+ .debug_str     0x00000000000020fe       0x91 ./Source/flowrate.o
                                         0x6e1 (size before relaxing)
- .debug_str     0x0000000000002173       0xd2 ./Source/main.o
+ .debug_str     0x000000000000218f       0xd2 ./Source/main.o
                                         0x2a5 (size before relaxing)
- .debug_str     0x0000000000002245       0x4b ./Source/pumps.o
+ .debug_str     0x0000000000002261       0x4b ./Source/pumps.o
                                         0x36d (size before relaxing)
- .debug_str     0x0000000000002290       0x8d /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_str     0x00000000000022ac       0x8d /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
                                         0x3ad (size before relaxing)
 
 .comment        0x0000000000000000       0xe0
@@ -1556,7 +1563,7 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000ad4       0x21 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
 
-.debug_loc      0x0000000000000000     0x20d9
+.debug_loc      0x0000000000000000     0x2111
  .debug_loc     0x0000000000000000      0x1ec ./Source/driver/gpio.o
  .debug_loc     0x00000000000001ec      0x138 ./Source/driver/i2c.o
  .debug_loc     0x0000000000000324      0x10c ./Source/driver/uart.o
@@ -1567,14 +1574,14 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .debug_loc     0x0000000000000910      0x578 ./Source/FreeRTOS_Source/queue.o
  .debug_loc     0x0000000000000e88      0x85a ./Source/FreeRTOS_Source/tasks.o
  .debug_loc     0x00000000000016e2      0x118 ./Source/UartPacket.o
- .debug_loc     0x00000000000017fa      0x188 ./Source/control.o
- .debug_loc     0x0000000000001982      0x3a7 ./Source/cr_startup_lpc11.o
- .debug_loc     0x0000000000001d29      0x118 ./Source/flowrate.o
- .debug_loc     0x0000000000001e41      0x164 ./Source/main.o
- .debug_loc     0x0000000000001fa5       0x9c ./Source/pumps.o
- .debug_loc     0x0000000000002041       0x98 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_loc     0x00000000000017fa      0x1c0 ./Source/control.o
+ .debug_loc     0x00000000000019ba      0x3a7 ./Source/cr_startup_lpc11.o
+ .debug_loc     0x0000000000001d61      0x118 ./Source/flowrate.o
+ .debug_loc     0x0000000000001e79      0x164 ./Source/main.o
+ .debug_loc     0x0000000000001fdd       0x9c ./Source/pumps.o
+ .debug_loc     0x0000000000002079       0x98 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_aranges  0x0000000000000000      0x630
+.debug_aranges  0x0000000000000000      0x638
  .debug_aranges
                 0x0000000000000000       0x60 ./Source/driver/gpio.o
  .debug_aranges
@@ -1596,19 +1603,19 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .debug_aranges
                 0x0000000000000450       0x40 ./Source/UartPacket.o
  .debug_aranges
-                0x0000000000000490       0x50 ./Source/control.o
+                0x0000000000000490       0x58 ./Source/control.o
  .debug_aranges
-                0x00000000000004e0       0x68 ./Source/cr_startup_lpc11.o
+                0x00000000000004e8       0x68 ./Source/cr_startup_lpc11.o
  .debug_aranges
-                0x0000000000000548       0x40 ./Source/flowrate.o
+                0x0000000000000550       0x40 ./Source/flowrate.o
  .debug_aranges
-                0x0000000000000588       0x50 ./Source/main.o
+                0x0000000000000590       0x50 ./Source/main.o
  .debug_aranges
-                0x00000000000005d8       0x30 ./Source/pumps.o
+                0x00000000000005e0       0x30 ./Source/pumps.o
  .debug_aranges
-                0x0000000000000608       0x28 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+                0x0000000000000610       0x28 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_ranges   0x0000000000000000      0x530
+.debug_ranges   0x0000000000000000      0x538
  .debug_ranges  0x0000000000000000       0x50 ./Source/driver/gpio.o
  .debug_ranges  0x0000000000000050       0x38 ./Source/driver/i2c.o
  .debug_ranges  0x0000000000000088       0x30 ./Source/driver/uart.o
@@ -1619,14 +1626,14 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .debug_ranges  0x00000000000001b0       0xd0 ./Source/FreeRTOS_Source/queue.o
  .debug_ranges  0x0000000000000280      0x140 ./Source/FreeRTOS_Source/tasks.o
  .debug_ranges  0x00000000000003c0       0x30 ./Source/UartPacket.o
- .debug_ranges  0x00000000000003f0       0x40 ./Source/control.o
- .debug_ranges  0x0000000000000430       0x58 ./Source/cr_startup_lpc11.o
- .debug_ranges  0x0000000000000488       0x30 ./Source/flowrate.o
- .debug_ranges  0x00000000000004b8       0x40 ./Source/main.o
- .debug_ranges  0x00000000000004f8       0x20 ./Source/pumps.o
- .debug_ranges  0x0000000000000518       0x18 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_ranges  0x00000000000003f0       0x48 ./Source/control.o
+ .debug_ranges  0x0000000000000438       0x58 ./Source/cr_startup_lpc11.o
+ .debug_ranges  0x0000000000000490       0x30 ./Source/flowrate.o
+ .debug_ranges  0x00000000000004c0       0x40 ./Source/main.o
+ .debug_ranges  0x0000000000000500       0x20 ./Source/pumps.o
+ .debug_ranges  0x0000000000000520       0x18 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_frame    0x0000000000000000     0x12f4
+.debug_frame    0x0000000000000000     0x1314
  .debug_frame   0x0000000000000000      0x12c ./Source/driver/gpio.o
  .debug_frame   0x000000000000012c       0xc8 ./Source/driver/i2c.o
  .debug_frame   0x00000000000001f4       0xac ./Source/driver/uart.o
@@ -1637,9 +1644,9 @@ OUTPUT(RTOSCeilingSupplyControl.axf elf32-littlearm)
  .debug_frame   0x00000000000005f4      0x330 ./Source/FreeRTOS_Source/queue.o
  .debug_frame   0x0000000000000924      0x4e4 ./Source/FreeRTOS_Source/tasks.o
  .debug_frame   0x0000000000000e08       0xb0 ./Source/UartPacket.o
- .debug_frame   0x0000000000000eb8       0xf4 ./Source/control.o
- .debug_frame   0x0000000000000fac      0x104 ./Source/cr_startup_lpc11.o
- .debug_frame   0x00000000000010b0       0xb0 ./Source/flowrate.o
- .debug_frame   0x0000000000001160       0xe4 ./Source/main.o
- .debug_frame   0x0000000000001244       0x6c ./Source/pumps.o
- .debug_frame   0x00000000000012b0       0x44 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_frame   0x0000000000000eb8      0x114 ./Source/control.o
+ .debug_frame   0x0000000000000fcc      0x104 ./Source/cr_startup_lpc11.o
+ .debug_frame   0x00000000000010d0       0xb0 ./Source/flowrate.o
+ .debug_frame   0x0000000000001180       0xe4 ./Source/main.o
+ .debug_frame   0x0000000000001264       0x6c ./Source/pumps.o
+ .debug_frame   0x00000000000012d0       0x44 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)

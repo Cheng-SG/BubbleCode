@@ -27,13 +27,19 @@ void prvDataSendTask(void *pvParameters)
 	pvParameters = pvParameters;
 
 	//Initialize UART
-	PacketInit(115200);
+	PacketInit(230400);
 	xNextWakeTime = xTaskGetTickCount();
 	for (;;)
 	{
 		vTaskDelayUntil(&xNextWakeTime,
 				1000 / DATA_SEND_FREQUENCY / portTICK_RATE_MS);
 		//taskENTER_CRITICAL();
+		//destination:0
+		TxBuffer[0] = 0;
+		TxBuffer[1] = 0;
+		//type:0x0100-Flowrates
+		TxBuffer[2] = 0x00;
+		TxBuffer[3] = 0x00;
 		for (n = 0; n < 16; n++)
 		{
 			if (temperature[n][1] == 0)
@@ -42,11 +48,11 @@ void prvDataSendTask(void *pvParameters)
 				tmp = temperature[n][0] / temperature[n][1];
 			temperature[n][0] = 0;
 			temperature[n][1] = 0;
-			TxBuffer[(n * 2)] = tmp;
-			TxBuffer[(n * 2 + 1)] = (tmp >> 8);
+			TxBuffer[(n * 2 + 4)] = tmp;
+			TxBuffer[(n * 2 + 5)] = (tmp >> 8);
 		}
 		//taskEXIT_CRITICAL();
-		PacketSend((uint8_t*) TxBuffer, 32);
+		PacketSend((uint8_t*) TxBuffer, 36);
 		GPIOToggle(LED_PORT, LED_GREEN_BIT);
 	}
 }

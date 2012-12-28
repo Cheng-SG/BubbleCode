@@ -659,7 +659,7 @@ END GROUP
                 0x0000000000006000                __top_MFlash24 = 0x6000
                 0x0000000010002000                __top_RamLoc8 = 0x10002000
 
-.text           0x0000000000000000     0x203c
+.text           0x0000000000000000     0x2054
  FILL mask 0xff
  *(.isr_vector)
  .isr_vector    0x0000000000000000       0xc0 ./Source/cr_startup_lpc11.o
@@ -667,7 +667,7 @@ END GROUP
                 0x00000000000000c0                . = ALIGN (0x4)
                 0x00000000000000c0                __section_table_start = .
                 0x00000000000000c0                __data_section_table = .
-                0x00000000000000c0        0x4 LONG 0x203c LOADADDR (.data)
+                0x00000000000000c0        0x4 LONG 0x2054 LOADADDR (.data)
                 0x00000000000000c4        0x4 LONG 0x10000000 ADDR (.data)
                 0x00000000000000c8        0x4 LONG 0x10 SIZEOF (.data)
                 0x00000000000000cc                __data_section_table_end = .
@@ -824,104 +824,104 @@ END GROUP
  .text.NVIC_ClearPendingIRQ
                 0x00000000000013d0       0x34 ./Source/Sensors.o
  .text.prvDataSendTask
-                0x0000000000001404      0x104 ./Source/Sensors.o
+                0x0000000000001404      0x11c ./Source/Sensors.o
                 0x0000000000001404                prvDataSendTask
  .text.prvSensorsScanTask
-                0x0000000000001508      0x1ec ./Source/Sensors.o
-                0x0000000000001508                prvSensorsScanTask
+                0x0000000000001520      0x1ec ./Source/Sensors.o
+                0x0000000000001520                prvSensorsScanTask
  .text.I2CArbitrationRecovery
-                0x00000000000016f4       0xac ./Source/Sensors.o
-                0x00000000000016f4                I2CArbitrationRecovery
+                0x000000000000170c       0xac ./Source/Sensors.o
+                0x000000000000170c                I2CArbitrationRecovery
  .text.PacketInit
-                0x00000000000017a0       0x48 ./Source/UartPacket.o
-                0x00000000000017a0                PacketInit
+                0x00000000000017b8       0x48 ./Source/UartPacket.o
+                0x00000000000017b8                PacketInit
  .text.PacketSend
-                0x00000000000017e8      0x118 ./Source/UartPacket.o
-                0x00000000000017e8                PacketSend
+                0x0000000000001800      0x118 ./Source/UartPacket.o
+                0x0000000000001800                PacketSend
  .text.UART_IRQHandler
-                0x0000000000001900      0x258 ./Source/UartPacket.o
-                0x0000000000001900                UART_IRQHandler
+                0x0000000000001918      0x258 ./Source/UartPacket.o
+                0x0000000000001918                UART_IRQHandler
  .text.pop_registers_from_fault_stack
-                0x0000000000001b58       0x28 ./Source/cr_startup_lpc11.o
-                0x0000000000001b58                pop_registers_from_fault_stack
- .text.main     0x0000000000001b80       0x68 ./Source/main.o
-                0x0000000000001b80                main
+                0x0000000000001b70       0x28 ./Source/cr_startup_lpc11.o
+                0x0000000000001b70                pop_registers_from_fault_stack
+ .text.main     0x0000000000001b98       0x68 ./Source/main.o
+                0x0000000000001b98                main
  .text.prvSetupHardware
-                0x0000000000001be8       0x68 ./Source/main.o
+                0x0000000000001c00       0x68 ./Source/main.o
  .text.vApplicationMallocFailedHook
-                0x0000000000001c50        0x8 ./Source/main.o
-                0x0000000000001c50                vApplicationMallocFailedHook
+                0x0000000000001c68        0x8 ./Source/main.o
+                0x0000000000001c68                vApplicationMallocFailedHook
  .text.vApplicationStackOverflowHook
-                0x0000000000001c58       0x10 ./Source/main.o
-                0x0000000000001c58                vApplicationStackOverflowHook
+                0x0000000000001c70       0x10 ./Source/main.o
+                0x0000000000001c70                vApplicationStackOverflowHook
  .text.vApplicationTickHook
-                0x0000000000001c68       0x28 ./Source/main.o
-                0x0000000000001c68                vApplicationTickHook
+                0x0000000000001c80       0x28 ./Source/main.o
+                0x0000000000001c80                vApplicationTickHook
  .text.SystemInit
-                0x0000000000001c90       0x90 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
-                0x0000000000001c90                SystemInit
- .text.memcpy   0x0000000000001d20        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcpy.o)
-                0x0000000000001d20                memcpy
- .text.memset   0x0000000000001d28        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memset.o)
-                0x0000000000001d28                memset
+                0x0000000000001ca8       0x90 /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+                0x0000000000001ca8                SystemInit
+ .text.memcpy   0x0000000000001d38        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcpy.o)
+                0x0000000000001d38                memcpy
+ .text.memset   0x0000000000001d40        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memset.o)
+                0x0000000000001d40                memset
  .text.__weak_main
-                0x0000000000001d30        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__weak__main.o)
-                0x0000000000001d30                __main
-                0x0000000000001d30                __weak_main
- .text.memcmp   0x0000000000001d38       0x38 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcmp.o)
-                0x0000000000001d38                memcmp
- .text.strncpy  0x0000000000001d70       0x54 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(strncpy.o)
-                0x0000000000001d70                strncpy
+                0x0000000000001d48        0x8 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(__weak__main.o)
+                0x0000000000001d48                __main
+                0x0000000000001d48                __weak_main
+ .text.memcmp   0x0000000000001d50       0x38 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(memcmp.o)
+                0x0000000000001d50                memcmp
+ .text.strncpy  0x0000000000001d88       0x54 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m/libcr_c.a(strncpy.o)
+                0x0000000000001d88                strncpy
  .text.__aeabi_division_uidivmod
-                0x0000000000001dc4       0x72 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x0000000000001dc4                __aeabi_uidiv
-                0x0000000000001dc4                __aeabi_uidivmod
+                0x0000000000001ddc       0x72 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x0000000000001ddc                __aeabi_uidiv
+                0x0000000000001ddc                __aeabi_uidivmod
  .text.__aeabi_division_idiv0
-                0x0000000000001e36        0x2 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
-                0x0000000000001e36                __aeabi_idiv0
+                0x0000000000001e4e        0x2 /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(division.o)
+                0x0000000000001e4e                __aeabi_idiv0
  .text.__aeabi_memcpy
-                0x0000000000001e38       0x2c /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
-                0x0000000000001e38                __aeabi_memcpy
-                0x0000000000001e38                __aeabi_memcpy4
-                0x0000000000001e38                __aeabi_memcpy8
+                0x0000000000001e50       0x2c /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
+                0x0000000000001e50                __aeabi_memcpy
+                0x0000000000001e50                __aeabi_memcpy4
+                0x0000000000001e50                __aeabi_memcpy8
  .text.__aeabi_memset_lowlevel
-                0x0000000000001e64       0x2a /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
-                0x0000000000001e64                __aeabi_lowlevel_memset
+                0x0000000000001e7c       0x2a /Applications/lpcxpresso_5.0.12_1041/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m/libcr_eabihelpers.a(memcpy.o)
+                0x0000000000001e7c                __aeabi_lowlevel_memset
  *(.rodata .rodata.*)
- *fill*         0x0000000000001e8e        0x2 00
+ *fill*         0x0000000000001ea6        0x2 00
  .rodata.LPC_GPIO
-                0x0000000000001e90       0x10 ./Source/driver/gpio.o
+                0x0000000000001ea8       0x10 ./Source/driver/gpio.o
  .rodata.I2C_IRQHandler
-                0x0000000000001ea0      0x144 ./Source/driver/i2c.o
- .rodata        0x0000000000001fe4       0x20 ./Source/FreeRTOS_Source/tasks.o
+                0x0000000000001eb8      0x144 ./Source/driver/i2c.o
+ .rodata        0x0000000000001ffc       0x20 ./Source/FreeRTOS_Source/tasks.o
  .rodata.ucExpectedStackBytes.4425
-                0x0000000000002004       0x14 ./Source/FreeRTOS_Source/tasks.o
+                0x000000000000201c       0x14 ./Source/FreeRTOS_Source/tasks.o
  .rodata.ucExpectedInterruptStackValues
-                0x0000000000002018       0x10 ./Source/main.o
-                0x0000000000002018                ucExpectedInterruptStackValues
- .rodata        0x0000000000002028       0x14 ./Source/main.o
-                0x000000000000203c                . = ALIGN (0x4)
+                0x0000000000002030       0x10 ./Source/main.o
+                0x0000000000002030                ucExpectedInterruptStackValues
+ .rodata        0x0000000000002040       0x14 ./Source/main.o
+                0x0000000000002054                . = ALIGN (0x4)
 
-.glue_7         0x000000000000203c        0x0
+.glue_7         0x0000000000002054        0x0
  .glue_7        0x0000000000000000        0x0 linker stubs
 
-.glue_7t        0x000000000000203c        0x0
+.glue_7t        0x0000000000002054        0x0
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x000000000000203c        0x0
+.vfp11_veneer   0x0000000000002054        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x000000000000203c        0x0
+.v4_bx          0x0000000000002054        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x000000000000203c                __exidx_start = .
+                0x0000000000002054                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x000000000000203c                __exidx_end = .
-                0x000000000000203c                _etext = .
+                0x0000000000002054                __exidx_end = .
+                0x0000000000002054                _etext = .
 
 .uninit_RESERVED
                 0x0000000010000000        0x0
@@ -929,7 +929,7 @@ END GROUP
                 0x0000000010000000                . = ALIGN (0x4)
                 0x0000000010000000                _end_uninit_RESERVED = .
 
-.data           0x0000000010000000       0x10 load address 0x000000000000203c
+.data           0x0000000010000000       0x10 load address 0x0000000000002054
  FILL mask 0xff
                 0x0000000010000000                _data = .
  *(vtable)
@@ -948,7 +948,7 @@ END GROUP
                 0x0000000010000010                . = ALIGN (0x4)
                 0x0000000010000010                _edata = .
 
-.bss            0x0000000010000010     0x1d00 load address 0x0000000000002050
+.bss            0x0000000010000010     0x1d00 load address 0x0000000000002068
                 0x0000000010000010                _bss = .
  *(.bss*)
  .bss.I2CMasterState
@@ -1097,35 +1097,35 @@ OUTPUT(RTOSSensors.axf elf32-littlearm)
  .debug_abbrev  0x00000000000013ec      0x19b ./Source/main.o
  .debug_abbrev  0x0000000000001587       0xec /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_line     0x0000000000000000     0x9215
- .debug_line    0x0000000000000000      0x414 ./Source/driver/adc.o
- .debug_line    0x0000000000000414      0x414 ./Source/driver/can.o
- .debug_line    0x0000000000000828      0x41a ./Source/driver/clkconfig.o
- .debug_line    0x0000000000000c42      0x41d ./Source/driver/crp.o
- .debug_line    0x000000000000105f      0x41d ./Source/driver/debug_printf.o
- .debug_line    0x000000000000147c      0x524 ./Source/driver/gpio.o
- .debug_line    0x00000000000019a0      0x506 ./Source/driver/i2c.o
- .debug_line    0x0000000000001ea6      0x419 ./Source/driver/i2cslave.o
- .debug_line    0x00000000000022bf      0x418 ./Source/driver/lpc_swu.o
- .debug_line    0x00000000000026d7      0x416 ./Source/driver/rs485.o
- .debug_line    0x0000000000002aed      0x41b ./Source/driver/small_gpio.o
- .debug_line    0x0000000000002f08      0x414 ./Source/driver/ssp.o
- .debug_line    0x000000000000331c      0x425 ./Source/driver/timer16.o
- .debug_line    0x0000000000003741      0x523 ./Source/driver/timer32.o
- .debug_line    0x0000000000003c64      0x4c9 ./Source/driver/uart.o
- .debug_line    0x000000000000412d      0x41d ./Source/driver/wdt.o
- .debug_line    0x000000000000454a      0x527 ./Source/FreeRTOS_Source/portable/MemMang/heap_1.o
- .debug_line    0x0000000000004a71      0x5e1 ./Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.o
- .debug_line    0x0000000000005052      0x640 ./Source/FreeRTOS_Source/croutine.o
- .debug_line    0x0000000000005692      0x587 ./Source/FreeRTOS_Source/list.o
- .debug_line    0x0000000000005c19      0x984 ./Source/FreeRTOS_Source/queue.o
- .debug_line    0x000000000000659d      0xc2f ./Source/FreeRTOS_Source/tasks.o
- .debug_line    0x00000000000071cc      0x50d ./Source/FreeRTOS_Source/timers.o
- .debug_line    0x00000000000076d9      0x722 ./Source/Sensors.o
- .debug_line    0x0000000000007dfb      0x521 ./Source/UartPacket.o
- .debug_line    0x000000000000831c      0x41d ./Source/cr_startup_lpc11.o
- .debug_line    0x0000000000008739      0x6cd ./Source/main.o
- .debug_line    0x0000000000008e06      0x40f /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+.debug_line     0x0000000000000000     0x91f8
+ .debug_line    0x0000000000000000      0x413 ./Source/driver/adc.o
+ .debug_line    0x0000000000000413      0x413 ./Source/driver/can.o
+ .debug_line    0x0000000000000826      0x419 ./Source/driver/clkconfig.o
+ .debug_line    0x0000000000000c3f      0x41c ./Source/driver/crp.o
+ .debug_line    0x000000000000105b      0x41c ./Source/driver/debug_printf.o
+ .debug_line    0x0000000000001477      0x524 ./Source/driver/gpio.o
+ .debug_line    0x000000000000199b      0x505 ./Source/driver/i2c.o
+ .debug_line    0x0000000000001ea0      0x418 ./Source/driver/i2cslave.o
+ .debug_line    0x00000000000022b8      0x417 ./Source/driver/lpc_swu.o
+ .debug_line    0x00000000000026cf      0x415 ./Source/driver/rs485.o
+ .debug_line    0x0000000000002ae4      0x41a ./Source/driver/small_gpio.o
+ .debug_line    0x0000000000002efe      0x413 ./Source/driver/ssp.o
+ .debug_line    0x0000000000003311      0x424 ./Source/driver/timer16.o
+ .debug_line    0x0000000000003735      0x522 ./Source/driver/timer32.o
+ .debug_line    0x0000000000003c57      0x4c8 ./Source/driver/uart.o
+ .debug_line    0x000000000000411f      0x41c ./Source/driver/wdt.o
+ .debug_line    0x000000000000453b      0x527 ./Source/FreeRTOS_Source/portable/MemMang/heap_1.o
+ .debug_line    0x0000000000004a62      0x5de ./Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.o
+ .debug_line    0x0000000000005040      0x63d ./Source/FreeRTOS_Source/croutine.o
+ .debug_line    0x000000000000567d      0x584 ./Source/FreeRTOS_Source/list.o
+ .debug_line    0x0000000000005c01      0x981 ./Source/FreeRTOS_Source/queue.o
+ .debug_line    0x0000000000006582      0xc2c ./Source/FreeRTOS_Source/tasks.o
+ .debug_line    0x00000000000071ae      0x50a ./Source/FreeRTOS_Source/timers.o
+ .debug_line    0x00000000000076b8      0x726 ./Source/Sensors.o
+ .debug_line    0x0000000000007dde      0x521 ./Source/UartPacket.o
+ .debug_line    0x00000000000082ff      0x41d ./Source/cr_startup_lpc11.o
+ .debug_line    0x000000000000871c      0x6cd ./Source/main.o
+ .debug_line    0x0000000000008de9      0x40f /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
 .debug_macinfo  0x0000000000000000    0x9cdda
  .debug_macinfo
@@ -1185,62 +1185,62 @@ OUTPUT(RTOSSensors.axf elf32-littlearm)
  .debug_macinfo
                 0x000000000009772c     0x56ae /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
 
-.debug_str      0x0000000000000000     0x2279
- .debug_str     0x0000000000000000       0xf7 ./Source/driver/adc.o
-                                        0x119 (size before relaxing)
- .debug_str     0x00000000000000f7       0x17 ./Source/driver/can.o
-                                        0x119 (size before relaxing)
- .debug_str     0x000000000000010e       0x1d ./Source/driver/clkconfig.o
-                                        0x11f (size before relaxing)
- .debug_str     0x000000000000012b       0x29 ./Source/driver/crp.o
-                                        0x12b (size before relaxing)
- .debug_str     0x0000000000000154       0x20 ./Source/driver/debug_printf.o
-                                        0x122 (size before relaxing)
- .debug_str     0x0000000000000174      0x36f ./Source/driver/gpio.o
-                                        0x43a (size before relaxing)
- .debug_str     0x00000000000004e3      0x4dc ./Source/driver/i2c.o
-                                        0x836 (size before relaxing)
- .debug_str     0x00000000000009bf       0x1c ./Source/driver/i2cslave.o
+.debug_str      0x0000000000000000     0x2239
+ .debug_str     0x0000000000000000       0xf6 ./Source/driver/adc.o
+                                        0x118 (size before relaxing)
+ .debug_str     0x00000000000000f6       0x17 ./Source/driver/can.o
+                                        0x118 (size before relaxing)
+ .debug_str     0x000000000000010d       0x1d ./Source/driver/clkconfig.o
                                         0x11e (size before relaxing)
- .debug_str     0x00000000000009db       0x1b ./Source/driver/lpc_swu.o
+ .debug_str     0x000000000000012a       0x29 ./Source/driver/crp.o
+                                        0x12a (size before relaxing)
+ .debug_str     0x0000000000000153       0x20 ./Source/driver/debug_printf.o
+                                        0x121 (size before relaxing)
+ .debug_str     0x0000000000000173      0x330 ./Source/driver/gpio.o
+                                        0x43a (size before relaxing)
+ .debug_str     0x00000000000004a3      0x4dc ./Source/driver/i2c.o
+                                        0x835 (size before relaxing)
+ .debug_str     0x000000000000097f       0x1c ./Source/driver/i2cslave.o
                                         0x11d (size before relaxing)
- .debug_str     0x00000000000009f6       0x19 ./Source/driver/rs485.o
-                                        0x11b (size before relaxing)
- .debug_str     0x0000000000000a0f       0x1e ./Source/driver/small_gpio.o
-                                        0x120 (size before relaxing)
- .debug_str     0x0000000000000a2d       0x17 ./Source/driver/ssp.o
-                                        0x119 (size before relaxing)
- .debug_str     0x0000000000000a44       0x1b ./Source/driver/timer16.o
-                                        0x11d (size before relaxing)
- .debug_str     0x0000000000000a5f      0x10d ./Source/driver/timer32.o
-                                        0x5ea (size before relaxing)
- .debug_str     0x0000000000000b6c       0xbd ./Source/driver/uart.o
-                                        0x7c1 (size before relaxing)
- .debug_str     0x0000000000000c29       0x17 ./Source/driver/wdt.o
-                                        0x119 (size before relaxing)
- .debug_str     0x0000000000000c40       0xdc ./Source/FreeRTOS_Source/portable/MemMang/heap_1.o
-                                        0x1f0 (size before relaxing)
- .debug_str     0x0000000000000d1c      0x156 ./Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.o
-                                        0x283 (size before relaxing)
- .debug_str     0x0000000000000e72      0x348 ./Source/FreeRTOS_Source/croutine.o
-                                        0x477 (size before relaxing)
- .debug_str     0x00000000000011ba       0xb5 ./Source/FreeRTOS_Source/list.o
-                                        0x267 (size before relaxing)
- .debug_str     0x000000000000126f      0x474 ./Source/FreeRTOS_Source/queue.o
-                                        0x664 (size before relaxing)
- .debug_str     0x00000000000016e3      0x715 ./Source/FreeRTOS_Source/tasks.o
-                                        0x9d5 (size before relaxing)
- .debug_str     0x0000000000001df8       0x23 ./Source/FreeRTOS_Source/timers.o
-                                        0x137 (size before relaxing)
- .debug_str     0x0000000000001e1b       0x8f ./Source/Sensors.o
+ .debug_str     0x000000000000099b       0x1b ./Source/driver/lpc_swu.o
+                                        0x11c (size before relaxing)
+ .debug_str     0x00000000000009b6       0x19 ./Source/driver/rs485.o
+                                        0x11a (size before relaxing)
+ .debug_str     0x00000000000009cf       0x1e ./Source/driver/small_gpio.o
+                                        0x11f (size before relaxing)
+ .debug_str     0x00000000000009ed       0x17 ./Source/driver/ssp.o
+                                        0x118 (size before relaxing)
+ .debug_str     0x0000000000000a04       0x1b ./Source/driver/timer16.o
+                                        0x11c (size before relaxing)
+ .debug_str     0x0000000000000a1f      0x10d ./Source/driver/timer32.o
+                                        0x5e9 (size before relaxing)
+ .debug_str     0x0000000000000b2c       0xbd ./Source/driver/uart.o
+                                        0x7c0 (size before relaxing)
+ .debug_str     0x0000000000000be9       0x17 ./Source/driver/wdt.o
+                                        0x118 (size before relaxing)
+ .debug_str     0x0000000000000c00       0xdc ./Source/FreeRTOS_Source/portable/MemMang/heap_1.o
+                                        0x1ef (size before relaxing)
+ .debug_str     0x0000000000000cdc      0x156 ./Source/FreeRTOS_Source/portable/GCC/ARM_CM0/port.o
+                                        0x282 (size before relaxing)
+ .debug_str     0x0000000000000e32      0x348 ./Source/FreeRTOS_Source/croutine.o
+                                        0x476 (size before relaxing)
+ .debug_str     0x000000000000117a       0xb5 ./Source/FreeRTOS_Source/list.o
+                                        0x266 (size before relaxing)
+ .debug_str     0x000000000000122f      0x474 ./Source/FreeRTOS_Source/queue.o
+                                        0x663 (size before relaxing)
+ .debug_str     0x00000000000016a3      0x715 ./Source/FreeRTOS_Source/tasks.o
+                                        0x9d4 (size before relaxing)
+ .debug_str     0x0000000000001db8       0x23 ./Source/FreeRTOS_Source/timers.o
+                                        0x136 (size before relaxing)
+ .debug_str     0x0000000000001ddb       0x8f ./Source/Sensors.o
                                         0x615 (size before relaxing)
- .debug_str     0x0000000000001eaa       0xe2 ./Source/UartPacket.o
+ .debug_str     0x0000000000001e6a       0xe2 ./Source/UartPacket.o
                                         0x247 (size before relaxing)
- .debug_str     0x0000000000001f8c      0x18e ./Source/cr_startup_lpc11.o
-                                        0x2c4 (size before relaxing)
- .debug_str     0x000000000000211a       0xd2 ./Source/main.o
+ .debug_str     0x0000000000001f4c      0x18e ./Source/cr_startup_lpc11.o
+                                        0x2c3 (size before relaxing)
+ .debug_str     0x00000000000020da       0xd2 ./Source/main.o
                                         0x292 (size before relaxing)
- .debug_str     0x00000000000021ec       0x8d /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
+ .debug_str     0x00000000000021ac       0x8d /Users/vivid/Dropbox/My files/code/BubbleArm/CMSISv2p00_LPC11xx/Debug/libCMSISv2p00_LPC11xx.a(system_LPC11xx.o)
                                         0x3ad (size before relaxing)
 
 .comment        0x0000000000000000       0xe0
