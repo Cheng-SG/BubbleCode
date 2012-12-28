@@ -63,6 +63,7 @@ implementation
         {
             call Ack.requestAck(&pkt);
             if( call AMSend.send(BASESTATION_ID,&pkt,18) != SUCCESS)
+//            if( call AMSend.send(AM_BROADCAST_ADDR,&pkt,18) != SUCCESS)
             {
                 RetryCount++;
                 post SendTask();
@@ -71,6 +72,7 @@ implementation
         else
         {
             RetryCount = 0;
+            TxState = 0;
             call Leds.led0Toggle();
         }
     }

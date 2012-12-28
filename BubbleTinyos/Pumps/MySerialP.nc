@@ -35,8 +35,8 @@ implementation
             {
                 utxe : 1,
                 urxe : 1,
-                ubr : UBR_1MHZ_115200,
-                umctl : UMCTL_1MHZ_115200,
+                ubr : UBR_1MHZ_230400,
+                umctl : UMCTL_1MHZ_230400,
                 ssel : 0x02,
                 pena : 0,
                 pev : 0,

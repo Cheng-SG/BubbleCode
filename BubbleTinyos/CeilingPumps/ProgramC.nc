@@ -16,7 +16,7 @@ module ProgramC
     uses interface AMSend;
     uses interface PacketAcknowledgements as Ack;
     uses interface Receive;
-//    uses interface Receive as Snoop;
+    uses interface Receive as Snoop;
 }
 implementation
 {
@@ -61,123 +61,76 @@ implementation
         WDTCTL = 0x5A09;
     }
 
-
-    event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len)
-    {
-        uint8_t  *p;
-        uint8_t  i;
-        uint16_t type;
-        if(TOS_NODE_ID == BASESTATION_ID)
-            return msg;
-        else 
-        {
-            if(call AMPacket.isForMe(msg)== TRUE && len == 18 )
-            {
-                p = (uint8_t*)payload;
-                type = *p;
-                type += (((uint16_t)(*(p+1)))<<8);
-                if(type == 0x0101)
-                {
-                    for(i=0;i<16;i++)
-                    {
-                        buf[i]=*(p+i+2);
-                    }
-                    if(call MySerial.send(buf,16) == SUCCESS)
-                        call Leds.led1Toggle();
-                    else
-                        call Leds.led0Toggle();
-                }
-            }       
-        }
-        return msg;
-    }
-
-    /*
     event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len)
     {
         uint8_t  *p;
         uint8_t  i;
         uint16_t src;
-        uint16_t type;
-        if(TOS_NODE_ID == BASESTATION_ID)
-            return msg;
-        else 
-        {
-            if(call AMPacket.isForMe(msg)== TRUE && len == 18 )
-            {
-                src = AMPacket.source(msg);
-                p = (uint8_t*)payload;
-                type = *p;
-                type += (((uint16_t)(*(p+1)))<<8);
-                if(type == 0x0101)
-                {
-                    buf[0] = src;
-                    buf[1] = (src>>8);
-                    for(i=0;i<18;i++)
-                    {
-                        buf[i+2]=*(p+i);
-                    }
-                    if(call MySerial.send(buf,20) == SUCCESS)
-                        call Leds.led1Toggle();
-                    else
-                        call Leds.led0Toggle();
-                }
-            }       
-        }
-        return msg;
-    }
-
-    event message_t* Snoop.receive(message_t* msg, void* payload, uint8_t len)
-    {
-        uint8_t  *p;
-        uint8_t  i;
-        uint16_t src;
-        uint16_t type;
         if(TOS_NODE_ID == BASESTATION_ID)
             return msg;
         else 
         {
             src = call AMPacket.source(msg);
-            if( len == 18 )
+            p = (uint8_t*)payload;
+            buf[0] = src;
+            buf[1] = (src>>8);
+            for(i=0;i<len;i++)
             {
-                p = (uint8_t*)payload;
-                type = *p;
-                type += (((uint16_t)(*(p+1)))<<8);
-                if(type == 0x0000 || type == 0x0001)
-                {
-                    buf[0] = src;
-                    buf[1] = (src >> 8);
-                    for(i=0;i<18;i++)
-                    {
-                        buf[i+2]=*(p+i+2);
-                    }
-                    if(call MySerial.send(buf,20) == SUCCESS)
-                        call Leds.led1Toggle();
-                    else
-                        call Leds.led0Toggle();
-                }
-            }       
+                buf[i+2]=*(p+i);
+            }
+            if(call MySerial.send(buf,len+2) == SUCCESS)
+                call Leds.led1Toggle();
+            else
+                call Leds.led0Toggle();
+        }
+        call Leds.led1Toggle();
+        return msg;
+    }
+    
+    event message_t* Snoop.receive(message_t* msg, void* payload, uint8_t len)
+    {
+        uint8_t  *p;
+        uint8_t  i;
+        uint16_t src;
+        if(TOS_NODE_ID == BASESTATION_ID)
+            return msg;
+        else 
+        { 
+            src = call AMPacket.source(msg);
+            p = (uint8_t*)payload;
+            buf[0] = src;
+            buf[1] = (src >> 8);
+            for(i=0;i<len;i++)
+            {
+                buf[i+2]=*(p+i);
+            }
+            if(call MySerial.send(buf,len+2) == SUCCESS)
+                call Leds.led1Toggle();
+            else
+                call Leds.led0Toggle();
         }
         return msg;
     }
-    */
+     
 
     event void MySerial.sendDone(){}
 
     event void MySerial.receive(uint8_t *payload,uint8_t len)
     {
         uint8_t* data;
+        uint16_t dst;
         uint8_t  i;
-        if( Rbusy == FALSE && len == 16)
+        if( Rbusy == FALSE )
         {
             if(TOS_NODE_ID == 0)
                 return;
             else
             {
+                dst = *payload;
+                dst += ((uint16_t)(*(payload+1)))<<8;
                 data = (uint8_t*)(call Packet.getPayload(&pkt,18));
-                *data++ = 0x00;
-                *data++ = 0x01;
-                for(i=0;i<16;i++)*data++ = *payload++;
+                for(i=2;i<len;i++)*data++ = *(payload+i);
+                call AMPacket.setDestination(&pkt,dst);
                 RetryCount = 0;
                 Rbusy = TRUE;
                 post SendTask();
@@ -187,10 +140,12 @@ implementation
 
     task void SendTask()
     {
+        uint16_t dst;
         if(RetryCount < MAX_RETRY)
         {
             call Ack.requestAck(&pkt);
-            if( call AMSend.send(BASESTATION_ID,&pkt,18) != SUCCESS)
+            dst = call AMPacket.destination(&pkt);
+            if( call AMSend.send(dst,&pkt,18) != SUCCESS)
             {
                 RetryCount++;
                 post SendTask();

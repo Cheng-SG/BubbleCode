@@ -16,27 +16,27 @@ implementation
         RBUF_LENGTH = 54
     };
 
-    uint8_t Sbuf[SBUF_LENGTH];
-    uint8_t Scount,Stotalnum;
-    uint8_t Ssum;
-    bool    Sbusy;
+    norace uint8_t Sbuf[SBUF_LENGTH];
+    norace uint8_t Scount,Stotalnum;
+    norace uint8_t Ssum;
+    norace bool    Sbusy;
 
-    uint8_t Rbuf0[RBUF_LENGTH];
-    uint8_t Rbuf1[RBUF_LENGTH];
-    uint8_t *prbuf,*pprbuf;;
-    uint8_t Rcount;
-    uint8_t Rlen,Rlength;
-    uint8_t Rsum;
+    norace uint8_t Rbuf0[RBUF_LENGTH];
+    norace uint8_t Rbuf1[RBUF_LENGTH];
+    norace uint8_t *prbuf,*pprbuf;;
+    norace uint8_t Rcount;
+    norace uint8_t Rlen,Rlength;
+    norace uint8_t Rsum;
 
-    async command void MySerial.init()
+    command void MySerial.init()
     {
         msp430_uart_union_config_t config =
         {
             {
                 utxe : 1,
                 urxe : 1,
-                ubr : UBR_1MHZ_115200,
-                umctl : UMCTL_1MHZ_115200,
+                ubr : UBR_1MHZ_230400,
+                umctl : UMCTL_1MHZ_230400,
                 ssel : 0x02,
                 pena : 0,
                 pev : 0,
@@ -56,17 +56,18 @@ implementation
         {
             call HplUart1.setModeUart(&config);
             call HplUart1.enableIntr();
+            call HplUart1.enableUart();
             Sbusy = FALSE;
             Rcount = 0;
             prbuf = Rbuf0;
         }
     }
 
-    async command error_t MySerial.send(uint8_t *sbuf,uint8_t len)
+    command error_t MySerial.send(uint8_t *sbuf,uint8_t len)
     {
-        if(Sbusy == TRUE)return FAIL;
         if(sbuf == NULL)return FAIL;
         if(len > SBUF_LENGTH-4)return FAIL;
+        if(Sbusy == TRUE)return EBUSY;
 
         Sbuf[0] = 0xAA;
         Ssum    = 0xAA;
@@ -85,15 +86,15 @@ implementation
         Sbuf[3] = Ssum;
         Scount=0;
         Stotalnum = len+4;
-        Sbusy = TRUE;
+        atomic Sbusy = TRUE;
         call HplUart1.tx(Sbuf[Scount]);
         return SUCCESS;
     }
 
     task void sendDoneTask()
     {
-        signal MySerial.sendDone();
         atomic Sbusy = FALSE;
+        signal MySerial.sendDone();
     }
 
     async event void Uart1Interrupts.txDone()
@@ -111,7 +112,7 @@ implementation
 
     task void recevieTask()
     {
-        atomic signal MySerial.receive(pprbuf+4,Rlength);
+        signal MySerial.receive(pprbuf+4,Rlength);
     }
 
     async event void Uart1Interrupts.rxDone(uint8_t data)
